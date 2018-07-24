@@ -109,34 +109,70 @@ const Toggle = styled.input`
   &[type="checkbox"]:checked + ${MenuButton} div .line:nth-child(1){
     opacity: 0;
     transition: .2s ease-in-out;
+    -webkit-transition: .2s ease-in-out;
+    -moz-transition: .2s ease-in-out;
+    -o-transition: .2s ease-in-out;
   }
   &[type="checkbox"]:checked + ${MenuButton} div .line:nth-child(2){
     transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
     transition: .3s ease-in-out;
+    -webkit-transition: .3s ease-in-out;
+    -moz-transition: .3s ease-in-out;
+    -o-transition: .3s ease-in-out;
   }
   &[type="checkbox"]:checked + ${MenuButton} div .line:nth-child(3){
     transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
     transition: .3s ease-in-out;
+    -webkit-transition: .3s ease-in-out;
+    -moz-transition: .3s ease-in-out;
+    -o-transition: .3s ease-in-out;
   }
   &[type="checkbox"]:checked + ${MenuButton} div .line:nth-child(4){
     opacity: 0;
     transition: .2s ease-in-out;
+    -webkit-transition: .2s ease-in-out;
+    -moz-transition: .2s ease-in-out;
+    -o-transition: .2s ease-in-out;
   }
   &[type="checkbox"]:not(:checked) + ${MenuButton} div .line:nth-child(1){
     opacity: 1;
     transition: .2s ease-in-out;
+    -webkit-transition: .2s ease-in-out;
+    -moz-transition: .2s ease-in-out;
+    -o-transition: .2s ease-in-out;
   }
   &[type="checkbox"]:not(:checked) + ${MenuButton} div .line:nth-child(2){
     transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
     transition: .3s ease-in-out;
+    -webkit-transition: .3s ease-in-out;
+    -moz-transition: .3s ease-in-out;
+    -o-transition: .3s ease-in-out;
   }
   &[type="checkbox"]:not(:checked) + ${MenuButton} div .line:nth-child(3){
     transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
     transition: .3s ease-in-out;
+    -webkit-transition: .3s ease-in-out;
+    -moz-transition: .3s ease-in-out;
+    -o-transition: .3s ease-in-out;
   }
   &[type="checkbox"]:not(:checked) + ${MenuButton} div .line:nth-child(4){
     opacity: 1;
     transition: .2s ease-in-out;
+    -webkit-transition: .2s ease-in-out;
+    -moz-transition: .2s ease-in-out;
+    -o-transition: .2s ease-in-out;
   }
 
 `
