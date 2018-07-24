@@ -2,8 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
-  padding-top: 150px;
-  padding-bottom: 150px;
+  padding: 150px 20px;
   position: relative;
   text-align: center;
   font-size: 30px;

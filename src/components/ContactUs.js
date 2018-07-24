@@ -5,21 +5,23 @@ import vk from '../images/vk.svg'
 import instagram from '../images/instagram.svg'
 
 const Wrapper = styled.div`
-  height: 290px;
-  padding-top: 180px;
-  padding-bottom: 180px;
   width: 100%;
+  height: 650px;
   position: relative;
   background: #f0f0f0;
 `
 
 const ContactBox = styled.div`
   text-align: center;
-  height: 267px;
-  margin: auto;
-  position: absolute;
-  overflow: hidden;
-  top: 0; left: 0; bottom: 0; right: 0;
+  padding: 0px 20px;
+  margin: 0 auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
   h1 {
     color: black;
     text-align: center;
@@ -31,13 +33,9 @@ const ContactBox = styled.div`
   li {
     margin-bottom: 10px;
   }
-  @media screen and (max-width: 368px) {
-    height: 311px;
-  }
 `
 
 const SocialLinks = styled.div`
-  margin-top: 10px;
   position: relative;
   img {
     display: inline-block;
