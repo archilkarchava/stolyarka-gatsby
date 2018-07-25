@@ -2,7 +2,14 @@ import React from 'react'
 import Link from 'gatsby-link'
 import styled from 'styled-components'
 
-const Wrapper = styled.div`
+const Indent = styled.div`
+  padding-top: 80px;
+  @media screen and (max-width: 900px) {
+    padding-top: 65px;
+  }
+`
+
+const Wrapper = styled.nav`
   width: 100%;
   display: table;
   position: fixed;
@@ -11,10 +18,14 @@ const Wrapper = styled.div`
   background: white;
 `
 const Nav = styled.div`
-  height: 100px;
-  line-height: 100px;
-  width: 90%;
+  height: 80px;
+  line-height: 80px;
+  width: 95%;
   margin: 0 auto;
+  @media screen and (max-width: 900px) {
+    height: 65px;
+    line-height: 65px;
+  }
   .menu {
     list-style:none;
     margin:0;
@@ -32,10 +43,13 @@ const Nav = styled.div`
     font-weight: 500;
     display: inline;
     @media screen and (max-width: 900px) {
+      display: none;
+    }
+/*     @media screen and (max-width: 900px) {
       width: 100%;
       float: left;
       line-height: 50px;
-    }
+    } */
   }
 `
 
@@ -51,10 +65,13 @@ const NavTel = styled.a`
   font-size: 18px;
   font-weight: 700;
   @media screen and (max-width: 900px) {
+    display: none;
+  }
+/*   @media screen and (max-width: 900px) {
     margin: 40px 0 10px 0;
     width: 100%;
     float: left;
-  }
+  } */
 `
 
 const MenuButton = styled.label`
@@ -62,8 +79,8 @@ const MenuButton = styled.label`
   float: right;
   cursor: pointer;
   position: relative;
-  width: 28px;
-  height: 20px;
+  width: 23px;
+  height: 16px;
   transform: translateY(-50%);
   -webkit-transform: translateY(-50%);
   -moz-transform: translateY(-50%);
@@ -177,16 +194,12 @@ const Toggle = styled.input`
 
 `
 
-
-const Indent = styled.div`
-  padding-top: 100px;
-`
-
 const Navbar = ({ title, phoneNumber }) => (
   <div>
     <Wrapper>
       <Nav className="clearfix">
-        <NavLogo to="#"><s>{ title }</s></NavLogo>
+        <NavLogo to="/"><s>{ title }</s></NavLogo>
+        <NavTel href={`tel:${ phoneNumber }`}>{ phoneNumber }</NavTel>
         <Toggle type="checkbox" id="toggle"/>
         <MenuButton htmlFor="toggle">
           <Hamburger>
@@ -197,13 +210,9 @@ const Navbar = ({ title, phoneNumber }) => (
           </Hamburger>
         </MenuButton>
         <ul className="menu">
-          <li></li>
           <li><Link to="#work">Наши работы</Link></li>
           <li><Link to="#about">О нас</Link></li>
           <li><Link to="#contactUs">Контакты</Link></li>
-          <li>
-            <NavTel href={`tel:${ phoneNumber }`}>{ phoneNumber }</NavTel>
-          </li>
         </ul>
       </Nav>
     </Wrapper>

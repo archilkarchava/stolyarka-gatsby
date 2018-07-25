@@ -25,13 +25,22 @@ const ContactBox = styled.div`
   h1 {
     color: black;
     text-align: center;
+    margin-bottom: 60px;
   }
   ul {
     list-style:none;
-    margin: 57px 0;
+    margin-bottom: 45px;
   }
   li {
     margin-bottom: 10px;
+  }
+  @media screen and (max-width: 768px) {
+    h1 {
+      margin-bottom: 35px;
+    }
+    ul {
+      margin-bottom: 27px;
+    }
   }
 `
 

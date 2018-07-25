@@ -8,12 +8,17 @@ import Footer from '../components/Footer'
 
 injectGlobal`
   * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     margin: 0;
     padding: 0;
     border: 0;
     outline: 0;
     font-size: 100%;
     vertical-align: baseline;
+  }
+  header, section, footer, aside, nav, main, article, figure {
+    display: block; 
   }
   html {
     font-family: Montserrat, sans-serif;
@@ -28,7 +33,7 @@ injectGlobal`
   }
   h1 {
     line-height: 1.23;
-    font-size: 36px;
+    font-size: 46px;
     font-weight: 600;
   }
   h2 {

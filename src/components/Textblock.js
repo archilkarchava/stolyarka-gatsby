@@ -14,4 +14,4 @@ const TextBlock = ({ textData }) => (
   </Wrapper>
 )
 
-export default TextBlock
+export def

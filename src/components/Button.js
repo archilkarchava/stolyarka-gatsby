@@ -1,18 +1,15 @@
 import styled from 'styled-components'
+import Link from 'gatsby-link'
 
-const Button = styled.div`
-  border-radius: 100px;
-  font-size: 14px;
-  height: 50px;
-  line-height: 50px;
-  padding-right: 34px;
-  padding-left: 34px;
+const Button = styled(Link)`
   color: black;
   background-color: white;
+  text-transform: uppercase;
+  border-radius: 100px;
+  font-size: 14px;
+  padding: 13px 50px;
   display: inline-block;
   border: 0 none;
-  padding-left: 60px;
-  padding-right: 60px;
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
@@ -29,4 +26,5 @@ const Button = styled.div`
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 `
+
 export default Button
