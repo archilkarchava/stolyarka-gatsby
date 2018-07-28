@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import Link from 'gatsby-link'
+import { Link } from 'gatsby'
 import Img from '../components/Img'
 
 import Button from './Button'
@@ -73,12 +73,15 @@ const Header = props => (
       <Box>
         <h1>Мебель из массива дерева на заказ</h1>
         <p>Мы с любовью изготавливаем изделия из Дуба, Ясеня, Сосны, Бука, Карагача, Граба</p>
-        <Button to='#intro'>Привет</Button>
+        <Link to='#intro'>
+          <Button primary>
+              Привет
+          </Button>
+        </Link>
       </Box>
     </BackgroundFilter>
-    <BackgroundImg objFit = "cover" objPosition = "50% 50%" title="Header image" alt="Мебель из массива дерева на заказ" sizes={props.headerImage.sizes}/>
+    <BackgroundImg objFit="cover" objPosition="50% 50%" title="Header image" alt="Мебель из массива дерева на заказ" fluid={props.headerImage.fluid} />
   </header>
 )
-
 
 export default Header

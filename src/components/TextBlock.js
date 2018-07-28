@@ -1,6 +1,11 @@
 import styled from 'styled-components'
 
 const TextBlock = styled.div`
+  background-color: ${props =>
+    (props.primary && props.theme.primary) ||
+    (props.secondary && props.theme.secondary) ||
+    props.theme.primary
+  };
   position: relative;
   text-align: center;
   font-size: 30px;

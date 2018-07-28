@@ -1,39 +1,65 @@
 import React from 'react'
+import { graphql, Link } from 'gatsby'
+import styled from 'styled-components'
 import Header from '../components/Header'
 import TextBlock from '../components/TextBlock'
-import Work from '../components/Work'
+import Gallery from '../components/Gallery'
 import ContactUs from '../components/ContactUs'
 import Anchor from '../components/Anchor'
+import Button from '../components/Button'
 
-const IndexPage = props => (
-  <div>
-    <Header headerImage={props.data.headerImage.childImageSharp}/>
-    <Anchor id="intro"/>
-    <TextBlock>Делаем мебель красиво. Мы из России.</TextBlock>
-    <Anchor id="work"/>
-    <Work imageArray={props.data.portfolioImages.edges}/>
-    <Anchor id="contactUs"/>
-    <ContactUs/>
-  </div>
+import Layout from '../components/layout'
+
+const Container = styled.div`
+  text-align: center;
+  width: 100%;
+  padding: 50px 0;
+  background-color: ${props =>
+    (props.primary && props.theme.primary) ||
+    (props.secondary && props.theme.secondary) ||
+    props.theme.primary
+  };
+`
+
+const IndexPage = ({ data }) => (
+  <Layout>
+    <Header headerImage={data.headerImage.childImageSharp} />
+    <Anchor id="intro" />
+    <TextBlock primary>Делаем мебель красиво. Мы из России.</TextBlock>
+    <Anchor id="work" />
+    <Gallery imageArray={data.portfolioImages.edges.slice(0, 6)} />
+    <Container primary>
+      <Link to="products">
+        <Button inverted>
+          Посмотреть все работы
+      </Button>
+      </Link>
+    </Container>
+    <Anchor id="contactUs" />
+    <ContactUs secondary></ContactUs>
+  </Layout>
 )
 
-export default IndexPage
-
 export const query = graphql`
-  query PageQuery {
+  query IndexPageQuery {
     headerImage: file(relativePath: { regex: "/header/" }) {
       childImageSharp {
-        sizes(maxWidth: 10000 ) {
-          ...GatsbyImageSharpSizes
+        fluid(maxWidth: 1240 quality: 80 ) {
+          ...GatsbyImageSharpFluid
         }
       }
-    }
-    portfolioImages: allFile(filter: {sourceInstanceName: {eq: "portfolio"}}) {
+    },
+    portfolioImages: allFile(
+      filter: {sourceInstanceName: {eq: "portfolio"}}
+      sort: {order: ASC, fields: name}
+    ) {
       edges {
         node {
+          id
+          name
           childImageSharp {
-            sizes(maxWidth: 528, maxHeight: 500) {
-              ...GatsbyImageSharpSizes
+            fluid(maxWidth: 392) {
+              ...GatsbyImageSharpFluid
             }
           }
         }
@@ -41,3 +67,5 @@ export const query = graphql`
     }
   }
 `
+
+export default IndexPage

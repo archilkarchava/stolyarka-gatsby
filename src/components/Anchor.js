@@ -1,13 +1,16 @@
 import styled from 'styled-components'
+import media from './media';
+
+import { NavHeight, mobileNavHeight } from './Navbar'
 
 const Anchor = styled.a`
-    display: block;
-    position: relative;
-    top: -80px;
-    visibility: hidden;
-    @media screen and (max-width: 900px) {
-        top: -65px
-    }
+  display: block;
+  position: relative;
+  top: -${NavHeight};
+  visibility: hidden;
+  ${media.tablet`
+    top: -${mobileNavHeight};
+  `}
 `
 
 export default Anchor

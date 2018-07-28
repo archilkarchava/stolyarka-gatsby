@@ -1,9 +1,14 @@
 import styled from 'styled-components'
-import Link from 'gatsby-link'
 
-const Button = styled(Link)`
-  color: black;
-  background-color: white;
+const Button = styled.button`
+  color: ${props =>
+    (props.inverted && props.theme.primary)
+  };
+  background-color: ${props =>
+    (props.primary && props.theme.primary)
+    || (props.inverted && props.theme.brandBlack)
+    || props.theme.primary
+  };
   text-transform: uppercase;
   border-radius: 100px;
   font-size: 14px;

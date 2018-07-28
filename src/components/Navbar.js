@@ -1,12 +1,17 @@
 import React from 'react'
-import Link from 'gatsby-link'
+import { Link } from 'gatsby'
 import styled from 'styled-components'
 
+import media from './media'
+
+export const mobileNavHeight = '65px'
+export const NavHeight = '80px'
+
 const Indent = styled.div`
-  padding-top: 80px;
-  @media screen and (max-width: 900px) {
-    padding-top: 65px;
-  }
+  padding-top: ${NavHeight};
+  ${media.tablet`
+    padding-top: ${mobileNavHeight};
+  `}
 `
 
 const Wrapper = styled.nav`
@@ -18,23 +23,23 @@ const Wrapper = styled.nav`
   background: white;
 `
 const Nav = styled.div`
-  height: 80px;
-  line-height: 80px;
+  height: ${NavHeight};
+  line-height: ${NavHeight};
   width: 95%;
   margin: 0 auto;
-  @media screen and (max-width: 900px) {
-    height: 65px;
-    line-height: 65px;
-  }
+  ${media.tablet`
+    height: ${mobileNavHeight};
+    line-height: ${mobileNavHeight};
+  `}
   .menu {
     list-style:none;
     margin:0;
     padding:0;
     text-align:center;
     margin: 0 auto;
-    @media screen and (max-width: 900px) {
+    ${media.tablet`
       display: none;
-    }
+    `}
   }
   li {
     padding: 0 20px;
@@ -42,14 +47,12 @@ const Nav = styled.div`
     font-size: 16px;
     font-weight: 500;
     display: inline;
-    @media screen and (max-width: 900px) {
+    ${media.tablet`
       display: none;
-    }
-/*     @media screen and (max-width: 900px) {
       width: 100%;
       float: left;
       line-height: 50px;
-    } */
+    `}
   }
 `
 
@@ -64,14 +67,12 @@ const NavTel = styled.a`
   float: right;
   font-size: 18px;
   font-weight: 700;
-  @media screen and (max-width: 900px) {
+  ${media.tablet`
     display: none;
-  }
-/*   @media screen and (max-width: 900px) {
     margin: 40px 0 10px 0;
     width: 100%;
     float: left;
-  } */
+  `}
 `
 
 const MenuButton = styled.label`
@@ -87,9 +88,9 @@ const MenuButton = styled.label`
   -o-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   top: 50%;
-  @media screen and (max-width: 900px) {
+  ${media.tablet`
     display: inline-block;
-  }
+  `}
 `
 
 const Hamburger = styled.div`
@@ -195,12 +196,12 @@ const Toggle = styled.input`
 `
 
 const Navbar = ({ title, phoneNumber }) => (
-  <div>
+  <>
     <Wrapper>
       <Nav className="clearfix">
-        <NavLogo to="/"><s>{ title }</s></NavLogo>
-        <NavTel href={`tel:${ phoneNumber }`}>{ phoneNumber }</NavTel>
-        <Toggle type="checkbox" id="toggle"/>
+        <NavLogo to="/"><s>{title}</s></NavLogo>
+        <NavTel href={`tel:${phoneNumber}`}>{phoneNumber}</NavTel>
+        <Toggle type="checkbox" id="toggle" />
         <MenuButton htmlFor="toggle">
           <Hamburger>
             <span className="line"></span>
@@ -210,14 +211,14 @@ const Navbar = ({ title, phoneNumber }) => (
           </Hamburger>
         </MenuButton>
         <ul className="menu">
-          <li><Link to="#work">Наши работы</Link></li>
-          <li><Link to="#about">О нас</Link></li>
-          <li><Link to="#contactUs">Контакты</Link></li>
+          <li><Link to="products">Наши работы</Link></li>
+          <li><Link to="about">О нас</Link></li>
+          <li><Link to="contact">Контакты</Link></li>
         </ul>
       </Nav>
     </Wrapper>
-    <Indent/>
-  </div>
+    <Indent />
+  </>
 )
 
 

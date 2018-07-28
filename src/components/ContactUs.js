@@ -3,12 +3,17 @@ import styled from 'styled-components'
 
 import vk from '../images/vk.svg'
 import instagram from '../images/instagram.svg'
+import media from './media';
 
 const Wrapper = styled.div`
   width: 100%;
   height: 650px;
   position: relative;
-  background: #f0f0f0;
+  background-color: ${props =>
+    (props.primary && props.theme.primary) ||
+    (props.secondary && props.theme.secondary) ||
+    props.theme.primary
+  };
 `
 
 const ContactBox = styled.div`
@@ -34,14 +39,14 @@ const ContactBox = styled.div`
   li {
     margin-bottom: 10px;
   }
-  @media screen and (max-width: 768px) {
+  ${media.tablet`
     h1 {
       margin-bottom: 35px;
     }
     ul {
       margin-bottom: 27px;
     }
-  }
+  `}
 `
 
 const SocialLinks = styled.div`
@@ -53,8 +58,8 @@ const SocialLinks = styled.div`
   }
 `
 
-const ContactUs = () => (
-  <Wrapper>
+const ContactUs = props => (
+  <Wrapper {...props}>
     <ContactBox>
       <h1>Свяжитесь с нами</h1>
       <ul>
@@ -69,8 +74,8 @@ const ContactUs = () => (
         </li>
       </ul>
       <SocialLinks>
-        <a target="_blank" rel="noopener noreferrer" href="https://vk.com/"><img src={vk} alt="vk"/></a>
-        <a target="_blank" rel="noopener noreferrer" href="https://instagram.com/"><img src={instagram} alt="instagram"/></a>
+        <a target="_blank" rel="noopener noreferrer" href="https://vk.com/"><img src={vk} alt="vk" /></a>
+        <a target="_blank" rel="noopener noreferrer" href="https://instagram.com/"><img src={instagram} alt="instagram" /></a>
       </SocialLinks>
     </ContactBox>
   </Wrapper>
