@@ -1,11 +1,12 @@
 {
   "name": "gatsby-stolyarka",
-  "description": "Website for the local workshop build with Gatsby.",
+  "description": "Website for the local wooden workshop build with Gatsby.",
   "version": "1.0.0",
   "author": "Archil Karchava <archil1997@gmail.com>",
   "dependencies": {
     "babel-plugin-styled-components": "^1.5.1",
-    "gatsby": "next",
+    "core-js": "^2.5.7",
+    "gatsby": "^2.0.0-beta.61",
     "gatsby-image": "^2.0.0-beta.7",
     "gatsby-plugin-netlify": "^2.0.0-beta.4",
     "gatsby-plugin-offline": "^2.0.0-beta.5",

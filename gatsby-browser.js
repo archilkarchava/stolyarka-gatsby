@@ -1,10 +1,12 @@
+require('core-js/es6/map');
+require('core-js/es6/set');
+
 exports.onClientEntry = () => {
   // NOTE: Don't polyfill Promise here (Gatsby already includes a Promise polyfill)
 
   // IntersectionObserver polyfill for gatsby-image (Safari, IE)
   if (typeof window.IntersectionObserver === `undefined`) {
     require(`intersection-observer`)
-    console.log(`👍 IntersectionObserver is polyfilled`)
   }
 
   // Object-fit/Object-position polyfill for gatsby-image (IE)
@@ -14,6 +16,5 @@ exports.onClientEntry = () => {
     typeof testImg.style.objectPosition === `undefined`
   ) {
     require(`object-fit-images`)()
-    console.log(`👍 Object-fit/Object-position are polyfilled`)
   }
 }
