@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'gatsby'
 import Img from '../components/Img'
+import media from '../components/media'
 
 import Button from './Button'
 
@@ -47,23 +48,21 @@ const Box = styled.div`
 
   h1 {
     margin-bottom: 50px;
-    font-size: 50px;
-    line-height: 1.23;
     text-transform: uppercase;
-    @media screen and (max-width: 900px) {
+    ${media.tablet`
       font-size: 28px;
       margin-bottom: 35px;
-    }
+    `}
   }
   p {
     margin-bottom: 37px;
     font-weight: 400;
     font-size: 24px;
     line-height: 1.5;
-    @media screen and (max-width: 900px) {
+    ${media.tablet`
       margin-bottom: 23px;
       font-size: 16px;
-    }
+    `}
   }
 `
 
@@ -75,7 +74,7 @@ const Header = props => (
         <p>Мы с любовью изготавливаем изделия из Дуба, Ясеня, Сосны, Бука, Карагача, Граба</p>
         <Link to='#intro'>
           <Button primary>
-              Привет
+            Привет
           </Button>
         </Link>
       </Box>
