@@ -28,7 +28,6 @@ const ContactBox = styled.div`
   -o-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   h1 {
-    color: black;
     text-align: center;
     margin-bottom: 60px;
   }
