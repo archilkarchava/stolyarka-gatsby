@@ -12,10 +12,10 @@ const Wrapper = styled.div`
   font-size: 0;
   margin: 0 auto;
   max-width: 1240px;
-  ${media.wide`
+  ${media.desktop`
     max-width: 940px;
   `}
-  ${media.desktop`
+  ${media.laptop`
     max-width: 720px;
   `}
   ${media.tablet`
@@ -37,7 +37,7 @@ const ProductItem = styled.div`
   &:nth-last-child(3) {
     margin-bottom: 0;
   }
-  ${media.desktop`
+  ${media.laptop`
     margin: 0 10px 40px 10px;
     width: calc(50% - 20px);
     &:nth-last-child(3) {
