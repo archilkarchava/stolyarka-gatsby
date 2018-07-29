@@ -42,7 +42,7 @@ injectGlobal`
   }
   h1 {
     line-height: 1.23;
-    font-size: 46px;
+    font-size: 50px;
     font-weight: 600;
   }
   h2 {
