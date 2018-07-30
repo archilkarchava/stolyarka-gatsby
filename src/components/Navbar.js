@@ -2,15 +2,12 @@ import React from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 
-import media from './media'
-
-export const mobileNavHeight = '65px'
-export const NavHeight = '80px'
+import media from '../utils/media'
 
 const Indent = styled.div`
-  padding-top: ${NavHeight};
+  padding-top: ${props => props.theme.navHeight};
   ${media.tablet`
-    padding-top: ${mobileNavHeight};
+    padding-top: ${props => props.theme.mobileNavHeight};
   `}
 `
 
@@ -23,13 +20,13 @@ const Wrapper = styled.nav`
   background: white;
 `
 const Nav = styled.div`
-  height: ${NavHeight};
-  line-height: ${NavHeight};
+  height: ${props => props.theme.navHeight};
+  line-height: ${props => props.theme.navHeight};
   width: 95%;
   margin: 0 auto;
   ${media.tablet`
-    height: ${mobileNavHeight};
-    line-height: ${mobileNavHeight};
+    height: ${props => props.theme.mobileNavHeight};
+    line-height: ${props => props.theme.mobileNavHeight};
   `}
   .menu {
     list-style:none;
@@ -48,7 +45,7 @@ const Nav = styled.div`
     font-weight: 500;
     display: inline;
     ${media.tablet`
-      display: none;
+
       width: 100%;
       float: left;
       line-height: 50px;

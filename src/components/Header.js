@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'gatsby'
 import Img from '../components/Img'
-import media from '../components/media'
+import media from '../utils/media'
 
 import Button from './Button'
 

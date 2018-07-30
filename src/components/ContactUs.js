@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import vk from '../images/vk.svg'
 import instagram from '../images/instagram.svg'
-import media from './media';
+import media from '../utils/media';
 
 const Wrapper = styled.div`
   width: 100%;

@@ -4,10 +4,10 @@ import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from "gatsby"
 import { injectGlobal, ThemeProvider } from 'styled-components'
 
-import Navbar, { NavHeight, mobileNavHeight } from './Navbar'
+import Navbar from './Navbar'
 import Footer from './Footer'
 
-import media from './media'
+import media from '../utils/media'
 
 injectGlobal`
   * {
@@ -30,9 +30,9 @@ injectGlobal`
     width: 100%;
   }
   main {
-    min-height: calc(100vh - 150px - ${NavHeight});
+    min-height: calc(100vh - 150px - ${props => props.theme.navHeight});
     ${media.tablet`
-      min-height: calc(100vh - 150px - ${mobileNavHeight});
+      min-height: calc(100vh - 150px - ${props => props.theme.mobileNavHeight});
     `}
   }
   .clearfix::after {
@@ -57,17 +57,18 @@ injectGlobal`
 `
 
 const theme = {
-  primary: '#fff',
-  secondary: '#f0f0f0',
+  primary: '#FFFFFF',
+  secondary: '#F0F0F0',
   brandBlack: '#181818',
   fontSans: '\'Montserrat\', sans-serif',
   baseFontFamily: '\'Montserrat\', sans-serif',
-  baseFontColor: '#000',
   baseFontSize: '16px',
   fontNormal: 400,
   fontSemibold: 600,
   fontBold: 700,
   baseLineHeight: 1.5,
+  navHeight: '80px',
+  mobileNavHeight: '65px'
 };
 
 const Layout = ({ children, data }) => (

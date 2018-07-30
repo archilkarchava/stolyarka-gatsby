@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import Button from '../components/Button'
 
 import Img from '../components/Img'
-import media from './media';
+import media from '../utils/media';
 
 const Wrapper = styled.div`
   position: relative;

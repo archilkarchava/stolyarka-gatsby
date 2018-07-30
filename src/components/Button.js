@@ -1,20 +1,26 @@
 import styled from 'styled-components'
+import setTextColor from '../utils/setTextColor'
 
 const Button = styled.button`
-  color: ${props =>
-    (props.inverted && props.theme.primary)
-  };
   ${props => (props.primary && `
   background-color: ${props.theme.primary};
+  color: ${setTextColor(props.theme.primary)};
   border: 0 none;
   `) ||
     (props.inverted && `
   background-color: ${props.theme.brandBlack};
+  color: ${setTextColor(props.theme.brandBlack)};
   border: 0 none;
   `) ||
     (props.hollow && `
   background-color: transparent;
   border: 1px solid;
+  transition: .2s ease-in-out;
+  &:hover {
+    background-color: ${props.theme.brandBlack};
+    color: ${setTextColor(props.theme.brandBlack)};
+    border: 1px solid;
+  }
   `)}
   ${props => props.small ? `
   font-size: 13px;
