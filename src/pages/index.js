@@ -29,8 +29,8 @@ const IndexPage = ({ data }) => (
     <Anchor id="work" />
     <Gallery imageArray={data.portfolioImages.edges.slice(0, 6)} />
     <Container primary>
-      <Link to="products">
-        <Button inverted>
+      <Link to="/products/">
+        <Button inverted rounded>
           Посмотреть все работы
       </Button>
       </Link>

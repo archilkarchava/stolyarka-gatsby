@@ -211,9 +211,9 @@ const Navbar = ({ title, phoneNumber }) => (
           </Hamburger>
         </MenuButton>
         <ul className="menu">
-          <li><Link to="products">Наши работы</Link></li>
-          <li><Link to="about">О нас</Link></li>
-          <li><Link to="contact">Контакты</Link></li>
+          <li><Link to="/products/">Наши работы</Link></li>
+          <li><Link to="/about/">О нас</Link></li>
+          <li><Link to="/contact/">Контакты</Link></li>
         </ul>
       </Nav>
     </Wrapper>

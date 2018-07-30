@@ -73,7 +73,7 @@ const Header = props => (
         <h1>Мебель из массива дерева на заказ</h1>
         <p>Мы с любовью изготавливаем изделия из Дуба, Ясеня, Сосны, Бука, Карагача, Граба</p>
         <Link to='#intro'>
-          <Button primary>
+          <Button primary rounded>
             Привет
           </Button>
         </Link>

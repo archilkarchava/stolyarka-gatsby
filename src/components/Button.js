@@ -4,20 +4,30 @@ const Button = styled.button`
   color: ${props =>
     (props.inverted && props.theme.primary)
   };
-  background-color: ${props =>
-    (props.primary && props.theme.primary)
-    || (props.inverted && props.theme.brandBlack)
-    || props.theme.primary
-  };
-  text-transform: uppercase;
-  border-radius: 100px;
+  ${props => (props.primary && `
+  background-color: ${props.theme.primary};
+  border: 0 none;
+  `) ||
+    (props.inverted && `
+  background-color: ${props.theme.brandBlack};
+  border: 0 none;
+  `) ||
+    (props.hollow && `
+  background-color: transparent;
+  border: 1px solid;
+  `)}
+  ${props => props.small ? `
+  font-size: 13px;
+  padding: 9px 18px;
+  ` : `
   font-size: 14px;
   padding: 13px 50px;
+  text-transform: uppercase;
+  `}
+  border-radius: ${props => props.rounded ? '100px' : '5px'};
   display: inline-block;
-  border: 0 none;
   text-align: center;
   white-space: nowrap;
-  vertical-align: middle;
   font-weight: 700;
   background-image: none;
   cursor: pointer;

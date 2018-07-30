@@ -1,5 +1,9 @@
 import React from 'react'
+import { Link } from 'gatsby'
 import styled from 'styled-components'
+
+import Button from '../components/Button'
+
 import Img from '../components/Img'
 import media from './media';
 
@@ -25,30 +29,28 @@ const Wrapper = styled.div`
 
 const ProductItem = styled.div`
   overflow: hidden;
-  cursor: pointer;
   display: inline-block;
   margin: 0 15px 60px 15px;
   width: calc(33.3333% - 30px);
   .text-block {
     margin-top: 20px;
-  }
-  .title {
-    font-size: 20px;
-    font-weight: 600;
-  }
-  .description {
-    margin-top: 8px;
-    font-size: 14px;
-    font-weight: 300;
-    line-height: 1.55;
-  }
-  .price {
-    margin-top: 12px;
-    font-size: 16px;
-    line-height: 1.35;
-    font-weight: 600;
-    display: inline-block;
-    vertical-align: middle;
+    .title {
+      font-size: 20px;
+      font-weight: 600;
+    }
+    .description {
+      margin-top: 8px;
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.55;
+    }
+    .price {
+      margin-top: 12px;
+      margin-bottom: 19px;
+      font-size: 16px;
+      line-height: 1.35;
+      font-weight: 600;
+    }
   }
 
   &:nth-last-child(1) {
@@ -105,11 +107,10 @@ const ColorOverlay = styled.span`
 `
 
 const ProductImg = styled(Img)`
-  margin: 0;
-  position: relative;
-  display: block;
   padding-bottom: 77%;
   height: 0;
+  pointer-events: none;
+  user-select: none;
 `
 
 const Gallery = props => (
@@ -123,6 +124,9 @@ const Gallery = props => (
           <div className="title">{image.node.name.replace(/-/g, ' ')}</div>
           <div className="description">Описание товара</div>
           <div className="price">&#8381;20000</div>
+          <Link to="/">
+            <Button hollow small>Купить</Button>
+          </Link>
         </div>
       </ProductItem>
     ))}
