@@ -4,7 +4,7 @@ import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from "gatsby"
 import { injectGlobal, ThemeProvider } from 'styled-components'
 
-import Navbar from './Navbar'
+import Navbar from './Navigation/Navbar'
 import Footer from './Footer'
 
 import media from '../utils/media'

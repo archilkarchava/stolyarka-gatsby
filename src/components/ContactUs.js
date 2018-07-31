@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import vk from '../images/vk.svg'
-import instagram from '../images/instagram.svg'
+import SocialLinks from './SocialLinks'
+
 import media from '../utils/media';
 
 const Wrapper = styled.div`
@@ -48,15 +48,6 @@ const ContactBox = styled.div`
   `}
 `
 
-const SocialLinks = styled.div`
-  position: relative;
-  img {
-    display: inline-block;
-    margin: 0 5px;
-    height: 28px;
-  }
-`
-
 const ContactUs = props => (
   <Wrapper {...props}>
     <ContactBox>
@@ -72,10 +63,7 @@ const ContactUs = props => (
           <p>Челябинск, ул. Блюхера 91</p>
         </li>
       </ul>
-      <SocialLinks>
-        <a target="_blank" rel="noopener noreferrer" href="https://vk.com/"><img src={vk} alt="vk" /></a>
-        <a target="_blank" rel="noopener noreferrer" href="https://instagram.com/"><img src={instagram} alt="instagram" /></a>
-      </SocialLinks>
+      <SocialLinks />
     </ContactBox>
   </Wrapper>
 )
