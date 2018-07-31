@@ -45,8 +45,8 @@ const ProductItem = styled.div`
       line-height: 1.55;
     }
     .price {
-      margin-top: 12px;
-      margin-bottom: 19px;
+      margin-top: 15px;
+      margin-bottom: 12px;
       font-size: 16px;
       line-height: 1.35;
       font-weight: 600;
@@ -123,9 +123,9 @@ const Gallery = props => (
         <div className="text-block">
           <div className="title">{image.node.name.replace(/-/g, ' ')}</div>
           <div className="description">Описание товара</div>
-          <div className="price">&#8381;20000</div>
+          <div className="price">20000 рублей</div>
           <Link to="/">
-            <Button hollow small>Купить</Button>
+            <Button hollow rounded small>Купить</Button>
           </Link>
         </div>
       </ProductItem>
