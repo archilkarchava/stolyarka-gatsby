@@ -59,29 +59,31 @@ const Hamburger = styled.div`
   span {
     width: 100%;
     height: 3px;
-    background-color: black;
+    background-color: #000000;
     border-radius: 25px;
     display: block;
     position: absolute;
   }
   .line:nth-child(1) {
-    top 0;
+    top: 0;
+/*     transition: 0.3s ease-in-out;
+    transform: rotate(45deg) translate(5px, 5px); */
   }
   .line:nth-child(2) {
-    top 8px;
+    top: 8px;
+/*     opacity: 0;
+    transition: 0.3s ease-in-out; */
   }
   .line:nth-child(3) {
-    top 8px;
-  }
-  .line:nth-child(4) {
-    top 16px;
+    top: 16px;
+/*     transform: rotate(-45deg) translate(7px, -6px);
+    transition: 0.3s ease-in-out; */
   }
 `
 
 const MenuButton = props => (
   <Wrapper {...props} onClick={props.click}>
     <Hamburger>
-      <span className="line"></span>
       <span className="line"></span>
       <span className="line"></span>
       <span className="line"></span>

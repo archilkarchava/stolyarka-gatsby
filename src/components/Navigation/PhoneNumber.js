@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Wrapper = styled.a`
-  font-size: 18px;
+  font-size: ${props => !!props.size ? props.size : '18px'};
   font-weight: 700;
 `
 

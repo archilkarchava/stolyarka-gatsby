@@ -10,6 +10,7 @@ import Overlay from './Overlay'
 import media from '../../utils/media'
 
 const Indent = styled.div`
+  width: 100%;
   padding-top: ${props => props.theme.navHeight};
   ${media.tablet`
     padding-top: ${props => props.theme.mobileNavHeight};

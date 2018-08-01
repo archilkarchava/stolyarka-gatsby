@@ -55,10 +55,9 @@ injectGlobal`
     color: black;
   }
   .noscroll {
-    ${media.tablet`
-      overflow: hidden;
-      position : fixed;
-    `}
+    height: 100vh;
+    min-height: 100vh;
+    overflow: hidden;
   }
 `
 
@@ -104,17 +103,18 @@ class Layout extends Component {
               <Helmet
                 title={data.site.siteMetadata.title}
                 meta={[
-                  { name: 'description', content: 'Sample' },
+                  { name: 'description', content: 'Столярная мастерская в Челябинске.' },
                   { name: 'keywords', content: 'sample, something' },
                 ]}
+                bodyAttributes={{
+                  class: this.state.noscroll ? `noscroll` : ''
+                }}
               >
                 <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700&amp;subset=cyrillic" rel="stylesheet" />
                 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&amp;subset=cyrillic" rel="stylesheet" />
               </Helmet>
               <Navbar title={data.site.siteMetadata.title} phoneNumber={'+7 (900) 000-00-00'} menuOpened={this.mobileMenuOpened} />
-              <div className={this.state.noscroll ? `noscroll` : ''}>
-                {this.props.children}
-              </div>
+              {this.props.children}
               <Footer>© Все права защищены. ООО "Столярка".</Footer>
             </>
           </ThemeProvider>
