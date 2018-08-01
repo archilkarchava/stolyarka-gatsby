@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
-import NavLogo from './NavLogo'
+import NavLogo from './Logo'
 import NavMenu from './NavMenu'
 import MobileNavMenu from './MobileNavMenu'
 import MenuButton from './MenuButton'
@@ -17,16 +17,21 @@ const Indent = styled.div`
 `
 
 const Wrapper = styled.nav`
-  z-index: 20;
+  z-index: 9999;
   background-color: ${props => props.theme.primary};
   width: 100%;
   display: table;
+  content: "";
   position: fixed;
   top: 0;
-  background: white;
+  height: ${props => props.theme.navHeight};
+  ${media.tablet`
+    height: ${props => props.theme.mobileNavHeight};
+  `}
 `
 const Nav = styled.div`
-  height: ${props => props.theme.navHeight};
+  z-index: 9999;
+  height: 100%;
   line-height: ${props => props.theme.navHeight};
   margin: 0 20px;
   ${media.tablet`
@@ -36,6 +41,7 @@ const Nav = styled.div`
   `}
 `
 
+
 class Navbar extends Component {
   state = {
     mobileMenuOpen: false
@@ -43,26 +49,23 @@ class Navbar extends Component {
   mobileNavClickHandler = () => {
     this.setState((prevState) => {
       return { mobileMenuOpen: !prevState.mobileMenuOpen }
-    })
+    }, () => this.props.menuOpened(this.state.mobileMenuOpen))
+  }
+  overlayClickHandler = () => {
+    this.setState({ mobileMenuOpen: false }, () => this.props.menuOpened(this.state.mobileMenuOpen))
   }
   render() {
-    let mobileNavMenu
-    let overlay
-    if (this.state.mobileMenuOpen) {
-      mobileNavMenu = <MobileNavMenu phoneNumber={this.props.phoneNumber} />
-      overlay = <Overlay />
-    }
     return (
       <>
-        {overlay}
-        <Wrapper>
-          <Nav className='clearfix'>
+        <Wrapper className='clearfix'>
+          <Nav>
             <NavLogo to='/' title={this.props.title} />
             <MenuButton click={this.mobileNavClickHandler} />
             <NavMenu phoneNumber={this.props.phoneNumber} />
           </Nav>
-          {mobileNavMenu}
         </Wrapper>
+        <MobileNavMenu phoneNumber={this.props.phoneNumber} show={this.state.mobileMenuOpen} />
+        <Overlay click={this.overlayClickHandler} show={this.state.mobileMenuOpen} />
         <Indent />
       </>
     )

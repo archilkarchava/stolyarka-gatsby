@@ -6,6 +6,7 @@ import instagram from '../images/instagram.svg'
 
 const Wrapper = styled.div`
   position: relative;
+  vertical-align: middle;
   img {
     display: inline-block;
     margin: 0 5px;

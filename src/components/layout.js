@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from "gatsby"
@@ -54,6 +54,12 @@ injectGlobal`
     text-decoration: none;
     color: black;
   }
+  .noscroll {
+    ${media.tablet`
+      overflow: hidden;
+      position : fixed;
+    `}
+  }
 `
 
 const theme = {
@@ -71,40 +77,53 @@ const theme = {
   mobileNavHeight: '65px'
 };
 
-const Layout = ({ children, data }) => (
-  <StaticQuery
-    query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
+class Layout extends Component {
+
+  state = {
+    noscroll: false
+  }
+
+  mobileMenuOpened = menuOpened => {
+    this.setState({ noscroll: menuOpened })
+  }
+  render() {
+    return (
+      <StaticQuery
+        query={graphql`
+          query SiteTitleQuery {
+            site {
+              siteMetadata {
+                title
+              }
+            }
           }
-        }
-      }
-    `}
-    render={data => (
-      <ThemeProvider theme={theme}>
-        <>
-          <Helmet
-            title={data.site.siteMetadata.title}
-            meta={[
-              { name: 'description', content: 'Sample' },
-              { name: 'keywords', content: 'sample, something' },
-            ]}
-          >
-            <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700&amp;subset=cyrillic" rel="stylesheet" />
-            <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&amp;subset=cyrillic" rel="stylesheet" />
-          </Helmet>
-          <Navbar title={data.site.siteMetadata.title} phoneNumber={'+7 (900) 000-00-00'} />
-          <main>
-            {children}
-          </main>
-          <Footer>© Все права защищены. ООО "Столярка".</Footer>
-        </>
-      </ThemeProvider>
-    )}
-  />
-)
+        `}
+        render={data => (
+          <ThemeProvider theme={theme}>
+            <>
+              <Helmet
+                title={data.site.siteMetadata.title}
+                meta={[
+                  { name: 'description', content: 'Sample' },
+                  { name: 'keywords', content: 'sample, something' },
+                ]}
+              >
+                <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700&amp;subset=cyrillic" rel="stylesheet" />
+                <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&amp;subset=cyrillic" rel="stylesheet" />
+              </Helmet>
+              <Navbar title={data.site.siteMetadata.title} phoneNumber={'+7 (900) 000-00-00'} menuOpened={this.mobileMenuOpened} />
+              <div className={this.state.noscroll ? `noscroll` : ''}>
+                {this.props.children}
+              </div>
+              <Footer>© Все права защищены. ООО "Столярка".</Footer>
+            </>
+          </ThemeProvider>
+        )}
+      />
+    )
+  }
+}
+
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
