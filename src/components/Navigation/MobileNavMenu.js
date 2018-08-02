@@ -29,10 +29,10 @@ const StyledList = styled.ul`
   list-style: none;
   li {
     font-weight: 500;
-    font-size: 20px;
+    font-size: 18px;
   }
   li:not(:last-child) {
-    margin-bottom: 50px;
+    margin-bottom: 40px;
   }
 `
 
@@ -43,8 +43,8 @@ const MobileNavMenu = props => (
       <li><Link to='/about/'>О нас</Link></li>
       <li><Link to='/contact/'>Контакты</Link></li>
     </StyledList>
-    <PhoneNumber size='24px' phoneNumber={props.phoneNumber} />
-    <SocialLinks margin='35px 0 0 0' />
+    <PhoneNumber size='22px' phoneNumber={props.phoneNumber} />
+    <SocialLinks margin='30px 0 0 0' />
   </Wrapper>
 )
 

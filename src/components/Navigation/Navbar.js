@@ -34,11 +34,11 @@ const Nav = styled.div`
   z-index: 9999;
   height: 100%;
   line-height: ${props => props.theme.navHeight};
-  margin: 0 20px;
+  margin: 0 25px;
   ${media.tablet`
     height: ${props => props.theme.mobileNavHeight};
     line-height: ${props => props.theme.mobileNavHeight};
-    margin: 0 10px;
+    margin: 0 20px;
   `}
 `
 
@@ -61,7 +61,7 @@ class Navbar extends Component {
         <Wrapper className='clearfix'>
           <Nav>
             <NavLogo to='/' title={this.props.title} />
-            <MenuButton click={this.mobileNavClickHandler} />
+            <MenuButton click={this.mobileNavClickHandler} show={this.state.mobileMenuOpen} />
             <NavMenu phoneNumber={this.props.phoneNumber} />
           </Nav>
         </Wrapper>

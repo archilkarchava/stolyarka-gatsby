@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   padding: ${props => props.padding};
   img {
     display: inline-block;
-    margin: 0 5px;
+    margin: 0 ${props => !!props.spaceBetween ? props.spaceBetween : '7px'};
     height: 28px;
   }
 `

@@ -66,24 +66,32 @@ const Hamburger = styled.div`
   }
   .line:nth-child(1) {
     top: 0;
-/*     transition: 0.3s ease-in-out;
-    transform: rotate(45deg) translate(5px, 5px); */
+    transition: 0.3s ease-in-out;
+    ${props => props.show && `
+      transform: rotate(-45deg) translate(-5px, 5px);
+    `
+  }
   }
   .line:nth-child(2) {
     top: 8px;
-/*     opacity: 0;
-    transition: 0.3s ease-in-out; */
+    transition: 0.3s ease-in-out;
+    ${props => props.show && `
+      opacity: 0;
+    `
+  }
   }
   .line:nth-child(3) {
     top: 16px;
-/*     transform: rotate(-45deg) translate(7px, -6px);
-    transition: 0.3s ease-in-out; */
+    transition: 0.3s ease-in-out;
+    ${props => props.show && `
+      transform: rotate(45deg) translate(-6px, -6px);
+    `
   }
 `
 
 const MenuButton = props => (
-  <Wrapper {...props} onClick={props.click}>
-    <Hamburger>
+  <Wrapper onClick={props.click}>
+    <Hamburger {...props}>
       <span className="line"></span>
       <span className="line"></span>
       <span className="line"></span>
