@@ -52,6 +52,7 @@ injectGlobal`
   }
   a {
     text-decoration: none;
+    color: #000000
   }
   .noscroll {
     ${media.tablet`
