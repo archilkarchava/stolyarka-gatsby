@@ -7,10 +7,10 @@ import PhoneNumber from './PhoneNumber'
 import media from '../../utils/media'
 
 const StyledList = styled.ul`
-  list-style:none;
+  list-style: none;
   margin:0;
   padding:0;
-  text-align:center;
+  text-align: center;
   margin: 0 auto;
   width: 100%;
   height: 100%;

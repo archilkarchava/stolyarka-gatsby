@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import SocialLinks from './SocialLinks'
 
 import media from '../utils/media';
+import setTextColor from '../utils/setTextColor'
 
 const Wrapper = styled.div`
   width: 100%;
@@ -14,57 +15,93 @@ const Wrapper = styled.div`
     (props.secondary && props.theme.secondary) ||
     props.theme.primary
   };
+  ${media.laptop`
+    background-color: ${props => props.theme.brandBlack};
+  `}
+
+`
+
+const BoxWrapper = styled.div`
+  background-color: ${props => props.theme.brandBlack};
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  margin: auto;
+  max-width: 1160px;
+  z-index: 1;
+  ${media.desktop`
+    max-width: 940px;
+  `}
+  ${media.laptop`
+    width: 100%;
+    position: initial;
+  `}
 `
 
 const ContactBox = styled.div`
-  text-align: center;
-  padding: 0px 20px;
-  margin: 0 auto;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
+  position: absolute;
+  background-color: ${props => props.theme.brandBlack};
+  color: ${props => setTextColor(props.theme.brandBlack)};
+  a {
+    color: ${props => setTextColor(props.theme.brandBlack)};
+  }
+  top: 158px;
+  padding: 60px;
+  box-sizing: border-box;
   h1 {
-    text-align: center;
-    margin-bottom: 60px;
+    font-size: 32px;
+    line-height: 1.17;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    font-weight: 700;
+    ${media.desktop`
+      font-size: 30px;
+    `}
   }
   ul {
     list-style:none;
-    margin-bottom: 45px;
+    margin-bottom: 30px;
   }
   li {
-    margin-bottom: 10px;
+    font-size: 17px;
+    line-height: 1.7;
+    font-weight: 400;
+    ${media.desktop`
+      font-size: 15px;
+    `}
   }
-  ${media.tablet`
-    h1 {
-      margin-bottom: 35px;
-    }
-    ul {
-      margin-bottom: 27px;
-    }
+  ${media.desktop`
+    top: 163px; 
+  `}
+  ${media.laptop`
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 45px 20px;
+    position: initial;
   `}
 `
 
 const ContactUs = props => (
   <Wrapper {...props}>
-    <ContactBox>
-      <h1>Свяжитесь с нами</h1>
-      <ul>
-        <li>
-          <p>E-mail: <a href="mailto:lesdoska@list.ru">lesdoska@list.ru</a></p>
-        </li>
-        <li>
-          <p>Телефон: <a href="tel:+7 (900) 000-00-00">+7 (900) 000 00 00</a></p>
-        </li>
-        <li>
-          <p>Челябинск, ул. Блюхера 91</p>
-        </li>
-      </ul>
-      <SocialLinks />
-    </ContactBox>
+    <BoxWrapper>
+      <ContactBox>
+        <h1>Свяжитесь с нами</h1>
+        <ul>
+          <li>
+            <a href="tel:+7 (900) 000-00-00">+7 (900) 000 00 00</a>
+          </li>
+          <li>
+            <a href="mailto:lesdoska@list.ru">lesdoska@list.ru</a>
+          </li>
+          <li>
+            <p>Челябинск, ул. Блюхера 91</p>
+          </li>
+        </ul>
+        <SocialLinks />
+      </ContactBox>
+    </BoxWrapper>
   </Wrapper>
 )
 

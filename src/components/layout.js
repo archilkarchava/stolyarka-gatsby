@@ -52,7 +52,6 @@ injectGlobal`
   }
   a {
     text-decoration: none;
-    color: black;
   }
   .noscroll {
     ${media.tablet`
@@ -66,7 +65,7 @@ injectGlobal`
 const theme = {
   primary: '#FFFFFF',
   secondary: '#F0F0F0',
-  brandBlack: '#181818',
+  brandBlack: '#000000',
   fontSans: '\'Montserrat\', sans-serif',
   baseFontFamily: '\'Montserrat\', sans-serif',
   baseFontSize: '16px',
@@ -112,7 +111,7 @@ class Layout extends Component {
                   class: this.state.noscroll ? `noscroll` : ''
                 }}
               >
-                <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700&amp;subset=cyrillic" rel="stylesheet" />
+                {/* <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700&amp;subset=cyrillic" rel="stylesheet" /> */}
                 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&amp;subset=cyrillic" rel="stylesheet" />
               </Helmet>
               <Navbar title={data.site.siteMetadata.title} phoneNumber={'+7 (900) 000-00-00'} menuOpened={this.mobileMenuOpened} />
