@@ -5,23 +5,16 @@ import SocialLinks from './SocialLinks'
 
 import media from '../utils/media';
 import setTextColor from '../utils/setTextColor'
+import Map from './Map';
 
 const Wrapper = styled.div`
+  background-color: ${props => props.theme.brandBlack};
   width: 100%;
   height: 650px;
   position: relative;
-  background-color: ${props =>
-    (props.primary && props.theme.primary) ||
-    (props.secondary && props.theme.secondary) ||
-    props.theme.primary
-  };
-  ${media.laptop`
-    background-color: ${props => props.theme.brandBlack};
-  `}
-
 `
 
-const BoxWrapper = styled.div`
+const ContactBoxWrapper = styled.div`
   background-color: ${props => props.theme.brandBlack};
   position: absolute;
   left: 0;
@@ -40,13 +33,14 @@ const BoxWrapper = styled.div`
 `
 
 const ContactBox = styled.div`
-  position: absolute;
   background-color: ${props => props.theme.brandBlack};
   color: ${props => setTextColor(props.theme.brandBlack)};
   a {
     color: ${props => setTextColor(props.theme.brandBlack)};
   }
-  top: 158px;
+  top: 120px;
+  position: absolute;
+  min-height: 300px;
   padding: 60px;
   box-sizing: border-box;
   h1 {
@@ -72,20 +66,27 @@ const ContactBox = styled.div`
     `}
   }
   ${media.desktop`
-    top: 163px; 
+    max-width: 355px;
   `}
   ${media.laptop`
-    width: 100%;
-    margin: 0 auto;
+    max-width: initial;
+    position: initial;
     text-align: center;
     padding: 45px 20px;
-    position: initial;
+    min-height: auto;
+  `}
+`
+
+const MapWrapper = styled.div`
+  height: 100%;
+  ${media.laptop`
+    height: 55%;
   `}
 `
 
 const ContactUs = props => (
   <Wrapper {...props}>
-    <BoxWrapper>
+    <ContactBoxWrapper>
       <ContactBox>
         <h1>Свяжитесь с нами</h1>
         <ul>
@@ -101,7 +102,16 @@ const ContactUs = props => (
         </ul>
         <SocialLinks />
       </ContactBox>
-    </BoxWrapper>
+    </ContactBoxWrapper>
+    <MapWrapper>
+      <Map
+        isMarkerShown
+        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9N9nZnV5nECOLRyZY4byO5H5ZUlMPf_I&v=3.exp&libraries=geometry,drawing,places"
+        loadingElement={<div style={{ height: `100%` }} />}
+        containerElement={<div style={{ height: `100%` }} />}
+        mapElement={<div style={{ height: `100%` }} />}
+      />
+    </MapWrapper>
   </Wrapper>
 )
 
