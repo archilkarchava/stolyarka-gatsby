@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   position: relative;
   vertical-align: middle;
   list-style: none;
-  font-size: 28px;
+  font-size: 32px;
   ${props => props.centered && 'text-align: center'};
   margin: ${props => props.margin};
   a {

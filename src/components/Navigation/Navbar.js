@@ -8,6 +8,7 @@ import MenuButton from './MenuButton'
 import Overlay from './Overlay'
 
 import media from '../../utils/media'
+import setTextColor from '../../utils/setTextColor'
 
 const Indent = styled.div`
   width: 100%;
@@ -18,8 +19,9 @@ const Indent = styled.div`
 `
 
 const Wrapper = styled.nav`
-  z-index: 9999;
   background-color: ${props => props.theme.primary};
+  color: ${props => setTextColor(props.theme.primary)};
+  z-index: 9999;
   width: 100%;
   display: table;
   content: "";
@@ -58,7 +60,7 @@ class Navbar extends Component {
   render() {
     return (
       <>
-        <Wrapper className='clearfix'>
+        <Wrapper {...this.props} className='clearfix'>
           <Nav>
             <NavLogo to='/' title={this.props.title} />
             <MenuButton click={this.mobileNavClickHandler} show={this.state.mobileMenuOpen} />

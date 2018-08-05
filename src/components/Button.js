@@ -7,9 +7,9 @@ const Button = styled.button`
   color: ${setTextColor(props.theme.primary)};
   border: 0 none;
   `) ||
-    (props.inverted && `
-  background-color: ${props.theme.brandBlack};
-  color: ${setTextColor(props.theme.brandBlack)};
+    (props.accent && `
+  background-color: ${props.theme.accent};
+  color: ${setTextColor(props.theme.accent)};
   border: 0 none;
   `) ||
     (props.hollow && `
@@ -17,8 +17,8 @@ const Button = styled.button`
   border: 1px solid;
   transition: .2s ease-in-out;
   &:hover {
-    background-color: ${props.theme.brandBlack};
-    color: ${setTextColor(props.theme.brandBlack)};
+    background-color: ${props.theme.accent};
+    color: ${setTextColor(props.theme.accent)};
     border: 1px solid;
   }
   `)}

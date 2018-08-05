@@ -5,8 +5,13 @@ import { Link } from 'gatsby'
 import PhoneNumber from './PhoneNumber'
 
 import media from '../../utils/media'
+import setTextColor from '../../utils/setTextColor'
 
 const StyledList = styled.ul`
+  background-color: ${props => props.theme.primary};
+  &, a {
+    color: ${props => setTextColor(props.theme.primary)};
+  };
   list-style: none;
   margin:0;
   padding:0;
@@ -19,7 +24,6 @@ const StyledList = styled.ul`
   `}
   li {
     padding: 0 20px;
-    color: ${props => props.theme.baseFontColor};
     font-size: 16px;
     font-weight: 500;
     display: inline;

@@ -16,7 +16,7 @@ const Container = styled.div`
   padding: 50px 0;
   background-color: ${props =>
     (props.primary && props.theme.primary) ||
-    (props.secondary && props.theme.secondary) ||
+    (props.accent && props.theme.accent) ||
     props.theme.primary
   };
 `
@@ -30,13 +30,13 @@ const IndexPage = ({ data }) => (
     <Gallery imageArray={data.portfolioImages.edges.slice(0, 6)} />
     <Container primary>
       <Link to="/products/">
-        <Button inverted rounded>
+        <Button accent rounded>
           Посмотреть все работы
       </Button>
       </Link>
     </Container>
     <Anchor id="contactUs" />
-    <ContactUs secondary></ContactUs>
+    <ContactUs accent />
   </Layout>
 )
 

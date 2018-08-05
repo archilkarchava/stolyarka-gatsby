@@ -5,96 +5,120 @@ import SocialLinks from './SocialLinks'
 
 import media from '../utils/media';
 import setTextColor from '../utils/setTextColor'
-import Map from './Map';
+import YandexMap from './YandexMap';
 
 const Wrapper = styled.div`
-  background-color: ${props => props.theme.brandBlack};
-  width: 100%;
-  height: 650px;
-  position: relative;
+  background-color: ${props =>
+    (props.primary && props.theme.primary) ||
+    (props.accent && props.theme.accent) ||
+    props.theme.accent
+  };
+  height: 600px;
+  overflow: hidden;
+  &::after{
+    content: "";
+    display: table;
+    clear: both;
+  }
 `
 
 const ContactBoxWrapper = styled.div`
-  background-color: ${props => props.theme.brandBlack};
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  margin: auto;
-  max-width: 1160px;
-  z-index: 1;
-  ${media.desktop`
-    max-width: 940px;
-  `}
-  ${media.laptop`
+  background-color: ${props =>
+    (props.primary && props.theme.primary) ||
+    (props.accent && props.theme.accent) ||
+    props.theme.accent
+  };
+  float: left;
+  width: 50%;
+  height: 100%;
+  ${media.tablet`
     width: 100%;
-    position: initial;
+    height: 60%;
   `}
 `
 
 const ContactBox = styled.div`
-  background-color: ${props => props.theme.brandBlack};
-  color: ${props => setTextColor(props.theme.brandBlack)};
-  a {
-    color: ${props => setTextColor(props.theme.brandBlack)};
+  margin: 147px 100px;
+  max-width: 461px;
+  padding: 20px;
+  background-color: ${props =>
+    (props.primary && props.theme.primary) ||
+    (props.accent && props.theme.accent) ||
+    props.theme.accent
+  };
+  &, a {
+    color: ${props => setTextColor(
+    (props.primary && props.theme.primary) ||
+    (props.accent && props.theme.accent) ||
+    props.theme.accent
+  )};
   }
-  top: 120px;
-  position: absolute;
-  min-height: 300px;
-  padding: 60px;
-  box-sizing: border-box;
   h1 {
-    font-size: 32px;
+    font-size: 40px;
     line-height: 1.17;
-    margin-bottom: 30px;
+    margin-bottom: 60px;
     text-transform: uppercase;
     font-weight: 700;
-    ${media.desktop`
-      font-size: 30px;
-    `}
   }
   ul {
     list-style:none;
-    margin-bottom: 30px;
+    margin-bottom: 60px;
   }
   li {
-    font-size: 17px;
-    line-height: 1.7;
+    font-size: 20px;
+    margin-bottom: 15px;
     font-weight: 400;
-    ${media.desktop`
-      font-size: 15px;
-    `}
   }
-  ${media.desktop`
-    max-width: 355px;
-  `}
   ${media.laptop`
-    max-width: initial;
-    position: initial;
-    text-align: center;
-    padding: 45px 20px;
-    min-height: auto;
+    margin: 147px 70px;
+  `}
+  ${media.tablet`
+    h1 {
+      font-size: 30px;
+    }
+    li {
+      font-size: 18px;
+    }
+    margin: 15px auto;
+    max-width: 346px;
+  `}
+  ${media.phone`
+    max-width: 250px;
+    margin: 17px auto;
+    h1 {
+      margin-bottom: 40px;
+    }
+    ul {
+      margin-bottom: 40px;
+    }
   `}
 `
 
 const MapWrapper = styled.div`
+  float: left;
+  width: 50%;
   height: 100%;
-  ${media.laptop`
-    height: 55%;
+  ${media.tablet`
+    width: 100%;
+    height: 40%;
   `}
 `
 
 const ContactUs = props => (
   <Wrapper {...props}>
-    <ContactBoxWrapper>
-      <ContactBox>
+    <ContactBoxWrapper {...props}>
+      <ContactBox {...props}>
         <h1>Свяжитесь с нами</h1>
         <ul>
           <li>
-            <a href="tel:+7 (900) 000-00-00">+7 (900) 000 00 00</a>
+            <p>
+              <a href="tel:+7 (900) 000-00-00">+7 (900) 000 00 00</a>
+            </p>
           </li>
           <li>
-            <a href="mailto:lesdoska@list.ru">lesdoska@list.ru</a>
+            <p>
+              <a href="mailto:lesdoska@list.ru">lesdoska@list.ru</a>
+            </p>
           </li>
           <li>
             <p>Челябинск, ул. Блюхера 91</p>
@@ -104,13 +128,7 @@ const ContactUs = props => (
       </ContactBox>
     </ContactBoxWrapper>
     <MapWrapper>
-      <Map
-        isMarkerShown
-        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9N9nZnV5nECOLRyZY4byO5H5ZUlMPf_I&v=3.exp&libraries=geometry,drawing,places"
-        loadingElement={<div style={{ height: `100%` }} />}
-        containerElement={<div style={{ height: `100%` }} />}
-        mapElement={<div style={{ height: `100%` }} />}
-      />
+      <YandexMap />
     </MapWrapper>
   </Wrapper>
 )

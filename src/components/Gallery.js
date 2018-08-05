@@ -9,11 +9,6 @@ import media from '../utils/media';
 
 const Wrapper = styled.div`
   position: relative;
-  background-color: ${props =>
-    (props.primary && props.theme.primary) ||
-    (props.secondary && props.theme.secondary) ||
-    props.theme.primary
-  };
   font-size: 0;
   margin: 0 auto;
   max-width: 1240px;

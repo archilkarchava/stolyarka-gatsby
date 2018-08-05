@@ -29,12 +29,6 @@ injectGlobal`
   body {
     width: 100%;
   }
-  main {
-    min-height: calc(100vh - 150px - ${props => props.theme.navHeight});
-    ${media.tablet`
-      min-height: calc(100vh - 150px - ${props => props.theme.mobileNavHeight});
-    `}
-  }
   .clearfix::after {
     content: "";
     clear: both;
@@ -52,7 +46,6 @@ injectGlobal`
   }
   a {
     text-decoration: none;
-    color: #000000
   }
   .noscroll {
     ${media.tablet`
@@ -65,8 +58,8 @@ injectGlobal`
 
 const theme = {
   primary: '#FFFFFF',
-  secondary: '#F0F0F0',
-  brandBlack: '#000000',
+  accent: '#000000',
+  whiteAccent: '#F0F0F0',
   fontSans: '\'Montserrat\', sans-serif',
   baseFontFamily: '\'Montserrat\', sans-serif',
   baseFontSize: '16px',
@@ -117,7 +110,7 @@ class Layout extends Component {
               </Helmet>
               <Navbar title={data.site.siteMetadata.title} phoneNumber={'+7 (900) 000-00-00'} menuOpened={this.mobileMenuOpened} />
               {this.props.children}
-              <Footer>© Все права защищены. ООО "Столярка".</Footer>
+              <Footer accent>© Все права защищены. ООО "Столярка".</Footer>
             </>
           </ThemeProvider>
         )}

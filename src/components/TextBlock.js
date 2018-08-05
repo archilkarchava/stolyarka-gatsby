@@ -1,11 +1,16 @@
 import styled from 'styled-components'
+import setTextColor from '../utils/setTextColor'
 
 const TextBlock = styled.div`
   background-color: ${props =>
     (props.primary && props.theme.primary) ||
-    (props.secondary && props.theme.secondary) ||
+    (props.accent && props.theme.accent) ||
     props.theme.primary
   };
+  color: ${props => setTextColor(
+    (props.primary && props.theme.primary) ||
+    (props.accent && props.theme.accent) ||
+    props.theme.primary)};
   position: relative;
   text-align: center;
   font-size: 30px;
