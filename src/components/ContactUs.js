@@ -111,13 +111,10 @@ const MapWrapper = styled.div`
     width: 100%;
     height: 50%;
   `}
-  @media screen and (min-width:0\0) {
-    /* target IE9 and IE10 specifically to show an image instead of interactive map  */
-    background-image: url(${staticMapImg});
-    background-position: center center;
-    background-size: cover;
-    height: 100%;
-  }
+  background-image: url(${staticMapImg});
+  background-position: center center;
+  background-size: cover;
+  height: 100%;
 `
 
 const ContactUs = props => (

@@ -5,6 +5,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faVk, faInstagram } from '@fortawesome/free-brands-svg-icons'
 
 const Wrapper = styled.div`
+  height: 32px;
+  * {
+    height: 100%;
+  }
   position: relative;
   vertical-align: middle;
   list-style: none;
