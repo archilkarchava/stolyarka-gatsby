@@ -33,7 +33,7 @@ const ContactBoxWrapper = styled.div`
   height: 100%;
   ${media.tablet`
     width: 100%;
-    height: 60%;
+    height: 50%;
   `}
 `
 
@@ -70,27 +70,36 @@ const ContactBox = styled.div`
     font-weight: 400;
   }
   ${media.laptop`
-    margin: 147px 70px;
+    margin: 147px 50px;
   `}
   ${media.tablet`
     h1 {
       font-size: 30px;
-    }
-    li {
-      font-size: 18px;
-    }
-    margin: 15px auto;
-    max-width: 346px;
-  `}
-  ${media.phone`
-    max-width: 250px;
-    margin: 17px auto;
-    h1 {
       margin-bottom: 40px;
     }
     ul {
       margin-bottom: 40px;
     }
+    li {
+      font-size: 18px;
+    }
+    margin: 5px 20px;
+    max-width: 346px;
+  `}
+  ${media.phone`
+    h1 {
+      margin-bottom: 30px;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+    ul {
+      margin-bottom: 30px;
+    }
+    margin: 0 20px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
   `}
 `
 
@@ -100,7 +109,7 @@ const MapWrapper = styled.div`
   height: 100%;
   ${media.tablet`
     width: 100%;
-    height: 40%;
+    height: 50%;
   `}
 `
 
