@@ -6,6 +6,7 @@ import SocialLinks from './SocialLinks'
 import media from '../utils/media';
 import setTextColor from '../utils/setTextColor'
 import YandexMap from './YandexMap';
+import staticMapImg from '../images/staticMap.png'
 
 const Wrapper = styled.div`
   background-color: ${props =>
@@ -39,7 +40,7 @@ const ContactBoxWrapper = styled.div`
 
 const ContactBox = styled.div`
   margin: 147px 100px;
-  max-width: 461px;
+  max-width: 470px;
   padding: 20px;
   background-color: ${props =>
     (props.primary && props.theme.primary) ||
@@ -83,8 +84,11 @@ const ContactBox = styled.div`
     li {
       font-size: 18px;
     }
-    margin: 5px 20px;
-    max-width: 346px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0 20px;
+    max-width: 350px;
   `}
   ${media.phone`
     h1 {
@@ -96,10 +100,6 @@ const ContactBox = styled.div`
     ul {
       margin-bottom: 30px;
     }
-    margin: 0 20px;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
   `}
 `
 
@@ -111,6 +111,13 @@ const MapWrapper = styled.div`
     width: 100%;
     height: 50%;
   `}
+  @media screen and (min-width:0\0) {
+    /* target IE9 and IE10 specifically to show an image instead of interactive map  */
+    background-image: url(${staticMapImg});
+    background-position: center center;
+    background-size: cover;
+    height: 100%;
+  }
 `
 
 const ContactUs = props => (
