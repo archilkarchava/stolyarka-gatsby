@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link, StaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
-import alasql from 'alasql'
 
 import Button from '../components/Button'
 
@@ -121,15 +120,28 @@ const ProductImg = styled(Img)`
   user-select: none;
 `
 
-const mergeArrays = (arr1, arr2) => (
-  alasql('SELECT * FROM ? arr1 \
-  JOIN ? arr2 USING name', [arr1, arr2])
-)
+const combineArraysBasedOnName = (arr1, arr2) => {
+  var combined = arr1.map(
+    function (el) {
+      const findInB = this.filter(function (x) { return x.name === el.name; });
+      if (findInB.length) {
+        const current = findInB[0];
+        for (const l in current) {
+          if (!el[l]) { el[l] = current[l]; }
+        }
+      }
+      return el;
+    }, arr2);
+  combined = combined.concat(arr2.filter(
+    function (el) {
+      return !this.filter(function (x) { return x.name === el.name; }).length;
+    }, combined));
+  return combined;
+}
 
 const transformArrayOfImages = imgArr => (
   imgArr.map(function (edge) {
     return {
-      index: edge.node.name,
       name: edge.node.relativeDirectory,
       childImageSharp: edge.node.childImageSharp
     };
@@ -147,7 +159,6 @@ const Gallery = props => {
           ) {
             edges {
               node {
-                name
                 relativeDirectory
                 childImageSharp {
                   fluid(maxWidth: 392) {
@@ -177,44 +188,46 @@ const Gallery = props => {
         }
       `}
       render={data => (
-        < Wrapper {...props}>
+        <Wrapper {...props}>
           {
-            mergeArrays(transformArrayOfImages(data.productImages.edges), data.productSpecs.childrenProductsJson).slice(0, props.numberOfProductsDisplayed).map(productItem => (
-              <ProductItem key={productItem.index}>
-                <div>
-                  <ProductImg title="Изображение продукта" alt={productItem.name} fluid={productItem.childImageSharp.fluid} />
-                </div>
-                <div className="text-block">
-                  <div className="title">{productItem.name}</div>
-                  {productItem.isStocked ?
-                    <>
-                      {productItem.discount > 0 ?
-                        <>
-                          <div className="price former-price">{productItem.price} рублей</div>
-                          <div className="price">{productItem.discount} рублей</div>
-                        </> :
-                        <div className="price">{productItem.price} рублей</div>
-                      }
-                      <div className="button-wrapper">
-                        <Link to='/'>
-                          <Button hollow rounded small>Купить</Button>
-                        </Link>
-                      </div>
-                    </>
-                    :
-                    <>
-                      {/* <s><div className="price price-out-of-stock strike-through">{productItem.price} рублей</div></s> */}
-                      <div className="out-of-stock-notice">Нет в наличии.</div>
-                      <div className="button-wrapper">
-                        <Link to='/'>
-                          <Button hollow rounded small>Заказать</Button>
-                        </Link>
-                      </div>
-                    </>
-                  }
-                </div>
-              </ProductItem>
-            ))
+            combineArraysBasedOnName(data.productSpecs.childrenProductsJson, transformArrayOfImages(data.productImages.edges))
+              .slice(0, props.numberOfProductsDisplayed)
+              .map(productItem => (
+                <ProductItem key={productItem.index}>
+                  <div>
+                    <ProductImg title="Изображение продукта" alt={productItem.name} fluid={productItem.childImageSharp.fluid} />
+                  </div>
+                  <div className="text-block">
+                    <div className="title">{productItem.name}</div>
+                    {productItem.isStocked ?
+                      <>
+                        {productItem.discount > 0 ?
+                          <>
+                            <div className="price former-price">{productItem.price} рублей</div>
+                            <div className="price">{productItem.discount} рублей</div>
+                          </> :
+                          <div className="price">{productItem.price} рублей</div>
+                        }
+                        <div className="button-wrapper">
+                          <Link to='/'>
+                            <Button hollow rounded small>Купить</Button>
+                          </Link>
+                        </div>
+                      </>
+                      :
+                      <>
+                        {/* <s><div className="price price-out-of-stock strike-through">{productItem.price} рублей</div></s> */}
+                        <div className="out-of-stock-notice">Нет в наличии.</div>
+                        <div className="button-wrapper">
+                          <Link to='/'>
+                            <Button hollow rounded small>Заказать</Button>
+                          </Link>
+                        </div>
+                      </>
+                    }
+                  </div>
+                </ProductItem>
+              ))
           }
         </Wrapper>
       )
