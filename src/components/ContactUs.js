@@ -6,7 +6,7 @@ import SocialLinks from './SocialLinks'
 import media from '../utils/media';
 import setTextColor from '../utils/setTextColor'
 import YandexMap from './YandexMap';
-import staticMapImg from '../images/staticMap.png'
+import staticMapImg from '../data/images/staticMap.png'
 
 const Wrapper = styled.div`
   background-color: ${props =>
@@ -24,11 +24,6 @@ const Wrapper = styled.div`
 `
 
 const ContactBoxWrapper = styled.div`
-  background-color: ${props =>
-    (props.primary && props.theme.primary) ||
-    (props.accent && props.theme.accent) ||
-    props.theme.accent
-  };
   float: left;
   width: 50%;
   height: 100%;
@@ -42,11 +37,6 @@ const ContactBox = styled.div`
   margin: 147px 100px;
   max-width: 470px;
   padding: 20px;
-  background-color: ${props =>
-    (props.primary && props.theme.primary) ||
-    (props.accent && props.theme.accent) ||
-    props.theme.accent
-  };
   &, a {
     color: ${props => setTextColor(
     (props.primary && props.theme.primary) ||
@@ -87,10 +77,12 @@ const ContactBox = styled.div`
     position: relative;
     top: 50%;
     transform: translateY(-50%);
-    margin: 0 20px;
+    margin: 0;
+    padding: 0 40px;
     max-width: 350px;
   `}
   ${media.phone`
+    padding: 0 20px;
     h1 {
       margin-bottom: 30px;
     }

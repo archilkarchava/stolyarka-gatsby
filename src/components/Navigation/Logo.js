@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import setTextColor from '../../utils/setTextColor'
 
 const StyledLink = styled(Link)`
+  text-decoration: line-through;
   height: 100%;
   font-size: 36px;
   font-weight: 400;
@@ -17,7 +18,7 @@ const StyledLink = styled(Link)`
 
 const Logo = props => (
   <StyledLink {...props}>
-    <s>{props.title}</s>
+    {props.title}
   </StyledLink>
 )
 

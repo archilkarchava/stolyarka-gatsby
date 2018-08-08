@@ -27,7 +27,7 @@ const IndexPage = ({ data }) => (
     <Anchor id="intro" />
     <TextBlock primary>Делаем мебель красиво. Мы из России.</TextBlock>
     <Anchor id="work" />
-    <Gallery imageArray={data.portfolioImages.edges.slice(0, 6)} />
+    <Gallery numberOfProductsDisplayed={6} />
     <Container primary>
       <Link to="/products/">
         <Button accent rounded>
@@ -46,22 +46,6 @@ export const query = graphql`
       childImageSharp {
         fluid(maxWidth: 1240 quality: 80 ) {
           ...GatsbyImageSharpFluid
-        }
-      }
-    },
-    portfolioImages: allFile(
-      filter: {sourceInstanceName: {eq: "portfolio"}}
-      sort: {order: ASC, fields: name}
-    ) {
-      edges {
-        node {
-          id
-          name
-          childImageSharp {
-            fluid(maxWidth: 392) {
-              ...GatsbyImageSharpFluid
-            }
-          }
         }
       }
     }

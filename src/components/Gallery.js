@@ -1,6 +1,7 @@
 import React from 'react'
-import { Link } from 'gatsby'
+import { Link, StaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
+import alasql from 'alasql'
 
 import Button from '../components/Button'
 
@@ -41,10 +42,22 @@ const ProductItem = styled.div`
     }
     .price {
       margin-top: 15px;
-      margin-bottom: 12px;
       font-size: 16px;
       line-height: 1.35;
       font-weight: 600;
+      display: inline-block;
+    }
+    .former-price {
+      opacity: .5;
+      text-decoration: line-through;
+      margin-right: 10px;
+    }
+    .out-of-stock-notice {
+      margin-top: 18px;
+      font-size: 14px;
+    }
+    .button-wrapper {
+      margin-top: 12px;
     }
   }
 
@@ -58,7 +71,7 @@ const ProductItem = styled.div`
     margin-bottom: 0;
   }
   h2 {
-    color: #000;
+    color: ${props => props.theme.baseFontColor};
     text-align: center;
     width: 100%
   }
@@ -108,24 +121,106 @@ const ProductImg = styled(Img)`
   user-select: none;
 `
 
-const Gallery = props => (
-  <Wrapper {...props}>
-    {props.imageArray.map(image => (
-      <ProductItem key={image.node.id}>
-        <div>
-          <ProductImg key={image.node.id} fluid={image.node.childImageSharp.fluid} alt={image.node.name.replace(/-/g, ' ')} />
-        </div>
-        <div className="text-block">
-          <div className="title">{image.node.name.replace(/-/g, ' ')}</div>
-          <div className="description">Описание товара</div>
-          <div className="price">20000 рублей</div>
-          <Link to="/">
-            <Button hollow rounded small>Купить</Button>
-          </Link>
-        </div>
-      </ProductItem>
-    ))}
-  </Wrapper>
+const mergeArrays = (arr1, arr2) => (
+  alasql('SELECT * FROM ? arr1 \
+  JOIN ? arr2 USING name', [arr1, arr2])
 )
+
+const transformArrayOfImages = imgArr => (
+  imgArr.map(function (edge) {
+    return {
+      index: edge.node.name,
+      name: edge.node.relativeDirectory,
+      childImageSharp: edge.node.childImageSharp
+    };
+  })
+)
+
+const Gallery = props => {
+  return (
+    <StaticQuery
+      query={graphql`
+        query ProductStoreQuery {
+          productImages: allFile(
+            filter: { sourceInstanceName: { eq: "productImages"}, name: {eq: "1"}}
+            sort: { fields: relativePath, order: ASC}
+          ) {
+            edges {
+              node {
+                name
+                relativeDirectory
+                childImageSharp {
+                  fluid(maxWidth: 392) {
+                    ...GatsbyImageSharpFluid
+                  }
+                }
+              }
+            }
+          },
+          productSpecs: file(relativePath: {eq: "products.json"}) {
+            childrenProductsJson {
+              index
+              name
+              type
+              material
+              woodType
+              color
+              sizes
+              shortDescription
+              description
+              note
+              price
+              discount
+              isStocked
+            }
+          }
+        }
+      `}
+      render={data => (
+        < Wrapper {...props}>
+          {
+            mergeArrays(transformArrayOfImages(data.productImages.edges), data.productSpecs.childrenProductsJson).slice(0, props.numberOfProductsDisplayed).map(productItem => (
+              <ProductItem key={productItem.index}>
+                <div>
+                  <ProductImg title="Изображение продукта" alt={productItem.name} fluid={productItem.childImageSharp.fluid} />
+                </div>
+                <div className="text-block">
+                  <div className="title">{productItem.name}</div>
+                  {productItem.isStocked ?
+                    <>
+                      {productItem.discount > 0 ?
+                        <>
+                          <div className="price former-price">{productItem.price} рублей</div>
+                          <div className="price">{productItem.discount} рублей</div>
+                        </> :
+                        <div className="price">{productItem.price} рублей</div>
+                      }
+                      <div className="button-wrapper">
+                        <Link to='/'>
+                          <Button hollow rounded small>Купить</Button>
+                        </Link>
+                      </div>
+                    </>
+                    :
+                    <>
+                      {/* <s><div className="price price-out-of-stock strike-through">{productItem.price} рублей</div></s> */}
+                      <div className="out-of-stock-notice">Нет в наличии.</div>
+                      <div className="button-wrapper">
+                        <Link to='/'>
+                          <Button hollow rounded small>Заказать</Button>
+                        </Link>
+                      </div>
+                    </>
+                  }
+                </div>
+              </ProductItem>
+            ))
+          }
+        </Wrapper>
+      )
+      }
+    />
+  )
+}
 
 export default Gallery

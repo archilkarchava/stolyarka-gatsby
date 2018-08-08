@@ -1,24 +1,32 @@
 module.exports = {
   siteMetadata: {
-    title: 'Столярка',
+    title: `Столярка`,
   },
   plugins: [
-    'gatsby-plugin-styled-components',
-    'gatsby-plugin-react-helmet',
+    `gatsby-plugin-styled-components`,
+    `gatsby-plugin-react-helmet`,
     `gatsby-transformer-sharp`,
+    `gatsby-transformer-json`,
     `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `portfolio`,
-        path: `${__dirname}/src/images/portfolio`
+        name: `productImages`,
+        path: `${__dirname}/src/data/images/productImages`
       }
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `img`,
-        path: `${__dirname}/src/images`
+        name: `images`,
+        path: `${__dirname}/src/data/images`
+      }
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `data`,
+        path: `${__dirname}/src/data/`
       }
     }
   ]

@@ -62,6 +62,7 @@ const theme = {
   whiteAccent: '#F0F0F0',
   fontSans: '\'Montserrat\', sans-serif',
   baseFontFamily: '\'Montserrat\', sans-serif',
+  baseFontColor: '#000000',
   baseFontSize: '16px',
   fontNormal: 400,
   fontSemibold: 600,
@@ -110,7 +111,7 @@ class Layout extends Component {
               </Helmet>
               <Navbar title={data.site.siteMetadata.title} phoneNumber={'+7 (900) 000-00-00'} menuOpened={this.mobileMenuOpened} />
               {this.props.children}
-              <Footer accent>© Все права защищены. ООО "Столярка".</Footer>
+              <Footer title={data.site.siteMetadata.title} />
             </>
           </ThemeProvider>
         )}

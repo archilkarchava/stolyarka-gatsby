@@ -11,11 +11,6 @@ const BackgroundImg = styled(Img)`
   width: 100%;
   z-index: 1;
   position: absolute;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -o-user-select: none;
-  user-select: none;
 `
 
 const BackgroundFilter = styled.div`
@@ -40,17 +35,16 @@ const Box = styled.div`
   position: relative;
   top: 50%;
   transform: translateY(-50%);
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  color: white;
+  color: #FFFFFF;
 
   h1 {
     margin-bottom: 50px;
+    font-weight: 600;
+    line-height: 1.23;
+    font-size: 50px;
     text-transform: uppercase;
     ${media.tablet`
-      font-size: 28px;
+      font-size: 32px;
       margin-bottom: 35px;
     `}
   }
@@ -61,7 +55,7 @@ const Box = styled.div`
     line-height: 1.5;
     ${media.tablet`
       margin-bottom: 23px;
-      font-size: 16px;
+      font-size: 19px;
     `}
   }
 `
