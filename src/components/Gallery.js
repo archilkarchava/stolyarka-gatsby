@@ -7,26 +7,23 @@ import Button from '../components/Button'
 import Img from '../components/Img'
 import media from '../utils/media';
 
-const Wrapper = styled.div`
+const Wrapper = styled.ul`
   position: relative;
-  font-size: 0;
+  max-width: 1200px;
   margin: 0 auto;
-  max-width: 1240px;
-  ${media.desktop`
-    max-width: 940px;
-  `}
-  ${media.laptop`
-    max-width: 720px;
-  `}
-  ${media.tablet`
-  `}
+  padding: 0;
+  font-size: 0;
+  list-style: none;
 `
 
-const ProductItem = styled.div`
-  overflow: hidden;
+const ProductItemContainer = styled.li`
   display: inline-block;
-  margin: 0 15px 60px 15px;
-  width: calc(33.3333% - 30px);
+  *display: inline;/*for IE6 - IE7*/
+  width: 33.33%;
+  vertical-align: middle;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
   .text-block {
     margin-top: 20px;
     .title {
@@ -59,71 +56,42 @@ const ProductItem = styled.div`
       margin-top: 12px;
     }
   }
-
-  &:nth-last-child(1) {
-    margin-bottom: 0;
-  }
-  &:nth-last-child(2) {
-    margin-bottom: 0;
-  }
-  &:nth-last-child(3) {
-    margin-bottom: 0;
-  }
-  h2 {
-    color: ${props => props.theme.baseFontColor};
-    text-align: center;
-    width: 100%
-  }
-  ${media.laptop`
-    margin: 0 10px 40px 10px;
-    width: calc(50% - 20px);
-    &:nth-last-child(3) {
-      margin-bottom: 40px;
-    }
-  `}
   ${media.tablet`
-    margin: 0 10px 20px 10px;
-    width: calc(50% - 20px);
-    &:nth-last-child(3) {
-      margin-bottom: 20px;
-    }
+    width: 50%;
   `}
   ${media.phone`
-    margin: 10px 20px;
-    width: calc(100% - 40px);
-    &:nth-last-child(2) {
-      margin-bottom: 20px;
-    }
+    width: 100%;
   `}
-
 `
-const ColorOverlay = styled.span`
-  opacity: 0;
-  &:hover{
-    transition: opacity 0.25s ease-in-out;
-    opacity: 1;
-  }
-  cursor: pointer;
-  position: relative;
+
+const ProductItem = styled.div`
+  margin: 12px;
   display: block;
-  padding-top: 77%;
-  height: 100%;
-  width: 100%;
-  top: 100%;
-  background: ${props => props.theme.brandBlack};
+  position: relative;
+  overflow: hidden;
 `
 
 const ProductImg = styled(Img)`
-  padding-bottom: 77%;
-  height: 0;
-  pointer-events: none;
-  user-select: none;
+  img {
+    user-drag: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+  }  
+  &:hover {
+    opacity: 1 !important;
+  }
 `
 
-const combineArraysBasedOnName = (arr1, arr2) => {
+const ProductImgWrapper = styled.div`
+  position: relative;
+  height: 100%;
+`
+
+
+const combineArraysBasedOnProductName = (arr1, arr2) => {
   var combined = arr1.map(
     function (el) {
-      const findInB = this.filter(function (x) { return x.name === el.name; });
+      const findInB = this.filter(function (x) { return x.productName === el.productName; });
       if (findInB.length) {
         const current = findInB[0];
         for (const l in current) {
@@ -134,26 +102,87 @@ const combineArraysBasedOnName = (arr1, arr2) => {
     }, arr2);
   combined = combined.concat(arr2.filter(
     function (el) {
-      return !this.filter(function (x) { return x.name === el.name; }).length;
+      return !this.filter(function (x) { return x.productName === el.productName; }).length;
     }, combined));
   return combined;
 }
 
-const transformArrayOfImages = imgArr => (
-  imgArr.map(function (edge) {
+const transformImg2Arr = img2Arr => (
+  img2Arr.map(function (edge) {
     return {
-      name: edge.node.relativeDirectory,
-      childImageSharp: edge.node.childImageSharp
+      productName: edge.node.relativeDirectory,
+      img2Sharp: edge.node.childImageSharp
     };
   })
 )
+const transformImg1Arr = img1Arr => (
+  img1Arr.map(function (edge) {
+    return {
+      productName: edge.node.relativeDirectory,
+      img1Sharp: edge.node.childImageSharp
+    };
+  })
+)
+
+const ProductItemLayout = productItem =>
+  <ProductItem>
+    <ProductImgWrapper>
+      {productItem.img1Sharp &&
+        <ProductImg alt={productItem.productName} fluid={{ ...productItem.img1Sharp.fluid, aspectRatio: 4 / 3 }} />
+      }
+      {productItem.img2Sharp &&
+        <ProductImg
+          style={{
+            position: 'absolute',
+            display: 'block',
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 0,
+            opacity: 0,
+            transition: 'all .3s',
+            transitionDelay: '.3s',
+            margin: 'auto'
+          }}
+          alt={productItem.productName} fluid={{ ...productItem.img2Sharp.fluid, aspectRatio: 4 / 3 }} />
+      }
+    </ProductImgWrapper>
+    <div className="text-block">
+      <div className="title">{productItem.productName}</div>
+      {productItem.isStocked ?
+        <>
+          {productItem.discount > 0 ?
+            <>
+              <div className="price former-price">{productItem.price} рублей</div>
+              <div className="price">{productItem.discount} рублей</div>
+            </> :
+            <div className="price">{productItem.price} рублей</div>
+          }
+          <div className="button-wrapper">
+            <Link to='/'>
+              <Button hollow rounded small>Купить</Button>
+            </Link>
+          </div>
+        </>
+        :
+        <>
+          <div className="out-of-stock-notice">Нет в наличии.</div>
+          <div className="button-wrapper">
+            <Link to='/'>
+              <Button hollow rounded small>Заказать</Button>
+            </Link>
+          </div>
+        </>
+      }
+    </div>
+  </ProductItem>
 
 const Gallery = props => {
   return (
     <StaticQuery
       query={graphql`
         query ProductStoreQuery {
-          productImages: allFile(
+          img1Arr: allFile(
             filter: { sourceInstanceName: { eq: "productImages"}, name: {eq: "1"}}
             sort: { fields: relativePath, order: ASC}
           ) {
@@ -161,7 +190,22 @@ const Gallery = props => {
               node {
                 relativeDirectory
                 childImageSharp {
-                  fluid(maxWidth: 392) {
+                  fluid(maxWidth: 784) {
+                    ...GatsbyImageSharpFluid
+                  }
+                }
+              }
+            }
+          },
+          img2Arr: allFile(
+            filter: { sourceInstanceName: { eq: "productImages"}, name: {eq: "2"}}
+            sort: { fields: relativePath, order: ASC}
+          ) {
+            edges {
+              node {
+                relativeDirectory
+                childImageSharp {
+                  fluid(maxWidth: 784) {
                     ...GatsbyImageSharpFluid
                   }
                 }
@@ -170,8 +214,8 @@ const Gallery = props => {
           },
           productSpecs: file(relativePath: {eq: "products.json"}) {
             childrenProductsJson {
-              index
-              name
+              id
+              productName
               type
               material
               woodType
@@ -190,43 +234,18 @@ const Gallery = props => {
       render={data => (
         <Wrapper {...props}>
           {
-            combineArraysBasedOnName(data.productSpecs.childrenProductsJson, transformArrayOfImages(data.productImages.edges))
+            combineArraysBasedOnProductName(
+              data.productSpecs.childrenProductsJson,
+              combineArraysBasedOnProductName(
+                transformImg1Arr(data.img1Arr.edges),
+                transformImg2Arr(data.img2Arr.edges)
+              )
+            )
               .slice(0, props.numberOfProductsDisplayed)
               .map(productItem => (
-                <ProductItem key={productItem.index}>
-                  <div>
-                    <ProductImg title="Изображение продукта" alt={productItem.name} fluid={productItem.childImageSharp.fluid} />
-                  </div>
-                  <div className="text-block">
-                    <div className="title">{productItem.name}</div>
-                    {productItem.isStocked ?
-                      <>
-                        {productItem.discount > 0 ?
-                          <>
-                            <div className="price former-price">{productItem.price} рублей</div>
-                            <div className="price">{productItem.discount} рублей</div>
-                          </> :
-                          <div className="price">{productItem.price} рублей</div>
-                        }
-                        <div className="button-wrapper">
-                          <Link to='/'>
-                            <Button hollow rounded small>Купить</Button>
-                          </Link>
-                        </div>
-                      </>
-                      :
-                      <>
-                        {/* <s><div className="price price-out-of-stock strike-through">{productItem.price} рублей</div></s> */}
-                        <div className="out-of-stock-notice">Нет в наличии.</div>
-                        <div className="button-wrapper">
-                          <Link to='/'>
-                            <Button hollow rounded small>Заказать</Button>
-                          </Link>
-                        </div>
-                      </>
-                    }
-                  </div>
-                </ProductItem>
+                <ProductItemContainer key={productItem.id}>
+                  {ProductItemLayout(productItem)}
+                </ProductItemContainer>
               ))
           }
         </Wrapper>

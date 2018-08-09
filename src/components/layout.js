@@ -29,7 +29,8 @@ injectGlobal`
   body {
     width: 100%;
   }
-  .clearfix::after {
+  .clearfix:before,
+  .clearfix:after {
     content: "";
     clear: both;
     display: table;

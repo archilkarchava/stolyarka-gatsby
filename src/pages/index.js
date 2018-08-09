@@ -13,7 +13,7 @@ import Layout from '../components/layout'
 const Container = styled.div`
   text-align: center;
   width: 100%;
-  padding: 50px 0;
+  padding: 30px 0 50px 0;
   background-color: ${props =>
     (props.primary && props.theme.primary) ||
     (props.accent && props.theme.accent) ||
@@ -44,7 +44,7 @@ export const query = graphql`
   query IndexPageQuery {
     headerImage: file(relativePath: { regex: "/header/" }) {
       childImageSharp {
-        fluid(maxWidth: 1240 quality: 80 ) {
+        fluid(maxWidth: 2480) {
           ...GatsbyImageSharpFluid
         }
       }
