@@ -1,16 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'gatsby'
 import Img from '../components/Img'
 import media from '../utils/media'
 
-import Button from './Button'
-
-const BackgroundImg = styled(Img)`
+const Wrapper = styled.header`
+  z-index: -100;
   height: 620px;
-  width: 100%;
-  z-index: 1;
-  position: absolute;
 `
 
 const BackgroundFilter = styled.div`
@@ -20,8 +15,8 @@ const BackgroundFilter = styled.div`
   background: -ms-linear-gradient(top, rgba(0,0,0,0.25), rgba(0,0,0,0.80));
   background: linear-gradient(top, rgba(0,0,0,0.25), rgba(0,0,0,0.80));
   filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#b2000000', endColorstr='#66000000');
-  position: absolute;
-  z-index: 2;
+  position: fixed;
+  z-index: -99;
   width: 100%;
   height: 620px;
 `
@@ -61,20 +56,20 @@ const Box = styled.div`
 `
 
 const Header = props => (
-  <header>
+  <Wrapper>
     <BackgroundFilter>
-      <Box>
-        <h1>Мебель из массива дерева на заказ</h1>
-        <p>Мы с любовью изготавливаем изделия из Дуба, Ясеня, Сосны, Бука, Карагача, Граба</p>
-        <Link to='#intro'>
-          <Button primary rounded>
-            Привет
-          </Button>
-        </Link>
-      </Box>
     </BackgroundFilter>
-    <BackgroundImg objFit="cover" objPosition="50% 50%" title="Header image" alt="Мебель из массива дерева на заказ" fluid={props.headerImage.fluid} />
-  </header>
+    <Img style={{
+      height: '620px',
+      width: '100%',
+      position: 'fixed',
+      zIndex: -100
+    }} objFit="cover" objPosition="50% 50%" title="Header image" alt="Мебель из массива дерева на заказ" fluid={props.headerImage.fluid} />
+    <Box>
+      <h1>Мебель из массива дерева на заказ</h1>
+      <p>Мы с любовью изготавливаем изделия из Дуба, Ясеня, Сосны, Бука, Карагача, Граба</p>
+    </Box>
+  </Wrapper>
 )
 
 export default Header

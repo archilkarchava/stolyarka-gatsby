@@ -19,6 +19,12 @@ injectGlobal`
     outline: 0;
     font-size: 100%;
     vertical-align: baseline;
+    ::selection {
+      background: #DEB887;
+    }
+    ::-moz-selection {
+      background: #DEB887;
+    }
   }
   header, section, footer, aside, nav, main, article, figure {
     display: block; 
@@ -28,6 +34,7 @@ injectGlobal`
   }
   body {
     width: 100%;
+    background-color: #FFFFFF;
   }
   .clearfix:before,
   .clearfix:after {
@@ -47,6 +54,7 @@ injectGlobal`
   }
   a {
     text-decoration: none;
+    color: #000000;
   }
   .noscroll {
     ${media.tablet`

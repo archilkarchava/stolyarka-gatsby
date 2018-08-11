@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import setTextColor from '../utils/setTextColor'
+import media from '../utils/media'
 
 const TextBlock = styled.div`
   background-color: ${props =>
@@ -11,15 +12,13 @@ const TextBlock = styled.div`
     (props.primary && props.theme.primary) ||
     (props.accent && props.theme.accent) ||
     props.theme.primary)};
-  position: relative;
   text-align: center;
   font-size: 30px;
   padding: 100px 20px;
-  @media screen and (max-width: 769px) {
+  ${media.tablet`
     font-size: 18px;
     padding: 50px 20px;
-  }
-  
+  `}
 `
 
 export default TextBlock

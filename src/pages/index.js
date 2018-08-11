@@ -21,22 +21,29 @@ const Container = styled.div`
   };
 `
 
+const Main = styled.main`
+  background-color: ${props => props.theme.primary};
+  z-index: 1;
+`
+
 const IndexPage = ({ data }) => (
   <Layout>
     <Header headerImage={data.headerImage.childImageSharp} />
-    <Anchor id="intro" />
-    <TextBlock primary>Делаем мебель красиво. Мы из России.</TextBlock>
-    <Anchor id="work" />
-    <Gallery numberOfProductsDisplayed={6} />
-    <Container primary>
-      <Link to="/products/">
-        <Button accent rounded>
-          Посмотреть все работы
-      </Button>
-      </Link>
-    </Container>
-    <Anchor id="contactUs" />
-    <ContactUs accent />
+    <Main>
+      <Anchor id="intro" />
+      <TextBlock primary>Делаем мебель красиво. Мы из России.</TextBlock>
+      <Anchor id="work" />
+      <Gallery numberOfProductsDisplayed={9} />
+      <Container primary>
+        <Link to="/products/">
+          <Button accent rounded>
+            Посмотреть все работы
+          </Button>
+        </Link>
+      </Container>
+      <Anchor id="contactUs" />
+      <ContactUs accent />
+    </Main>
   </Layout>
 )
 
