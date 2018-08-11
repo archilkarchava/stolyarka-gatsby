@@ -2,9 +2,7 @@ import React from 'react'
 import { Link, StaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
 
-import Button from '../components/Button'
-
-import Img from '../components/Img'
+import Img from './Img'
 import media from '../utils/media';
 
 const Wrapper = styled.ul`
@@ -24,38 +22,6 @@ const ProductItemContainer = styled.li`
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  .text-block {
-    margin-top: 20px;
-    .title {
-      font-size: 20px;
-      font-weight: 600;
-    }
-    .description {
-      margin-top: 8px;
-      font-size: 14px;
-      font-weight: 300;
-      line-height: 1.55;
-    }
-    .price {
-      margin-top: 15px;
-      font-size: 16px;
-      line-height: 1.35;
-      font-weight: 600;
-      display: inline-block;
-    }
-    .former-price {
-      opacity: .5;
-      text-decoration: line-through;
-      margin-right: 10px;
-    }
-    .out-of-stock-notice {
-      margin-top: 18px;
-      font-size: 14px;
-    }
-    .button-wrapper {
-      margin-top: 12px;
-    }
-  }
   ${media.tablet`
     width: 50%;
   `}
@@ -65,10 +31,46 @@ const ProductItemContainer = styled.li`
 `
 
 const ProductItem = styled.div`
-  margin: 12px;
+  cursor: pointer;
+  margin: 20px;
   display: block;
   position: relative;
   overflow: hidden;
+  .text-block {
+    text-align: center;
+    .title {
+      margin: 1.4em 0 0 0;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .description {
+      margin-top: 8px;
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.55;
+    }
+    .price {
+      margin: .5em .5em 0 0;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.4em;
+      display: inline-block;
+    }
+    .new-price {
+      color: #d39850;
+    }
+    .former-price {
+      opacity: .7;
+      text-decoration: line-through;
+    }
+    .out-of-stock-notice {
+      margin-top: 18px;
+      font-size: 14px;
+    }
+    .button-wrapper {
+      margin-top: 12px;
+    }
+  }
 `
 
 const ProductImg = styled(Img)`
@@ -125,57 +127,41 @@ const transformImg1Arr = img1Arr => (
 )
 
 const ProductItemLayout = productItem =>
-  <ProductItem>
-    <ProductImgWrapper>
-      {productItem.img1Sharp &&
-        <ProductImg alt={productItem.productName} fluid={{ ...productItem.img1Sharp.fluid, aspectRatio: 4 / 3 }} />
-      }
-      {productItem.img2Sharp &&
-        <ProductImg
-          style={{
-            position: 'absolute',
-            display: 'block',
-            top: 0,
-            left: 0,
-            bottom: 0,
-            right: 0,
-            opacity: 0,
-            transition: 'all .3s',
-            transitionDelay: '.3s',
-            margin: 'auto'
-          }}
-          alt={productItem.productName} fluid={{ ...productItem.img2Sharp.fluid, aspectRatio: 4 / 3 }} />
-      }
-    </ProductImgWrapper>
-    <div className="text-block">
-      <div className="title">{productItem.productName}</div>
-      {productItem.isStocked ?
-        <>
-          {productItem.discount > 0 ?
-            <>
-              <div className="price former-price">{productItem.price} рублей</div>
-              <div className="price">{productItem.discount} рублей</div>
-            </> :
-            <div className="price">{productItem.price} рублей</div>
-          }
-          <div className="button-wrapper">
-            <Link to='/'>
-              <Button hollow rounded small>Купить</Button>
-            </Link>
-          </div>
-        </>
-        :
-        <>
-          <div className="out-of-stock-notice">Нет в наличии.</div>
-          <div className="button-wrapper">
-            <Link to='/'>
-              <Button hollow rounded small>Заказать</Button>
-            </Link>
-          </div>
-        </>
-      }
-    </div>
-  </ProductItem>
+  <Link to={`/products/${productItem.productName.replace(/ /g, '_')}`}>
+    <ProductItem>
+      <ProductImgWrapper>
+        {productItem.img1Sharp &&
+          <ProductImg alt={productItem.productName} fluid={{ ...productItem.img1Sharp.fluid, aspectRatio: 4 / 3 }} />
+        }
+        {productItem.img2Sharp &&
+          <ProductImg
+            style={{
+              position: 'absolute',
+              display: 'block',
+              top: 0,
+              left: 0,
+              bottom: 0,
+              right: 0,
+              opacity: 0,
+              transition: 'all .3s',
+              transitionDelay: '.3s',
+              margin: 'auto'
+            }}
+            alt={productItem.productName} fluid={{ ...productItem.img2Sharp.fluid, aspectRatio: 4 / 3 }} />
+        }
+      </ProductImgWrapper>
+      <div className="text-block">
+        <div className="title">{productItem.productName}</div>
+        {productItem.discount > 0 ?
+          <>
+            <div className="price new-price">{productItem.discount} рублей</div>
+            <div className="price former-price">{productItem.price} рублей</div>
+          </> :
+          <div className="price">{productItem.price} рублей</div>
+        }
+      </div>
+    </ProductItem>
+  </Link>
 
 const Gallery = props => {
   return (
