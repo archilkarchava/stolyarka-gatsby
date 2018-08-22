@@ -26,14 +26,14 @@ const ImagesWrapper = styled.div`
   margin: 0;
   .thumbnail-img {
     margin-right: 10px;
-    width: 120px;
-    height: 120px;
+    max-width: 120px;
+    max-height: 120px;
   }
   .main-slider {
     margin-bottom: 30px;
   }
   .thumbnail-slider {
-    width: ${props =>
+    max-width: ${props =>
       props.thumbnailSliderWidth <= 5
         ? `${props.thumbnailSliderWidth * 135}px`
         : `100%`};
