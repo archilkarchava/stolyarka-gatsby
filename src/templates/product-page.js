@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import Layout from '../components/layout'
 import Divider from '../components/Divider'
+import Separator from '../components/Separator'
 import Button from '../components/Button'
 
 import Img from '../components/Img'
@@ -51,9 +52,12 @@ const ProductMenu = styled.nav`
   overflow: hidden;
   line-height: 1em;
   font-size: 14px;
-  margin-bottom: 60px;
+  margin-bottom: 30px;
   .breadcrumb {
     float: left;
+    * {
+      display: inline-block;
+    }
   }
   .pagination {
     float: right;
@@ -142,6 +146,13 @@ class productPageTemplate extends Component {
     return (
       <Layout>
         <Wrapper className="clearfix">
+          <ProductMenu>
+            <div className="breadcrumb">
+              <Link to="products">Магазин</Link>
+              <Separator char="\203A" />
+              <div>{productSpecs.productName}</div>
+            </div>
+          </ProductMenu>
           <ImagesWrapper thumbnailSliderWidth={productImages.length}>
             <Slider
               className="main-slider"
@@ -191,11 +202,6 @@ class productPageTemplate extends Component {
             )}
           </ImagesWrapper>
           <ProductSpecs>
-            <ProductMenu>
-              <div className="breadcrumb">
-                <Link to="products">&larr; Назад в магазин</Link>
-              </div>
-            </ProductMenu>
             <h1 className="title">{productSpecs.productName}</h1>
             <Divider />
             {productSpecs.discount > 0 ? (
