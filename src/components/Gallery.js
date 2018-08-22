@@ -3,11 +3,11 @@ import { Link, StaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
 
 import Img from './Img'
-import media from '../utils/media';
+import media from '../utils/media'
 
 const Wrapper = styled.ul`
   position: relative;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0;
   font-size: 0;
@@ -16,7 +16,7 @@ const Wrapper = styled.ul`
 
 const ProductItemContainer = styled.li`
   display: inline-block;
-  *display: inline;/*for IE6 - IE7*/
+  *display: inline; /*for IE6 - IE7*/
   width: 33.33%;
   vertical-align: middle;
   box-sizing: border-box;
@@ -24,10 +24,9 @@ const ProductItemContainer = styled.li`
   padding: 0;
   ${media.tablet`
     width: 50%;
-  `}
-  ${media.phone`
+  `} ${media.phone`
     width: 100%;
-  `}
+  `};
 `
 
 const ProductItem = styled.div`
@@ -37,21 +36,20 @@ const ProductItem = styled.div`
   position: relative;
   overflow: hidden;
   .text-block {
-    text-align: center;
     .title {
       margin: 1.4em 0 0 0;
-      font-size: 16px;
+      font-size: 20px;
       font-weight: 600;
     }
     .description {
       margin-top: 8px;
-      font-size: 14px;
+      font-size: 18px;
       font-weight: 300;
       line-height: 1.55;
     }
     .price {
-      margin: .5em .5em 0 0;
-      font-size: 14px;
+      margin: 0.5em 0.5em 0 0;
+      font-size: 18px;
       font-weight: 500;
       line-height: 1.4em;
       display: inline-block;
@@ -60,7 +58,7 @@ const ProductItem = styled.div`
       color: #d39850;
     }
     .former-price {
-      opacity: .7;
+      opacity: 0.7;
       text-decoration: line-through;
     }
     .out-of-stock-notice {
@@ -78,7 +76,7 @@ const ProductImg = styled(Img)`
     user-drag: none;
     -moz-user-select: none;
     -webkit-user-drag: none;
-  }  
+  }
   &:hover {
     opacity: 1 !important;
   }
@@ -89,51 +87,57 @@ const ProductImgWrapper = styled.div`
   height: 100%;
 `
 
-
 const combineArraysBasedOnProductName = (arr1, arr2) => {
-  var combined = arr1.map(
-    function (el) {
-      const findInB = this.filter(function (x) { return x.productName === el.productName; });
-      if (findInB.length) {
-        const current = findInB[0];
-        for (const l in current) {
-          if (!el[l]) { el[l] = current[l]; }
+  var combined = arr1.map(function(el) {
+    const findInB = this.filter(function(x) {
+      return x.productName === el.productName
+    })
+    if (findInB.length) {
+      const current = findInB[0]
+      for (const l in current) {
+        if (!el[l]) {
+          el[l] = current[l]
         }
       }
-      return el;
-    }, arr2);
-  combined = combined.concat(arr2.filter(
-    function (el) {
-      return !this.filter(function (x) { return x.productName === el.productName; }).length;
-    }, combined));
-  return combined;
+    }
+    return el
+  }, arr2)
+  combined = combined.concat(
+    arr2.filter(function(el) {
+      return !this.filter(function(x) {
+        return x.productName === el.productName
+      }).length
+    }, combined)
+  )
+  return combined
 }
 
-const transformImg2Arr = img2Arr => (
-  img2Arr.map(function (edge) {
+const transformImg2Arr = img2Arr =>
+  img2Arr.map(function(edge) {
     return {
       productName: edge.node.relativeDirectory,
-      img2Sharp: edge.node.childImageSharp
-    };
+      img2Sharp: edge.node.childImageSharp,
+    }
   })
-)
-const transformImg1Arr = img1Arr => (
-  img1Arr.map(function (edge) {
+const transformImg1Arr = img1Arr =>
+  img1Arr.map(function(edge) {
     return {
       productName: edge.node.relativeDirectory,
-      img1Sharp: edge.node.childImageSharp
-    };
+      img1Sharp: edge.node.childImageSharp,
+    }
   })
-)
 
-const ProductItemLayout = productItem =>
-  <Link to={`/products/${productItem.productName.replace(/ /g, '_')}`}>
-    <ProductItem>
+const ProductItemLayout = productItem => (
+  <ProductItem>
+    <Link to={`/products/${productItem.productName.replace(/ /g, '_')}`}>
       <ProductImgWrapper>
-        {productItem.img1Sharp &&
-          <ProductImg alt={productItem.productName} fluid={{ ...productItem.img1Sharp.fluid, aspectRatio: 4 / 3 }} />
-        }
-        {productItem.img2Sharp &&
+        {productItem.img1Sharp && (
+          <ProductImg
+            alt={productItem.productName}
+            fluid={{ ...productItem.img1Sharp.fluid, aspectRatio: 4 / 3 }}
+          />
+        )}
+        {productItem.img2Sharp && (
           <ProductImg
             style={{
               position: 'absolute',
@@ -143,25 +147,28 @@ const ProductItemLayout = productItem =>
               bottom: 0,
               right: 0,
               opacity: 0,
-              transition: 'all .3s',
-              transitionDelay: '.3s',
-              margin: 'auto'
+              transition: 'opacity .3s ease-in',
+              margin: 'auto',
             }}
-            alt={productItem.productName} fluid={{ ...productItem.img2Sharp.fluid, aspectRatio: 4 / 3 }} />
-        }
+            alt={productItem.productName}
+            fluid={{ ...productItem.img2Sharp.fluid, aspectRatio: 4 / 3 }}
+          />
+        )}
       </ProductImgWrapper>
       <div className="text-block">
         <div className="title">{productItem.productName}</div>
-        {productItem.discount > 0 ?
+        {productItem.discount > 0 ? (
           <>
             <div className="price new-price">{productItem.discount} рублей</div>
             <div className="price former-price">{productItem.price} рублей</div>
-          </> :
+          </>
+        ) : (
           <div className="price">{productItem.price} рублей</div>
-        }
+        )}
       </div>
-    </ProductItem>
-  </Link>
+    </Link>
+  </ProductItem>
+)
 
 const Gallery = props => {
   return (
@@ -169,8 +176,11 @@ const Gallery = props => {
       query={graphql`
         query ProductStoreQuery {
           img1Arr: allFile(
-            filter: { sourceInstanceName: { eq: "productImages"}, name: {eq: "1"}}
-            sort: { fields: relativePath, order: ASC}
+            filter: {
+              sourceInstanceName: { eq: "productImages" }
+              name: { eq: "1" }
+            }
+            sort: { fields: relativePath, order: ASC }
           ) {
             edges {
               node {
@@ -182,10 +192,13 @@ const Gallery = props => {
                 }
               }
             }
-          },
+          }
           img2Arr: allFile(
-            filter: { sourceInstanceName: { eq: "productImages"}, name: {eq: "2"}}
-            sort: { fields: relativePath, order: ASC}
+            filter: {
+              sourceInstanceName: { eq: "productImages" }
+              name: { eq: "2" }
+            }
+            sort: { fields: relativePath, order: ASC }
           ) {
             edges {
               node {
@@ -197,8 +210,8 @@ const Gallery = props => {
                 }
               }
             }
-          },
-          productSpecs: file(relativePath: {eq: "products.json"}) {
+          }
+          productSpecs: file(relativePath: { eq: "products.json" }) {
             childrenProductsJson {
               id
               productName
@@ -219,24 +232,21 @@ const Gallery = props => {
       `}
       render={data => (
         <Wrapper {...props}>
-          {
+          {combineArraysBasedOnProductName(
+            data.productSpecs.childrenProductsJson,
             combineArraysBasedOnProductName(
-              data.productSpecs.childrenProductsJson,
-              combineArraysBasedOnProductName(
-                transformImg1Arr(data.img1Arr.edges),
-                transformImg2Arr(data.img2Arr.edges)
-              )
+              transformImg1Arr(data.img1Arr.edges),
+              transformImg2Arr(data.img2Arr.edges)
             )
-              .slice(0, props.numberOfProductsDisplayed)
-              .map(productItem => (
-                <ProductItemContainer key={productItem.id}>
-                  {ProductItemLayout(productItem)}
-                </ProductItemContainer>
-              ))
-          }
+          )
+            .slice(0, props.numberOfProductsDisplayed)
+            .map(productItem => (
+              <ProductItemContainer key={productItem.id}>
+                {ProductItemLayout(productItem)}
+              </ProductItemContainer>
+            ))}
         </Wrapper>
-      )
-      }
+      )}
     />
   )
 }

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
-import { StaticQuery, graphql } from "gatsby"
-import { injectGlobal, ThemeProvider } from 'styled-components'
+import { StaticQuery, graphql } from 'gatsby'
+import styled, { injectGlobal, ThemeProvider } from 'styled-components'
 
 import Navbar from './Navigation/Navbar'
 import Footer from './Footer'
@@ -39,8 +39,10 @@ injectGlobal`
   .clearfix:before,
   .clearfix:after {
     content: "";
-    clear: both;
     display: table;
+  }
+  .clearfix:after {
+    clear: both;
   }
   h1 {
     line-height: 1.23;
@@ -69,8 +71,8 @@ const theme = {
   primary: '#FFFFFF',
   accent: '#000000',
   whiteAccent: '#F0F0F0',
-  fontSans: '\'Montserrat\', sans-serif',
-  baseFontFamily: '\'Montserrat\', sans-serif',
+  fontSans: "'Montserrat', sans-serif",
+  baseFontFamily: "'Montserrat', sans-serif",
   baseFontColor: '#000000',
   baseFontSize: '16px',
   fontNormal: 400,
@@ -78,13 +80,16 @@ const theme = {
   fontBold: 700,
   baseLineHeight: 1.5,
   navHeight: '80px',
-  mobileNavHeight: '65px'
-};
+  mobileNavHeight: '65px',
+}
+
+/* const Main = styled.main`
+  min-height: calc(100vh - 231px);
+` */
 
 class Layout extends Component {
-
   state = {
-    noscroll: false
+    noscroll: false,
   }
 
   mobileMenuOpened = menuOpened => {
@@ -108,17 +113,27 @@ class Layout extends Component {
               <Helmet
                 title={data.site.siteMetadata.title}
                 meta={[
-                  { name: 'description', content: 'Столярная мастерская в Челябинске.' },
+                  {
+                    name: 'description',
+                    content: 'Столярная мастерская в Челябинске.',
+                  },
                   { name: 'keywords', content: 'sample, something' },
                 ]}
                 bodyAttributes={{
-                  class: this.state.noscroll ? `noscroll` : ''
+                  class: this.state.noscroll ? `noscroll` : '',
                 }}
               >
                 {/* <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700&amp;subset=cyrillic" rel="stylesheet" /> */}
-                <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&amp;subset=cyrillic" rel="stylesheet" />
+                <link
+                  href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&amp;subset=cyrillic"
+                  rel="stylesheet"
+                />
               </Helmet>
-              <Navbar title={data.site.siteMetadata.title} phoneNumber={'+7 (900) 000-00-00'} menuOpened={this.mobileMenuOpened} />
+              <Navbar
+                title={data.site.siteMetadata.title}
+                phoneNumber={'+7 (900) 000-00-00'}
+                menuOpened={this.mobileMenuOpened}
+              />
               {this.props.children}
               <Footer title={data.site.siteMetadata.title} />
             </>
@@ -128,7 +143,6 @@ class Layout extends Component {
     )
   }
 }
-
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,

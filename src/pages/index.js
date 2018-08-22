@@ -17,8 +17,7 @@ const Container = styled.div`
   background-color: ${props =>
     (props.primary && props.theme.primary) ||
     (props.accent && props.theme.accent) ||
-    props.theme.primary
-  };
+    props.theme.primary};
 `
 
 const Main = styled.main`

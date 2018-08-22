@@ -7,11 +7,15 @@ import Img from './Img'
 import setTextColor from '../utils/setTextColor'
 
 const BackgroundFilter = styled.div`
-  background: -webkit-linear-gradient(top, rgba(0,0,0,0.4), rgba(0,0,0,0.9));
-  background: -moz-linear-gradient(top, rgba(0,0,0,0.4), rgba(0,0,0,0.9));
-  background: -o-linear-gradient(top, rgba(0,0,0,0.4), rgba(0,0,0,0.9));
-  background: -ms-linear-gradient(top, rgba(0,0,0,0.4), rgba(0,0,0,0.9));
-  background: linear-gradient(top, rgba(0,0,0,0.4), rgba(0,0,0,0.9));
+  background: -webkit-linear-gradient(
+    top,
+    rgba(0, 0, 0, 0.4),
+    rgba(0, 0, 0, 0.9)
+  );
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.9));
+  background: -o-linear-gradient(top, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.9));
+  background: -ms-linear-gradient(top, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.9));
+  background: linear-gradient(top, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.9));
   filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#b2000000', endColorstr='#66000000');
   position: absolute;
   z-index: 2;
@@ -43,7 +47,9 @@ const Wrapper = styled.div`
   color: ${props => setTextColor(props.theme.accent)};
   text-align: center;
 `
-const footerText = siteTitle => <p>&copy; {siteTitle} 2018. Все права защищены.</p>
+const footerText = siteTitle => (
+  <p>&copy; {siteTitle} 2018. Все права защищены.</p>
+)
 
 const Footer = props => (
   <StaticQuery
@@ -60,21 +66,21 @@ const Footer = props => (
     `}
     render={data => (
       <>
-        {props.imageBg ?
+        {props.imageBg ? (
           <>
-            <BackgroundFilter>
-              {footerText(props.title)}
-            </BackgroundFilter>
-            <BackgroundImg title="Footer background image" alt="Дрова" fluid={data.footerImage.childImageSharp.fluid} />
-          </> :
-          <Wrapper>
-            {footerText(props.title)}
-          </Wrapper>
-        }
+            <BackgroundFilter>{footerText(props.title)}</BackgroundFilter>
+            <BackgroundImg
+              title="Footer background image"
+              alt="Дрова"
+              fluid={data.footerImage.childImageSharp.fluid}
+            />
+          </>
+        ) : (
+          <Wrapper>{footerText(props.title)}</Wrapper>
+        )}
       </>
     )}
   />
 )
-
 
 export default Footer

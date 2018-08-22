@@ -60,7 +60,7 @@ class Navbar extends Component {
   render() {
     return (
       <>
-        <Wrapper {...this.props} className='clearfix'>
+        <Wrapper {...this.props.theme} className='clearfix'>
           <Nav>
             <NavLogo to='/' title={this.props.title} />
             <MenuButton click={this.mobileNavClickHandler} show={this.state.mobileMenuOpen} />

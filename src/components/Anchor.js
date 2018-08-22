@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import media from '../utils/media';
+import media from '../utils/media'
 
 const Anchor = styled.a`
   display: block;
@@ -8,7 +8,7 @@ const Anchor = styled.a`
   visibility: hidden;
   ${media.tablet`
     top: -${props => props.theme.mobileNavHeight};
-  `}
+  `};
 `
 
 export default Anchor

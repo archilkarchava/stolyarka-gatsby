@@ -9,13 +9,21 @@ const Wrapper = styled.header`
 `
 
 const BackgroundFilter = styled.div`
-  background: -webkit-linear-gradient(top, rgba(0,0,0,0.25), rgba(0,0,0,0.80));
-  background: -moz-linear-gradient(top, rgba(0,0,0,0.25), rgba(0,0,0,0.80));
-  background: -o-linear-gradient(top, rgba(0,0,0,0.25), rgba(0,0,0,0.80));
-  background: -ms-linear-gradient(top, rgba(0,0,0,0.25), rgba(0,0,0,0.80));
-  background: linear-gradient(top, rgba(0,0,0,0.25), rgba(0,0,0,0.80));
+  background: -webkit-linear-gradient(
+    top,
+    rgba(0, 0, 0, 0.25),
+    rgba(0, 0, 0, 0.8)
+  );
+  background: -moz-linear-gradient(
+    top,
+    rgba(0, 0, 0, 0.25),
+    rgba(0, 0, 0, 0.8)
+  );
+  background: -o-linear-gradient(top, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.8));
+  background: -ms-linear-gradient(top, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.8));
+  background: linear-gradient(top, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.8));
   filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#b2000000', endColorstr='#66000000');
-  position: fixed;
+  position: ${props => (props.fixed ? 'fixed' : 'absolute')};
   z-index: -99;
   width: 100%;
   height: 620px;
@@ -30,7 +38,7 @@ const Box = styled.div`
   position: relative;
   top: 50%;
   transform: translateY(-50%);
-  color: #FFFFFF;
+  color: #ffffff;
 
   h1 {
     margin-bottom: 50px;
@@ -41,7 +49,7 @@ const Box = styled.div`
     ${media.tablet`
       font-size: 32px;
       margin-bottom: 35px;
-    `}
+    `};
   }
   p {
     margin-bottom: 37px;
@@ -51,23 +59,32 @@ const Box = styled.div`
     ${media.tablet`
       margin-bottom: 23px;
       font-size: 19px;
-    `}
+    `};
   }
 `
 
 const Header = props => (
   <Wrapper>
-    <BackgroundFilter>
-    </BackgroundFilter>
-    <Img style={{
-      height: '620px',
-      width: '100%',
-      position: 'fixed',
-      zIndex: -100
-    }} objFit="cover" objPosition="50% 50%" title="Header image" alt="Мебель из массива дерева на заказ" fluid={props.headerImage.fluid} />
+    <BackgroundFilter {...props} />
+    <Img
+      style={{
+        height: '620px',
+        width: '100%',
+        position: props.fixed ? 'fixed' : 'absolute',
+        zIndex: -100,
+      }}
+      objFit="cover"
+      objPosition="50% 50%"
+      title="Header image"
+      alt="Мебель из массива дерева на заказ"
+      fluid={props.headerImage.fluid}
+    />
     <Box>
       <h1>Мебель из массива дерева на заказ</h1>
-      <p>Мы с любовью изготавливаем изделия из Дуба, Ясеня, Сосны, Бука, Карагача, Граба</p>
+      <p>
+        Мы с любовью изготавливаем изделия из Дуба, Ясеня, Сосны, Бука,
+        Карагача, Граба
+      </p>
     </Box>
   </Wrapper>
 )

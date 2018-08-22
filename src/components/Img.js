@@ -2,7 +2,7 @@
 import React from 'react'
 import Image from 'gatsby-image'
 
-const Img = ({ objFit = `cover`, objPosition = `50% 50%`, ...props }) =>(
+const Img = ({ objFit = `cover`, objPosition = `50% 50%`, ...props }) => (
   <Image
     {...props}
     imgStyle={{
@@ -14,4 +14,4 @@ const Img = ({ objFit = `cover`, objPosition = `50% 50%`, ...props }) =>(
   />
 )
 
-export default Img;
+export default Img

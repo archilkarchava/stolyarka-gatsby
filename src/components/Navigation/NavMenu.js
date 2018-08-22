@@ -13,11 +13,10 @@ const StyledList = styled.ul`
     color: ${props => setTextColor(props.theme.primary)};
   };
   list-style: none;
-  margin:0;
-  padding:0;
+  padding: 0;
   text-align: center;
   margin: 0 auto;
-  width: 100%;
+  width: 362px;
   height: 100%;
   ${media.tablet`
     display: none;
