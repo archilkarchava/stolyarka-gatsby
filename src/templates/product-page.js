@@ -42,6 +42,9 @@ const ImagesWrapper = styled.div`
   .slick-next:before {
     color: #000000;
   }
+  ${media.tablet`
+  width: calc(100vw - 100px);
+  `};
 `
 
 const ProductMenu = styled.nav`
