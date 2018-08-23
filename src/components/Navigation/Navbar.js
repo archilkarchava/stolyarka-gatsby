@@ -1,11 +1,12 @@
 import React from 'react'
+import Helmet from 'react-helmet'
 import styled from 'styled-components'
 
 import NavLogo from './Logo'
 import NavMenu from './NavMenu'
 import MobileNavMenu from './MobileNavMenu'
 import MenuButton from './MenuButton'
-import Overlay from './Overlay'
+import Overlay from '../Overlay'
 
 import media from '../../utils/media'
 import setTextColor from '../../utils/setTextColor'
@@ -21,7 +22,7 @@ const Indent = styled.div`
 const Wrapper = styled.nav`
   background-color: ${props => props.theme.primary};
   color: ${props => setTextColor(props.theme.primary)};
-  z-index: 9999;
+  z-index: 998;
   width: 100%;
   display: table;
   content: '';
@@ -53,17 +54,20 @@ class Navbar extends React.Component {
       prevState => {
         return { mobileMenuOpen: !prevState.mobileMenuOpen }
       },
-      () => this.props.menuOpened(this.state.mobileMenuOpen)
+      () => {}
     )
   }
   overlayClickHandler = () => {
-    this.setState({ mobileMenuOpen: false }, () =>
-      this.props.menuOpened(this.state.mobileMenuOpen)
-    )
+    this.setState({ mobileMenuOpen: false }, () => {})
   }
   render() {
     return (
       <>
+        <Helmet
+          bodyAttributes={{
+            class: this.state.mobileMenuOpen ? `noscroll-mobile` : '',
+          }}
+        />
         <Wrapper {...this.props.theme} className="clearfix">
           <Nav>
             <NavLogo to="/" title={this.props.title} />
@@ -81,6 +85,7 @@ class Navbar extends React.Component {
         <Overlay
           click={this.overlayClickHandler}
           show={this.state.mobileMenuOpen}
+          mobileOnly
         />
         <Indent />
       </>

@@ -20,72 +20,79 @@ const Wrapper = styled.div`
   font-size: 15px;
   ${props => props.centered && 'text-align: center'};
   margin: ${props => props.margin};
-  a {
+  * {
     display: inline;
     margin: 0 ${props => (!!props.spaceBetween ? props.spaceBetween : '7px')};
   }
 `
 
+function openInNewWindow(url) {
+  window.open(
+    url,
+    'newwindow',
+    'width=650,height=570,scrollbars=yes,status=yes'
+  )
+}
+
 const ShareLinks = props => (
   <Wrapper {...props}>
-    <a
-      target="_blank"
-      rel="noopener noreferrer"
-      href={`https://vk.com/share.php?url=${props.location.href}`}
-    >
-      <FontAwesomeIcon
-        style={{
-          color: '#45668e',
-        }}
-        icon={faVk}
-      />
-    </a>
-    <a
-      target="_blank"
-      rel="noopener noreferrer"
-      href={`https://www.facebook.com/sharer/sharer.php?u=${
-        props.location.href
-      }`}
-    >
-      <FontAwesomeIcon
-        style={{
-          color: '#3b5998',
-        }}
-        icon={faFacebookF}
-      />
-    </a>
-    <a
-      target="_blank"
-      rel="noopener noreferrer"
-      href={`https://twitter.com/intent/tweet?${props.data.productSpecs.edges[0]
-        .node.description &&
-        `text=${props.data.productSpecs.edges[0].node.description}&`}url=${
-        props.location.href
-      }`}
-    >
-      <FontAwesomeIcon
-        style={{
-          color: '#1da1f2',
-        }}
-        icon={faTwitter}
-      />
-    </a>
-    <a
-      target="_blank"
-      rel="noopener noreferrer"
-      href={`https://www.pinterest.com/pin/create/link/?${props.data
-        .productSpecs.edges[0].node.description &&
-        `description=${props.data.productSpecs.edges[0].node.description}&`}
-          media=${props.data.productImages.edges[0].node.fullImgSharp.fluid}&
-            url=${props.location.href}`}
+    <FontAwesomeIcon
+      style={{
+        color: '#45668e',
+        cursor: 'pointer',
+      }}
+      icon={faVk}
+      onClick={() =>
+        openInNewWindow(`https://vk.com/share.php?url=${props.location.href}`)
+      }
+    />
+    <FontAwesomeIcon
+      style={{
+        color: '#3b5998',
+        cursor: 'pointer',
+      }}
+      icon={faFacebookF}
+      onClick={() =>
+        openInNewWindow(
+          `https://www.facebook.com/sharer/sharer.php?u=${props.location.href}`
+        )
+      }
+    />
+    <FontAwesomeIcon
+      style={{
+        color: '#1da1f2',
+        cursor: 'pointer',
+      }}
+      icon={faTwitter}
+      onClick={() =>
+        openInNewWindow(
+          `https://twitter.com/intent/tweet?${props.data.productSpecs.edges[0]
+            .node.description &&
+            `text=${props.data.productSpecs.edges[0].node.description}&`}url=${
+            props.location.href
+          }`
+        )
+      }
+    />
+    {/*     <a
+      style={{
+        cursor: 'pointer',
+      }}
+      onClick={() =>
+        openInNewWindow(`https://www.pinterest.com/pin/create/link/?${props.data
+          .productSpecs.edges[0].node.description &&
+          `description=${props.data.productSpecs.edges[0].node.description}&`}
+            url=${props.location.href}`)
+      }
     >
       <FontAwesomeIcon
         style={{
           color: '#bd081c',
+          cursor: 'pointer'
         }}
         icon={faPinterestP}
       />
-    </a>
+    </a> */}
   </Wrapper>
 )
 

@@ -9,6 +9,8 @@ import Divider from '../components/Divider'
 import Separator from '../components/Separator'
 import Button from '../components/Button'
 import ShareLinks from '../components/ShareLinks'
+import Overlay from '../components/Overlay'
+import ContactsPopup from '../components/ContactsPopup'
 
 import Img from '../components/Img'
 
@@ -127,12 +129,10 @@ const ProductSpecs = styled.div`
 `
 
 class ProductPageTemplate extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      imgMainSlider: null,
-      imgThumbnailSlider: null,
-    }
+  state = {
+    imgMainSlider: null,
+    imgThumbnailSlider: null,
+    buyProductPopupOpen: false,
   }
   componentDidMount() {
     this.setState({
@@ -140,128 +140,146 @@ class ProductPageTemplate extends React.Component {
       nav2: this.imgThumbnailSlider,
     })
   }
+  buyButtonClickHandler = () => {
+    this.setState({ buyProductPopupOpen: true }, () => {})
+  }
+  overlayClickHandler = () => {
+    this.setState({ buyProductPopupOpen: false }, () => {})
+  }
   render() {
     const { node: productSpecs } = this.props.data.productSpecs.edges[0]
     const { edges: productImages } = this.props.data.productImages
     return (
-      <Layout>
-        <Helmet
-          title={productSpecs.productName}
-          meta={[
-            { name: 'description', content: productSpecs.description },
-            { name: 'keywords', content: 'test' },
-          ]}
+      <>
+        <Overlay
+          click={this.overlayClickHandler}
+          show={this.state.buyProductPopupOpen}
         />
-        <Wrapper className="clearfix">
-          <ProductMenu>
-            <div className="breadcrumb">
-              <Link to="products">Магазин</Link>
-              <Separator char="\203A" />
-              <div>{productSpecs.productName}</div>
-            </div>
-          </ProductMenu>
-          <ImagesWrapper thumbnailSliderWidth={productImages.length}>
-            <Slider
-              className="main-slider"
-              arrows={false}
-              fade={true}
-              lazyLoad={true}
-              infinite={true}
-              speed={600}
-              slidesToShow={1}
-              slidesToScroll={1}
-              asNavFor={this.state.nav2}
-              ref={slider => (this.imgMainSlider = slider)}
-            >
-              {productImages.map(image => (
-                <Img
-                  key={image.node.name}
-                  alt={productSpecs.productName}
-                  fluid={image.node.fullImgSharp.fluid}
-                />
-              ))}
-            </Slider>
-            {productImages.length > 1 && (
+        <Layout>
+          <Helmet
+            title={productSpecs.productName}
+            meta={[
+              { name: 'description', content: productSpecs.description },
+              { name: 'keywords', content: 'test' },
+            ]}
+            bodyAttributes={{
+              class: this.state.buyProductPopupOpen ? `noscroll` : '',
+            }}
+          />
+          <ContactsPopup show={this.state.buyProductPopupOpen} />
+          <Wrapper className="clearfix">
+            <ProductMenu>
+              <div className="breadcrumb">
+                <Link to="products">Магазин</Link>
+                <Separator char="\203A" />
+                <div>{productSpecs.productName}</div>
+              </div>
+            </ProductMenu>
+            <ImagesWrapper thumbnailSliderWidth={productImages.length}>
               <Slider
-                className="thumbnail-slider"
-                arrows={productImages.length > 5}
-                slidesToShow={
-                  productImages.length <= 5 ? productImages.length : 5
-                }
-                swipeToSlide={true}
-                focusOnSelect={true}
-                centerMode={productImages.length > 5}
-                asNavFor={this.state.nav1}
-                ref={slider => (this.imgThumbnailSlider = slider)}
+                className="main-slider"
+                arrows={false}
+                fade={true}
+                lazyLoad={true}
+                infinite={true}
+                speed={600}
+                slidesToShow={1}
+                slidesToScroll={1}
+                asNavFor={this.state.nav2}
+                ref={slider => (this.imgMainSlider = slider)}
               >
                 {productImages.map(image => (
                   <Img
-                    outerWrapperClassName="thumbnail-img"
                     key={image.node.name}
                     alt={productSpecs.productName}
-                    fluid={{
-                      ...image.node.thumbnailImgSharp.fluid,
-                      aspectRatio: 1 / 1,
-                    }}
+                    fluid={image.node.fullImgSharp.fluid}
                   />
                 ))}
               </Slider>
-            )}
-          </ImagesWrapper>
-          <ProductSpecs>
-            <h1 className="title">{productSpecs.productName}</h1>
-            <Divider />
-            {productSpecs.discount > 0 ? (
-              <div className="price">
-                <div className="current-price">
-                  {productSpecs.discount} рублей
+              {productImages.length > 1 && (
+                <Slider
+                  className="thumbnail-slider"
+                  arrows={productImages.length > 5}
+                  slidesToShow={
+                    productImages.length <= 5 ? productImages.length : 5
+                  }
+                  swipeToSlide={true}
+                  focusOnSelect={true}
+                  centerMode={productImages.length > 5}
+                  asNavFor={this.state.nav1}
+                  ref={slider => (this.imgThumbnailSlider = slider)}
+                >
+                  {productImages.map(image => (
+                    <Img
+                      outerWrapperClassName="thumbnail-img"
+                      key={image.node.name}
+                      alt={productSpecs.productName}
+                      fluid={{
+                        ...image.node.thumbnailImgSharp.fluid,
+                        aspectRatio: 1 / 1,
+                      }}
+                    />
+                  ))}
+                </Slider>
+              )}
+            </ImagesWrapper>
+            <ProductSpecs>
+              <h1 className="title">{productSpecs.productName}</h1>
+              <Divider />
+              {productSpecs.discount > 0 ? (
+                <div className="price">
+                  <div className="current-price">
+                    {productSpecs.discount} рублей
+                  </div>
+                  <div className="former-price">
+                    {productSpecs.price} рублей
+                  </div>
                 </div>
-                <div className="former-price">{productSpecs.price} рублей</div>
+              ) : (
+                <div className="price current-price">
+                  {productSpecs.price} рублей
+                </div>
+              )}
+              <div className="button-wrapper">
+                <Button big hollow onClick={this.buyButtonClickHandler}>
+                  {productSpecs.isStocked ? 'Купить' : 'Заказать'}
+                </Button>
               </div>
-            ) : (
-              <div className="price current-price">
-                {productSpecs.price} рублей
+              <div className="description">
+                {productSpecs.description && <p>{productSpecs.description}</p>}
               </div>
-            )}
-            <div className="button-wrapper">
-              <Button big hollow>
-                {productSpecs.isStocked ? 'Купить' : 'Заказать'}
-              </Button>
-            </div>
-            <div className="description">
-              {productSpecs.description && <p>{productSpecs.description}</p>}
-            </div>
-            <ul className="specifications">
-              {productSpecs.material && (
-                <li>
-                  <p>Материал: {productSpecs.material}</p>
-                </li>
+              <ul className="specifications">
+                {productSpecs.material && (
+                  <li>
+                    <p>Материал: {productSpecs.material}</p>
+                  </li>
+                )}
+                {productSpecs.woodType && (
+                  <li>
+                    <p>Материал: {productSpecs.woodType}</p>
+                  </li>
+                )}
+                {productSpecs.color && (
+                  <li>
+                    <p>Цвет: {productSpecs.color}</p>
+                  </li>
+                )}
+                {productSpecs.sizes && (
+                  <li>
+                    <p>Размер: {productSpecs.sizes}</p>
+                  </li>
+                )}
+              </ul>
+              {productSpecs.note && (
+                <p className="note">
+                  <em>{productSpecs.note}</em>
+                </p>
               )}
-              {productSpecs.woodType && (
-                <li>
-                  <p>Материал: {productSpecs.woodType}</p>
-                </li>
-              )}
-              {productSpecs.color && (
-                <li>
-                  <p>Цвет: {productSpecs.color}</p>
-                </li>
-              )}
-              {productSpecs.sizes && (
-                <li>
-                  <p>Размер: {productSpecs.sizes}</p>
-                </li>
-              )}
-            </ul>
-            {productSpecs.note && (
-              <p className="note">
-                <em>{productSpecs.note}</em>
-              </p>
-            )}
-            <ShareLinks {...this.props} />
-          </ProductSpecs>
-        </Wrapper>
-      </Layout>
+              <ShareLinks {...this.props} />
+            </ProductSpecs>
+          </Wrapper>
+        </Layout>
+      </>
     )
   }
 }

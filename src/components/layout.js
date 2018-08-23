@@ -59,6 +59,11 @@ injectGlobal`
     color: #000000;
   }
   .noscroll {
+    height: 100vh;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+  .noscroll-mobile {
     ${media.tablet`
       height: 100vh;
       min-height: 100vh;
@@ -87,62 +92,47 @@ const theme = {
   min-height: calc(100vh - 231px);
 ` */
 
-class Layout extends React.Component {
-  state = {
-    noscroll: false,
-  }
-
-  mobileMenuOpened = menuOpened => {
-    this.setState({ noscroll: menuOpened })
-  }
-  render() {
-    return (
-      <StaticQuery
-        query={graphql`
-          query SiteTitleQuery {
-            site {
-              siteMetadata {
-                title
-              }
-            }
+const Layout = ({ children, data }) => (
+  <StaticQuery
+    query={graphql`
+      query LayoutQuery {
+        site {
+          siteMetadata {
+            title
           }
-        `}
-        render={data => (
-          <ThemeProvider theme={theme}>
-            <>
-              <Helmet
-                title={data.site.siteMetadata.title}
-                meta={[
-                  {
-                    name: 'description',
-                    content: 'Столярная мастерская в Челябинске.',
-                  },
-                  { name: 'keywords', content: 'sample, something' },
-                ]}
-                bodyAttributes={{
-                  class: this.state.noscroll ? `noscroll` : '',
-                }}
-              >
-                {/* <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700&amp;subset=cyrillic" rel="stylesheet" /> */}
-                <link
-                  href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&amp;subset=cyrillic"
-                  rel="stylesheet"
-                />
-              </Helmet>
-              <Navbar
-                title={data.site.siteMetadata.title}
-                phoneNumber={'+7 (900) 000-00-00'}
-                menuOpened={this.mobileMenuOpened}
-              />
-              {this.props.children}
-              <Footer title={data.site.siteMetadata.title} />
-            </>
-          </ThemeProvider>
-        )}
-      />
-    )
-  }
-}
+        }
+      }
+    `}
+    render={data => (
+      <ThemeProvider theme={theme}>
+        <>
+          <Helmet
+            title={data.site.siteMetadata.title}
+            meta={[
+              {
+                name: 'description',
+                content: 'Столярная мастерская в Челябинске.',
+              },
+              { name: 'keywords', content: 'sample, something' },
+            ]}
+          >
+            {/* <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700&amp;subset=cyrillic" rel="stylesheet" /> */}
+            <link
+              href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&amp;subset=cyrillic"
+              rel="stylesheet"
+            />
+          </Helmet>
+          <Navbar
+            title={data.site.siteMetadata.title}
+            phoneNumber={'+7 (900) 000-00-00'}
+          />
+          {children}
+          <Footer title={data.site.siteMetadata.title} />
+        </>
+      </ThemeProvider>
+    )}
+  />
+)
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,

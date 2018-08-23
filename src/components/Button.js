@@ -2,19 +2,23 @@ import styled from 'styled-components'
 import setTextColor from '../utils/setTextColor'
 
 const Button = styled.button`
-  ${props => (props.primary && `
+  ${props =>
+    (props.primary &&
+      `
   background-color: ${props.theme.primary};
   color: ${setTextColor(props.theme.primary)};
   font-weight: 600;
   border: 0 none;
   `) ||
-    (props.accent && `
+    (props.accent &&
+      `
   background-color: ${props.theme.accent};
   color: ${setTextColor(props.theme.accent)};
   font-weight: 600;
   border: 0 none;
   `) ||
-    (props.hollow && `
+    (props.hollow &&
+      `
   background-color: transparent;
   border: 2px solid ${props.theme.accent};
   font-weight: 500;
@@ -23,27 +27,34 @@ const Button = styled.button`
     background-color: ${props.theme.accent};
     color: ${setTextColor(props.theme.accent)};
   }
-  `) || `
+  `) ||
+    `
+  background-color: ${props.theme.primary};
+  color: ${setTextColor(props.theme.primary)};
   font-weight: 600;
-  `}
-  ${props =>
-    (props.small && `
+  border: 0 none;
+  `} ${props =>
+    (props.small &&
+      `
       font-size: 13px;
       padding: 9px 18px;
     `) ||
-    (props.regular && `
+    (props.regular &&
+      `
       font-size: 14px;
       padding: 13px 50px;
     `) ||
-    (props.big && `
+    (props.big &&
+      `
       font-size: 16px;
       padding: 17px 70px;
-    `) || `
-      font-size: 13px;
+    `) ||
+    `
+      font-size: 14px;
       padding: 13px 50px;
     `}
   text-transform: uppercase;
-  border-radius: ${props => props.rounded ? '100px' : '3px'};
+  border-radius: ${props => (props.rounded ? '100px' : '3px')};
   display: inline-block;
   text-align: center;
   white-space: nowrap;
