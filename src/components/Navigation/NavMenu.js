@@ -9,31 +9,31 @@ import setTextColor from '../../utils/setTextColor'
 
 const StyledList = styled.ul`
   background-color: ${props => props.theme.primary};
-  &, a {
+  &,
+  a {
     color: ${props => setTextColor(props.theme.primary)};
-  };
+  }
   list-style: none;
   padding: 0;
   text-align: center;
   margin: 0 auto;
-  width: 362px;
+  width: 365px;
   height: 100%;
   ${media.tablet`
     display: none;
-  `}
-  li {
+  `} li {
     padding: 0 20px;
     font-size: 16px;
     font-weight: 500;
-    display: inline;
-    &:last-child(){
+    display: inline-block;
+    &:last-child() {
       float: right;
     }
     ${media.tablet`
       width: 100%;
       float: left;
       line-height: 50px;
-    `}
+    `};
   }
 `
 const NavPhoneNumber = styled(PhoneNumber)`
@@ -41,16 +41,22 @@ const NavPhoneNumber = styled(PhoneNumber)`
   display: block;
   ${media.tablet`
     display: none;
-  `}
+  `};
 `
 
 const NavMenu = props => (
   <>
     <NavPhoneNumber phoneNumber={props.phoneNumber} />
     <StyledList>
-      <li><Link to='/products/'>Наши работы</Link></li>
-      <li><Link to='/about/'>О нас</Link></li>
-      <li><Link to='/contact/'>Контакты</Link></li>
+      <li>
+        <Link to="/products/">Наши работы</Link>
+      </li>
+      <li>
+        <Link to="/about/">О нас</Link>
+      </li>
+      <li>
+        <Link to="/contact/">Контакты</Link>
+      </li>
     </StyledList>
   </>
 )

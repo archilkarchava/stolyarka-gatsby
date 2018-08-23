@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
@@ -87,7 +87,7 @@ const theme = {
   min-height: calc(100vh - 231px);
 ` */
 
-class Layout extends Component {
+class Layout extends React.Component {
   state = {
     noscroll: false,
   }

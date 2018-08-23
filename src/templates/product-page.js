@@ -1,14 +1,16 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { graphql, Link } from 'gatsby'
 import styled from 'styled-components'
+import Helmet from 'react-helmet'
 
+import Slider from 'react-slick'
 import Layout from '../components/layout'
 import Divider from '../components/Divider'
 import Separator from '../components/Separator'
 import Button from '../components/Button'
+import ShareLinks from '../components/ShareLinks'
 
 import Img from '../components/Img'
-import Slider from 'react-slick'
 
 import media from '../utils/media'
 
@@ -26,7 +28,6 @@ const ImagesWrapper = styled.div`
   float: left;
   margin: 0;
   .thumbnail-img {
-    margin-right: 10px;
     max-width: 120px;
     max-height: 120px;
   }
@@ -105,7 +106,6 @@ const ProductSpecs = styled.div`
     margin: 0 0 30px 0;
   }
   .specifications {
-    margin: 16px 0;
     padding-left: 40px;
   }
   .note {
@@ -126,7 +126,7 @@ const ProductSpecs = styled.div`
   `};
 `
 
-class productPageTemplate extends Component {
+class ProductPageTemplate extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -145,6 +145,13 @@ class productPageTemplate extends Component {
     const { edges: productImages } = this.props.data.productImages
     return (
       <Layout>
+        <Helmet
+          title={productSpecs.productName}
+          meta={[
+            { name: 'description', content: productSpecs.description },
+            { name: 'keywords', content: 'test' },
+          ]}
+        />
         <Wrapper className="clearfix">
           <ProductMenu>
             <div className="breadcrumb">
@@ -251,6 +258,7 @@ class productPageTemplate extends Component {
                 <em>{productSpecs.note}</em>
               </p>
             )}
+            <ShareLinks {...this.props} />
           </ProductSpecs>
         </Wrapper>
       </Layout>
@@ -304,4 +312,4 @@ export const productPageQuery = graphql`
   }
 `
 
-export default productPageTemplate
+export default ProductPageTemplate
