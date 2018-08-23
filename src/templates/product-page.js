@@ -109,7 +109,7 @@ const ProductSpecs = styled.div`
     padding-left: 40px;
   }
   .note {
-    margin: 0 0 30px 0;
+    margin: 30px 0 30px 0;
   }
   ${media.laptop`
     padding: 0 0 0 50px;
