@@ -22,7 +22,7 @@ const Indent = styled.div`
 const Wrapper = styled.nav`
   background-color: ${props => props.theme.primary};
   color: ${props => setTextColor(props.theme.primary)};
-  z-index: 998;
+  z-index: 900;
   width: 100%;
   display: table;
   content: '';
@@ -64,8 +64,8 @@ class Navbar extends React.Component {
     return (
       <>
         <Helmet
-          bodyAttributes={{
-            class: this.state.mobileMenuOpen ? `noscroll-mobile` : '',
+          htmlAttributes={{
+            class: this.state.mobileMenuOpen && `noscroll-mobile`,
           }}
         />
         <Wrapper {...this.props.theme} className="clearfix">

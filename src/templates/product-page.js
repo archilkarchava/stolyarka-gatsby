@@ -10,7 +10,7 @@ import Separator from '../components/Separator'
 import Button from '../components/Button'
 import ShareLinks from '../components/ShareLinks'
 import Overlay from '../components/Overlay'
-import ContactsPopup from '../components/ContactsPopup'
+import OrderPopup from '../components/OrderPopup'
 
 import Img from '../components/Img'
 
@@ -143,18 +143,16 @@ class ProductPageTemplate extends React.Component {
   buyButtonClickHandler = () => {
     this.setState({ buyProductPopupOpen: true }, () => {})
   }
-  overlayClickHandler = () => {
-    this.setState({ buyProductPopupOpen: false }, () => {})
+  overlayClickHandler = e => {
+    if (e.target === e.currentTarget) {
+      this.setState({ buyProductPopupOpen: false }, () => {})
+    }
   }
   render() {
     const { node: productSpecs } = this.props.data.productSpecs.edges[0]
     const { edges: productImages } = this.props.data.productImages
     return (
       <>
-        <Overlay
-          click={this.overlayClickHandler}
-          show={this.state.buyProductPopupOpen}
-        />
         <Layout>
           <Helmet
             title={productSpecs.productName}
@@ -166,12 +164,17 @@ class ProductPageTemplate extends React.Component {
               class: this.state.buyProductPopupOpen ? `noscroll` : '',
             }}
           />
-          <ContactsPopup show={this.state.buyProductPopupOpen} />
+          <Overlay
+            click={e => this.overlayClickHandler(e)}
+            show={this.state.buyProductPopupOpen}
+          >
+            <OrderPopup {...this.props} />
+          </Overlay>
           <Wrapper className="clearfix">
             <ProductMenu>
               <div className="breadcrumb">
                 <Link to="products">Магазин</Link>
-                <Separator char="\203A" />
+                <Separator char="›" />
                 <div>{productSpecs.productName}</div>
               </div>
             </ProductMenu>
@@ -241,7 +244,7 @@ class ProductPageTemplate extends React.Component {
                 </div>
               )}
               <div className="button-wrapper">
-                <Button big hollow onClick={this.buyButtonClickHandler}>
+                <Button rounded big hollow onClick={this.buyButtonClickHandler}>
                   {productSpecs.isStocked ? 'Купить' : 'Заказать'}
                 </Button>
               </div>

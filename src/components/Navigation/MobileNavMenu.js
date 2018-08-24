@@ -9,7 +9,7 @@ import media from '../../utils/media'
 import setTextColor from '../../utils/setTextColor'
 
 const Wrapper = styled.div`
-  z-index: 888;
+  z-index: 800;
   text-align: center;
   width: 100%;
   padding: 30px 0;

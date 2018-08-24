@@ -34,25 +34,26 @@ const Button = styled.button`
   font-weight: 600;
   border: 0 none;
   `} ${props =>
-    (props.small &&
-      `
+  (props.small &&
+    `
       font-size: 13px;
       padding: 9px 18px;
     `) ||
-    (props.regular &&
-      `
-      font-size: 14px;
-      padding: 13px 50px;
-    `) ||
-    (props.big &&
-      `
-      font-size: 16px;
-      padding: 17px 70px;
-    `) ||
+  (props.regular &&
     `
       font-size: 14px;
       padding: 13px 50px;
+    `) ||
+  (props.big &&
+    `
+      font-size: 16px;
+      padding: 17px 70px;
+    `) ||
+  `
+      font-size: 14px;
+      padding: 13px 50px;
     `}
+  ${props => props.wide && `width: 100%`};
   text-transform: uppercase;
   border-radius: ${props => (props.rounded ? '100px' : '3px')};
   display: inline-block;

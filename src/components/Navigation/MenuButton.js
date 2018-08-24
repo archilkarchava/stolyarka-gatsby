@@ -16,38 +16,37 @@ const Wrapper = styled.div`
   top: 50%;
   ${media.tablet`
     display: inline-block;
-  `}
-  .line:nth-child(1){
+  `} .line:nth-child(1) {
     opacity: 0;
-    transition: .2s ease-in-out;
+    transition: 0.2s ease-in-out;
   }
-  .line:nth-child(2){
+  .line:nth-child(2) {
     transform: rotate(45deg);
-    transition: .3s ease-in-out;
+    transition: 0.3s ease-in-out;
   }
-  .line:nth-child(3){
+  .line:nth-child(3) {
     transform: rotate(-45deg);
-    transition: .3s ease-in-out;
+    transition: 0.3s ease-in-out;
   }
-  .line:nth-child(4){
+  .line:nth-child(4) {
     opacity: 0;
-    transition: .2s ease-in-out;
+    transition: 0.2s ease-in-out;
   }
-  .line:nth-child(1){
+  .line:nth-child(1) {
     opacity: 1;
-    transition: .2s ease-in-out;
+    transition: 0.2s ease-in-out;
   }
-  .line:nth-child(2){
+  .line:nth-child(2) {
     transform: rotate(0deg);
-    transition: .3s ease-in-out;
+    transition: 0.3s ease-in-out;
   }
-  .line:nth-child(3){
+  .line:nth-child(3) {
     transform: rotate(0deg);
-    transition: .3s ease-in-out;
+    transition: 0.3s ease-in-out;
   }
-  .line:nth-child(4){
+  .line:nth-child(4) {
     opacity: 1;
-    transition: .2s ease-in-out;
+    transition: 0.2s ease-in-out;
   }
 `
 
@@ -67,34 +66,37 @@ const Hamburger = styled.div`
   .line:nth-child(1) {
     top: 0;
     transition: 0.3s ease-in-out;
-    ${props => props.show && `
+    ${props =>
+      props.show &&
+      `
       transform: rotate(-45deg) translate(-5px, 5px);
-    `
-  }
+    `}
   }
   .line:nth-child(2) {
     top: 8px;
     transition: 0.3s ease-in-out;
-    ${props => props.show && `
+    ${props =>
+      props.show &&
+      `
       opacity: 0;
-    `
-  }
+    `}
   }
   .line:nth-child(3) {
     top: 16px;
     transition: 0.3s ease-in-out;
-    ${props => props.show && `
+    ${props =>
+      props.show &&
+      `
       transform: rotate(45deg) translate(-6px, -6px);
-    `
-  }
+    `}
 `
 
 const MenuButton = props => (
   <Wrapper onClick={props.click}>
     <Hamburger {...props}>
-      <span className="line"></span>
-      <span className="line"></span>
-      <span className="line"></span>
+      <span className="line" />
+      <span className="line" />
+      <span className="line" />
     </Hamburger>
   </Wrapper>
 )
