@@ -34,66 +34,71 @@ function openInNewWindow(url) {
   )
 }
 
-const ShareLinks = props => (
-  <Wrapper {...props}>
-    <FontAwesomeIcon
-      style={{
-        color: '#45668e',
-        cursor: 'pointer',
-      }}
-      icon={faVk}
-      onClick={() =>
-        openInNewWindow(`https://vk.com/share.php?url=${props.location.href}`)
-      }
-    />
-    <FontAwesomeIcon
-      style={{
-        color: '#3b5998',
-        cursor: 'pointer',
-      }}
-      icon={faFacebookF}
-      onClick={() =>
-        openInNewWindow(
-          `https://www.facebook.com/sharer/sharer.php?u=${props.location.href}`
-        )
-      }
-    />
-    <FontAwesomeIcon
-      style={{
-        color: '#1da1f2',
-        cursor: 'pointer',
-      }}
-      icon={faTwitter}
-      onClick={() =>
-        openInNewWindow(
-          `https://twitter.com/intent/tweet?${props.data.productSpecs.edges[0]
-            .node.description &&
-            `text=${props.data.productSpecs.edges[0].node.description}&`}url=${
-            props.location.href
-          }`
-        )
-      }
-    />
-    {/*     <a
-      style={{
-        cursor: 'pointer',
-      }}
-      onClick={() =>
-        openInNewWindow(`https://www.pinterest.com/pin/create/link/?${props.data
-          .productSpecs.edges[0].node.description &&
-          `description=${props.data.productSpecs.edges[0].node.description}&`}
-            url=${props.location.href}`)
-      }
-    >
+const ShareLinks = props => {
+  const { node: productSpecs } = props.data.productSpecs.edges[0]
+  const { edges: productImages } = props.data.productImages
+  const { href: currentPageUrl } = props.location
+  return (
+    <Wrapper {...props}>
       <FontAwesomeIcon
         style={{
-          color: '#bd081c',
-          cursor: 'pointer'
+          color: '#45668e',
+          width: '17px',
+          cursor: 'pointer',
         }}
-        icon={faPinterestP}
+        icon={faVk}
+        onClick={() =>
+          openInNewWindow(`https://vk.com/share.php?url=${currentPageUrl}`)
+        }
       />
-    </a> */}
-  </Wrapper>
-)
+      <FontAwesomeIcon
+        style={{
+          color: '#3b5998',
+          width: '9px',
+          cursor: 'pointer',
+        }}
+        icon={faFacebookF}
+        onClick={() =>
+          openInNewWindow(
+            `https://www.facebook.com/sharer/sharer.php?u=${currentPageUrl}`
+          )
+        }
+      />
+      <FontAwesomeIcon
+        style={{
+          color: '#1da1f2',
+          width: '15px',
+          cursor: 'pointer',
+        }}
+        icon={faTwitter}
+        onClick={() =>
+          openInNewWindow(
+            `https://twitter.com/intent/tweet?${productSpecs.description &&
+              `text=${productSpecs.description}&`}url=${currentPageUrl}`
+          )
+        }
+      />
+      {/*     <a
+        style={{
+          cursor: 'pointer',
+        }}
+        onClick={() =>
+          openInNewWindow(`https://www.pinterest.com/pin/create/link/?${props.data
+            .productSpecs.edges[0].node.description &&
+            `description=${props.data.productSpecs.edges[0].node.description}&`}
+              url=${currentPageUrl}`)
+        }
+      >
+        <FontAwesomeIcon
+          style={{
+            color: '#bd081c',
+            cursor: 'pointer'
+          }}
+          icon={faPinterestP}
+        />
+      </a> */}
+    </Wrapper>
+  )
+}
 
 export default ShareLinks

@@ -3,15 +3,39 @@ import styled from 'styled-components'
 import InputMask from 'react-input-mask'
 
 import Button from './Button'
+import CloseButton from './CloseButton'
 import Img from './Img'
 
-const Wrapper = styled.div`
+import media from '../utils/media'
+
+const OuterWrapper = styled.div`
+  z-index: 1000;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+  visibility: hidden;
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: all 0.3s ease-in-out;
+  opacity: ${props => (props.show ? '1' : '0')};
+  visibility: ${props => (props.show ? 'visible' : 'hidden')};
+`
+
+const InnerWrapper = styled.div`
   background-color: #ffffff;
   padding: 40px;
   margin: 65px auto;
   max-width: 560px;
-  max-height: 902px;
   box-sizing: border-box;
+  ${media.phone`
+    padding: 40px 10px;
+    margin: 0 auto;
+    margin-top: 50px;
+    min-height: calc(100% - 50px);
+  `};
 `
 
 const Form = styled.form`
@@ -154,78 +178,85 @@ class OrderPopup extends React.Component {
     const { edges: productImages } = this.props.data.productImages
     const { errors, data } = this.state
     return (
-      <Wrapper>
-        <Heading>Ваш заказ</Heading>
-        <Product>
-          <div className="row">
-            <div className="product-thumbnail">
-              <Img
-                style={{ width: '70px', height: '70px' }}
-                fluid={productImages[0].node.thumbnailImgSharp.fluid}
+      <OuterWrapper
+        {...this.props}
+        onClick={this.props.click}
+        show={this.props.show}
+      >
+        <CloseButton className="close-popup-button" />
+        <InnerWrapper className="content" {...this.props}>
+          <Heading>Ваш заказ</Heading>
+          <Product>
+            <div className="row">
+              <div className="product-thumbnail">
+                <Img
+                  style={{ width: '70px', height: '70px' }}
+                  fluid={productImages[0].node.thumbnailImgSharp.fluid}
+                />
+              </div>
+              <div className="product-name">{productSpecs.productName}</div>
+              <div className="product-price">
+                {productSpecs.discount > 0
+                  ? productSpecs.discount
+                  : productSpecs.price}{' '}
+                р.
+              </div>
+            </div>
+          </Product>
+          <Form onSubmit={this.handleSubmit}>
+            <div>
+              <p className="input-title">Имя</p>
+              <input
+                className={errors.firstName && 'error-border'}
+                onChange={this.handleChange}
+                value={data.firstName}
+                type="text"
+                name="firstName"
+              />
+              {errors.firstName && (
+                <div className="input-error">{errors.firstName}</div>
+              )}
+            </div>
+            <div>
+              <p className="input-title">Фамилия</p>
+              <input
+                className={errors.lastName && 'error-border'}
+                onChange={this.handleChange}
+                value={data.lastName}
+                type="text"
+                name="lastName"
+              />
+              {errors.lastName && (
+                <div className="input-error">{errors.lastName}</div>
+              )}
+            </div>
+            <div>
+              <p className="input-title">Номер телефона</p>
+              <InputMask
+                className={errors.tel && 'error-border'}
+                onChange={this.handleChange}
+                value={data.tel}
+                type="tel"
+                name="tel"
+                placeholder="+7 (900) 000-00-00"
+                mask="+7 (999) 999-99-99"
+              />
+              {errors.tel && <div className="input-error">{errors.tel}</div>}
+            </div>
+            <div>
+              <p className="input-title">Комментарий к заказу</p>
+              <textarea
+                value={data.message}
+                onChange={this.handleChange}
+                name="message"
               />
             </div>
-            <div className="product-name">{productSpecs.productName}</div>
-            <div className="product-price">
-              {productSpecs.discount > 0
-                ? productSpecs.discount
-                : productSpecs.price}{' '}
-              р.
-            </div>
-          </div>
-        </Product>
-        <Form onSubmit={this.handleSubmit}>
-          <div>
-            <p className="input-title">Имя</p>
-            <input
-              className={errors.firstName && 'error-border'}
-              onChange={this.handleChange}
-              value={data.firstName}
-              type="text"
-              name="firstName"
-            />
-            {errors.firstName && (
-              <div className="input-error">{errors.firstName}</div>
-            )}
-          </div>
-          <div>
-            <p className="input-title">Фамилия</p>
-            <input
-              className={errors.lastName && 'error-border'}
-              onChange={this.handleChange}
-              value={data.lastName}
-              type="text"
-              name="lastName"
-            />
-            {errors.lastName && (
-              <div className="input-error">{errors.lastName}</div>
-            )}
-          </div>
-          <div>
-            <p className="input-title">Номер телефона</p>
-            <InputMask
-              className={errors.tel && 'error-border'}
-              onChange={this.handleChange}
-              value={data.tel}
-              type="tel"
-              name="tel"
-              placeholder="+7 (900) 000-00-00"
-              mask="+7 (999) 999-99-99"
-            />
-            {errors.tel && <div className="input-error">{errors.tel}</div>}
-          </div>
-          <div>
-            <p className="input-title">Комментарий к заказу</p>
-            <textarea
-              value={data.message}
-              onChange={this.handleChange}
-              name="message"
-            />
-          </div>
-          <Button big wide accent rounded>
-            {productSpecs.isStocked ? 'Купить' : 'Заказать'}
-          </Button>
-        </Form>
-      </Wrapper>
+            <Button big wide accent rounded>
+              {productSpecs.isStocked ? 'Купить' : 'Заказать'}
+            </Button>
+          </Form>
+        </InnerWrapper>
+      </OuterWrapper>
     )
   }
 }

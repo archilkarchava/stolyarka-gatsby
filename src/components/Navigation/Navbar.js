@@ -6,7 +6,7 @@ import NavLogo from './Logo'
 import NavMenu from './NavMenu'
 import MobileNavMenu from './MobileNavMenu'
 import MenuButton from './MenuButton'
-import Overlay from '../Overlay'
+import NavOverlay from './NavOverlay'
 
 import media from '../../utils/media'
 import setTextColor from '../../utils/setTextColor'
@@ -82,10 +82,9 @@ class Navbar extends React.Component {
           phoneNumber={this.props.phoneNumber}
           show={this.state.mobileMenuOpen}
         />
-        <Overlay
+        <NavOverlay
           click={this.overlayClickHandler}
           show={this.state.mobileMenuOpen}
-          mobileOnly
         />
         <Indent />
       </>

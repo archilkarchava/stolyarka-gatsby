@@ -9,7 +9,6 @@ import Divider from '../components/Divider'
 import Separator from '../components/Separator'
 import Button from '../components/Button'
 import ShareLinks from '../components/ShareLinks'
-import Overlay from '../components/Overlay'
 import OrderPopup from '../components/OrderPopup'
 
 import Img from '../components/Img'
@@ -144,7 +143,10 @@ class ProductPageTemplate extends React.Component {
     this.setState({ buyProductPopupOpen: true }, () => {})
   }
   overlayClickHandler = e => {
-    if (e.target === e.currentTarget) {
+    if (
+      e.target.classList.contains('close-popup-button') ||
+      e.target == e.currentTarget
+    ) {
       this.setState({ buyProductPopupOpen: false }, () => {})
     }
   }
@@ -164,12 +166,11 @@ class ProductPageTemplate extends React.Component {
               class: this.state.buyProductPopupOpen ? `noscroll` : '',
             }}
           />
-          <Overlay
+          <OrderPopup
             click={e => this.overlayClickHandler(e)}
             show={this.state.buyProductPopupOpen}
-          >
-            <OrderPopup {...this.props} />
-          </Overlay>
+            {...this.props}
+          />
           <Wrapper className="clearfix">
             <ProductMenu>
               <div className="breadcrumb">
