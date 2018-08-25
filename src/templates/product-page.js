@@ -21,6 +21,11 @@ import 'slick-carousel/slick/slick-theme.css'
 const Wrapper = styled.div`
   padding: 100px 50px;
   height: 100%;
+  ${media.tablet`
+    padding: 50px 30px;
+  `} ${media.phone`
+    padding: 50px 15px;
+  `};
 `
 
 const ImagesWrapper = styled.div`
@@ -46,7 +51,7 @@ const ImagesWrapper = styled.div`
     color: #000000;
   }
   ${media.tablet`
-  width: calc(100vw - 100px);
+  width: 100%;
   `};
 `
 

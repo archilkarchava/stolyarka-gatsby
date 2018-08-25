@@ -105,6 +105,7 @@ const Product = styled.div`
       display: table-cell;
       width: 70px;
       height: 100px;
+      padding-right: 10px;
       vertical-align: middle;
     }
     .product-name {
