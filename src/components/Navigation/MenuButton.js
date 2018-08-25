@@ -16,38 +16,7 @@ const Wrapper = styled.div`
   top: 50%;
   ${media.tablet`
     display: inline-block;
-  `} .line:nth-child(1) {
-    opacity: 0;
-    transition: 0.2s ease-in-out;
-  }
-  .line:nth-child(2) {
-    transform: rotate(45deg);
-    transition: 0.3s ease-in-out;
-  }
-  .line:nth-child(3) {
-    transform: rotate(-45deg);
-    transition: 0.3s ease-in-out;
-  }
-  .line:nth-child(4) {
-    opacity: 0;
-    transition: 0.2s ease-in-out;
-  }
-  .line:nth-child(1) {
-    opacity: 1;
-    transition: 0.2s ease-in-out;
-  }
-  .line:nth-child(2) {
-    transform: rotate(0deg);
-    transition: 0.3s ease-in-out;
-  }
-  .line:nth-child(3) {
-    transform: rotate(0deg);
-    transition: 0.3s ease-in-out;
-  }
-  .line:nth-child(4) {
-    opacity: 1;
-    transition: 0.2s ease-in-out;
-  }
+  `};
 `
 
 const Hamburger = styled.div`
@@ -63,7 +32,7 @@ const Hamburger = styled.div`
     display: block;
     position: absolute;
   }
-  .line:nth-child(1) {
+  #line-1 {
     top: 0;
     transition: 0.3s ease-in-out;
     ${props =>
@@ -72,7 +41,7 @@ const Hamburger = styled.div`
       transform: rotate(-45deg) translate(-5px, 5px);
     `}
   }
-  .line:nth-child(2) {
+  #line-2 {
     top: 8px;
     transition: 0.3s ease-in-out;
     ${props =>
@@ -81,7 +50,7 @@ const Hamburger = styled.div`
       opacity: 0;
     `}
   }
-  .line:nth-child(3) {
+  #line-3 {
     top: 16px;
     transition: 0.3s ease-in-out;
     ${props =>
@@ -94,9 +63,9 @@ const Hamburger = styled.div`
 const MenuButton = props => (
   <Wrapper onClick={props.click}>
     <Hamburger {...props}>
-      <span className="line" />
-      <span className="line" />
-      <span className="line" />
+      <span id="line-1" />
+      <span id="line-2" />
+      <span id="line-3" />
     </Hamburger>
   </Wrapper>
 )
