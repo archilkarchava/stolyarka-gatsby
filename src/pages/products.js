@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import Gallery from '../components/Gallery'
+import Store from '../components/Store'
 
 import Layout from '../components/layout'
 
@@ -12,7 +12,7 @@ const Container = styled.div`
 const ProductsPage = () => (
   <Layout>
     <Container>
-      <Gallery />
+      <Store />
     </Container>
   </Layout>
 )

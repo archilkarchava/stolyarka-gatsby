@@ -3,52 +3,60 @@ import { graphql, Link } from 'gatsby'
 import styled from 'styled-components'
 import Header from '../components/Header'
 import TextBlock from '../components/TextBlock'
-import Gallery from '../components/Gallery'
+import Store from '../components/Store'
+import OurAdvantages from '../components/OurAdvantages/OurAdvantages'
+import OurServices from '../components/OurServices'
 import ContactUs from '../components/ContactUs'
-import Anchor from '../components/Anchor'
 import Button from '../components/Button'
 
 import Layout from '../components/layout'
 
-const Container = styled.div`
+const StoreWrapper = styled.div`
+  width: 100%;
+  padding-top: 100px;
+`
+const ButtonWrapper = styled.div`
   text-align: center;
   width: 100%;
-  padding: 30px 0 50px 0;
-  background-color: ${props =>
-    (props.primary && props.theme.primary) ||
-    (props.accent && props.theme.accent) ||
-    props.theme.primary};
+  margin: 40px 0 60px 0;
 `
-
 const Main = styled.main`
-  background-color: ${props => props.theme.primary};
-  z-index: 1;
+  background-color: #ffffff;
+  z-index: 10;
 `
 
 const IndexPage = ({ data }) => (
   <Layout>
-    <Header headerImage={data.headerImage.childImageSharp} />
+    <Header bgImg={data.headerBgImg.childImageSharp} />
     <Main>
-      <Anchor id="intro" />
-      <TextBlock primary>Делаем мебель красиво. Мы из России.</TextBlock>
-      <Anchor id="work" />
-      <Gallery numberOfProductsDisplayed={9} />
-      <Container primary>
-        <Link to="/products/">
-          <Button accent rounded>
-            Посмотреть все работы
-          </Button>
-        </Link>
-      </Container>
-      <Anchor id="contactUs" />
-      <ContactUs accent />
+      <StoreWrapper>
+        <Store numberOfProductsDisplayed={9} />
+        <ButtonWrapper>
+          <Link to="/products/">
+            <Button dark rounded>
+              Посмотреть все работы
+            </Button>
+          </Link>
+        </ButtonWrapper>
+      </StoreWrapper>
+      <TextBlock lightBg>Делаем мебель красиво. Мы из России.</TextBlock>
+      <OurAdvantages primaryBg />
+      <OurServices bgImg={data.ourServicesBgImg.childImageSharp} />
+      <ContactUs darkBg />
     </Main>
   </Layout>
 )
 
 export const query = graphql`
   query IndexPageQuery {
-    headerImage: file(relativePath: { regex: "/header/" }) {
+    headerBgImg: file(relativePath: { regex: "/header/" }) {
+      childImageSharp {
+        fluid(maxWidth: 2480) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+    ourServicesBgImg: file(relativePath: { regex: "/sectionBg/" }) {
       childImageSharp {
         fluid(maxWidth: 2480) {
           ...GatsbyImageSharpFluid

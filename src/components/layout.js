@@ -74,8 +74,8 @@ injectGlobal`
 
 const theme = {
   primary: '#FFFFFF',
-  accent: '#000000',
-  whiteAccent: '#F0F0F0',
+  dark: '#000000',
+  light: '#F0F0F0',
   fontSans: "'Montserrat', sans-serif",
   baseFontFamily: "'Montserrat', sans-serif",
   baseFontColor: '#000000',
@@ -118,7 +118,7 @@ const Layout = ({ children, data }) => (
           >
             {/* <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700&amp;subset=cyrillic" rel="stylesheet" /> */}
             <link
-              href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&amp;subset=cyrillic"
+              href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&amp;subset=cyrillic"
               rel="stylesheet"
             />
           </Helmet>
@@ -127,7 +127,7 @@ const Layout = ({ children, data }) => (
             phoneNumber={'+7 (900) 000-00-00'}
           />
           {children}
-          <Footer title={data.site.siteMetadata.title} />
+          <Footer darkBg title={data.site.siteMetadata.title} />
         </>
       </ThemeProvider>
     )}

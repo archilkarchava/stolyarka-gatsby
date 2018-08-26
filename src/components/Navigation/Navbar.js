@@ -37,7 +37,7 @@ const Nav = styled.div`
   z-index: 9999;
   height: 100%;
   line-height: ${props => props.theme.navHeight};
-  margin: 0 25px;
+  margin: 0 30px;
   ${media.tablet`
     height: ${props => props.theme.mobileNavHeight};
     line-height: ${props => props.theme.mobileNavHeight};

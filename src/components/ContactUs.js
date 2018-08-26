@@ -3,21 +3,21 @@ import styled from 'styled-components'
 
 import SocialLinks from './SocialLinks'
 
-import media from '../utils/media';
+import media from '../utils/media'
 import setTextColor from '../utils/setTextColor'
-import YandexMap from './YandexMap';
+import YandexMap from './YandexMap'
 import staticMapImg from '../data/images/staticMap.png'
 
 const Wrapper = styled.div`
   background-color: ${props =>
-    (props.primary && props.theme.primary) ||
-    (props.accent && props.theme.accent) ||
-    props.theme.accent
-  };
+    (props.primaryBg && props.theme.primary) ||
+    (props.lightBg && props.theme.light) ||
+    (props.darkBg && props.theme.dark) ||
+    props.theme.dark};
   height: 600px;
   overflow: hidden;
-  &::after{
-    content: "";
+  &::after {
+    content: '';
     display: table;
     clear: both;
   }
@@ -30,7 +30,8 @@ const ContactBoxWrapper = styled.div`
   ${media.tablet`
     width: 100%;
     height: 50%;
-  `}
+    padding: 20px 0;
+  `};
 `
 
 const ContactBox = styled.div`
@@ -38,11 +39,13 @@ const ContactBox = styled.div`
   max-width: 470px;
   padding: 20px;
   &, a {
-    color: ${props => setTextColor(
-    (props.primary && props.theme.primary) ||
-    (props.accent && props.theme.accent) ||
-    props.theme.accent
-  )};
+    color: ${props =>
+      setTextColor(
+        (props.primaryBg && props.theme.primary) ||
+          (props.lightBg && props.theme.light) ||
+          (props.darkBg && props.theme.dark) ||
+          props.theme.dark
+      )};
   }
   h1 {
     font-size: 40px;

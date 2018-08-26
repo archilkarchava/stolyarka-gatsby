@@ -12,22 +12,22 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `productImages`,
-        path: `${__dirname}/src/data/images/productImages`
-      }
+        path: `${__dirname}/src/data/images/productImages`,
+      },
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
-        path: `${__dirname}/src/data/images`
-      }
+        path: `${__dirname}/src/data/images`,
+      },
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `data`,
-        path: `${__dirname}/src/data/`
-      }
-    }
-  ]
+        path: `${__dirname}/src/data/`,
+      },
+    },
+  ],
 }

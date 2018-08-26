@@ -11,16 +11,12 @@ const StyledLink = styled(Link)`
   font-weight: 400;
   float: left;
   text-transform: lowercase;
-  &, a {
+  &,
+  a {
     color: ${props => setTextColor(props.theme.primary)};
-  };
+  }
 `
 
-const Logo = props => (
-  <StyledLink {...props}>
-    {props.title}
-  </StyledLink>
-)
-
+const Logo = props => <StyledLink {...props}>{props.title}</StyledLink>
 
 export default Logo

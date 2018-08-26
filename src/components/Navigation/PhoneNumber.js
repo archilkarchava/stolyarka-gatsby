@@ -4,11 +4,12 @@ import styled from 'styled-components'
 import setTextColor from '../../utils/setTextColor'
 
 const Wrapper = styled.a`
-  font-size: ${props => !!props.size ? props.size : '18px'};
+  font-size: ${props => (!!props.size ? props.size : '18px')};
   font-weight: 700;
-  &, a {
+  &,
+  a {
     color: ${props => setTextColor(props.theme.primary)};
-  };
+  }
 `
 
 const PhoneNumber = props => (
@@ -16,6 +17,5 @@ const PhoneNumber = props => (
     {props.phoneNumber}
   </Wrapper>
 )
-
 
 export default PhoneNumber

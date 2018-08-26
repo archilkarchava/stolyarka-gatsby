@@ -8,16 +8,16 @@ const Wrapper = styled.div`
   padding-top: 180px;
   padding-bottom: 180px;
   background-color: ${props =>
-    (props.primary && props.theme.primary) ||
-    (props.accent && props.theme.accent) ||
-    props.theme.accent
-  };
+    (props.primaryBg && props.theme.primary) ||
+    (props.darkBg && props.theme.dark) ||
+    props.theme.dark};
   &, a {
-    color: ${props => setTextColor(
-    (props.primary && props.theme.primary) ||
-    (props.accent && props.theme.accent) ||
-    props.theme.accent
-  )};
+    color: ${props =>
+      setTextColor(
+        (props.primaryBg && props.theme.primary) ||
+          (props.darkBg && props.theme.dark) ||
+          props.theme.dark
+      )};
   h1 {
     text-align: center;
     margin-bottom: 115px;
@@ -30,18 +30,14 @@ const Wrapper = styled.div`
   }
 `
 const Item = styled.div`
-    max-width: 360px;
-    float: left;
-    width: 100%;
-    margin-left: 20px;
-    margin-right: 20px;
-    text-align: center;
+  max-width: 360px;
+  float: left;
+  width: 100%;
+  margin-left: 20px;
+  margin-right: 20px;
+  text-align: center;
 `
 
-const WhyUs = () => (
-  <Wrapper>
-
-  </Wrapper>
-)
+const WhyUs = () => <Wrapper />
 
 export default WhyUs

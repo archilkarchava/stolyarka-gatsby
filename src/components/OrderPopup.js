@@ -105,7 +105,6 @@ const Product = styled.div`
       display: table-cell;
       width: 70px;
       height: 100px;
-      padding-right: 10px;
       vertical-align: middle;
     }
     .product-name {
@@ -116,6 +115,7 @@ const Product = styled.div`
       vertical-align: middle;
       text-align: center;
       line-height: 1.55;
+      padding: 0 10px;
     }
     .product-price {
       display: table-cell;
@@ -252,7 +252,7 @@ class OrderPopup extends React.Component {
                 name="message"
               />
             </div>
-            <Button big wide accent rounded>
+            <Button big wide dark rounded>
               {productSpecs.isStocked ? 'Купить' : 'Заказать'}
             </Button>
           </Form>

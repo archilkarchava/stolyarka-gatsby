@@ -150,7 +150,7 @@ class ProductPageTemplate extends React.Component {
   overlayClickHandler = e => {
     if (
       e.target.classList.contains('close-popup-button') ||
-      e.target == e.currentTarget
+      e.target === e.currentTarget
     ) {
       this.setState({ buyProductPopupOpen: false }, () => {})
     }

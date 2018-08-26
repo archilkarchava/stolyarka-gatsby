@@ -1,31 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import Img from '../components/Img'
+import BackgroundImg from './BackgroundImg'
 import media from '../utils/media'
 
 const Wrapper = styled.header`
   z-index: -100;
-  height: 620px;
-`
-
-const BackgroundFilter = styled.div`
-  background: -webkit-linear-gradient(
-    top,
-    rgba(0, 0, 0, 0.25),
-    rgba(0, 0, 0, 0.8)
-  );
-  background: -moz-linear-gradient(
-    top,
-    rgba(0, 0, 0, 0.25),
-    rgba(0, 0, 0, 0.8)
-  );
-  background: -o-linear-gradient(top, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.8));
-  background: -ms-linear-gradient(top, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.8));
-  background: linear-gradient(top, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.8));
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#b2000000', endColorstr='#66000000');
-  position: ${props => (props.fixed ? 'fixed' : 'absolute')};
-  z-index: -99;
-  width: 100%;
   height: 620px;
 `
 
@@ -53,7 +32,7 @@ const Box = styled.div`
   }
   p {
     margin-bottom: 37px;
-    font-weight: 400;
+    font-weight: 300;
     font-size: 24px;
     line-height: 1.5;
     ${media.tablet`
@@ -65,19 +44,14 @@ const Box = styled.div`
 
 const Header = props => (
   <Wrapper>
-    <BackgroundFilter {...props} />
-    <Img
+    <BackgroundImg
       style={{
         height: '620px',
-        width: '100%',
-        position: props.fixed ? 'fixed' : 'absolute',
-        zIndex: -100,
       }}
-      objFit="cover"
-      objPosition="50% 50%"
       title="Header image"
       alt="Мебель из массива дерева на заказ"
-      fluid={props.headerImage.fluid}
+      fluid={props.bgImg.fluid}
+      {...props}
     />
     <Box>
       <h1>Мебель из массива дерева на заказ</h1>

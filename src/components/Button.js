@@ -10,22 +10,22 @@ const Button = styled.button`
   font-weight: 600;
   border: 0 none;
   `) ||
-    (props.accent &&
+    (props.dark &&
       `
-  background-color: ${props.theme.accent};
-  color: ${setTextColor(props.theme.accent)};
+  background-color: ${props.theme.dark};
+  color: ${setTextColor(props.theme.dark)};
   font-weight: 600;
   border: 0 none;
   `) ||
     (props.hollow &&
       `
   background-color: transparent;
-  border: 2px solid ${props.theme.accent};
+  border: 2px solid ${props.theme.dark};
   font-weight: 500;
   transition: 0.1s background-color linear, 0.1s color linear;
   &:hover {
-    background-color: ${props.theme.accent};
-    color: ${setTextColor(props.theme.accent)};
+    background-color: ${props.theme.dark};
+    color: ${setTextColor(props.theme.dark)};
   }
   `) ||
     `
