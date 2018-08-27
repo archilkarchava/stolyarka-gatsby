@@ -137,9 +137,8 @@ const encode = data =>
 class OrderPopup extends React.Component {
   state = {
     data: {
-      firstName: '',
-      lastName: '',
-      tel: '',
+      name: '',
+      phone: '',
       message: '',
     },
     errors: {},
@@ -167,9 +166,8 @@ class OrderPopup extends React.Component {
   }
   validate = data => {
     const errors = {}
-    if (!data.firstName) errors.firstName = 'Поле обязательно для заполнения.'
-    if (!data.lastName) errors.lastName = 'Поле обязательно для заполнения.'
-    if (!data.tel) errors.tel = 'Введите номер телефона для связи.'
+    if (!data.name) errors.name = 'Поле обязательно для заполнения.'
+    if (!data.phone) errors.phone = 'Введите номер телефона для связи.'
     console.log(errors)
     return errors
   }
@@ -206,43 +204,32 @@ class OrderPopup extends React.Component {
           </Product>
           <Form onSubmit={this.handleSubmit}>
             <div>
-              <p className="input-title">Имя</p>
+              <p className="input-title">Ваше имя</p>
               <input
-                className={errors.firstName && 'error-border'}
+                className={errors.name && 'error-border'}
                 onChange={this.handleChange}
-                value={data.firstName}
+                value={data.name}
                 type="text"
-                name="firstName"
+                name="name"
+                autoComplete="name"
               />
-              {errors.firstName && (
-                <div className="input-error">{errors.firstName}</div>
-              )}
-            </div>
-            <div>
-              <p className="input-title">Фамилия</p>
-              <input
-                className={errors.lastName && 'error-border'}
-                onChange={this.handleChange}
-                value={data.lastName}
-                type="text"
-                name="lastName"
-              />
-              {errors.lastName && (
-                <div className="input-error">{errors.lastName}</div>
-              )}
+              {errors.name && <div className="input-error">{errors.name}</div>}
             </div>
             <div>
               <p className="input-title">Номер телефона</p>
               <InputMask
-                className={errors.tel && 'error-border'}
+                className={errors.phone && 'error-border'}
                 onChange={this.handleChange}
-                value={data.tel}
+                value={data.phone}
                 type="tel"
-                name="tel"
+                name="phone"
+                autoComplete="tel"
                 placeholder="+7 (900) 000-00-00"
                 mask="+7 (999) 999-99-99"
               />
-              {errors.tel && <div className="input-error">{errors.tel}</div>}
+              {errors.phone && (
+                <div className="input-error">{errors.phone}</div>
+              )}
             </div>
             <div>
               <p className="input-title">Комментарий к заказу</p>
