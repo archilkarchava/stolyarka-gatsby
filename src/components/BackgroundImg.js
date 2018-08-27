@@ -28,8 +28,8 @@ const BackgroundImg = props => {
         style={{
           ...props.style,
           width: '100%',
-          position: props.fixed ? 'fixed' : 'absolute',
-          zIndex: props.zIndex ? parseInt(props.zIndex) + 1 : '-99',
+          position: props.style.position ? props.style.position : 'absolute',
+          zIndex: props.style.zIndex ? parseInt(props.style.zIndex) : '-10',
         }}
       />
       <Img
@@ -37,8 +37,8 @@ const BackgroundImg = props => {
         style={{
           ...props.style,
           width: '100%',
-          position: props.fixed ? 'fixed' : 'absolute',
-          zIndex: props.zIndex ? parseInt(props.zIndex) : '-100',
+          position: props.style.position ? props.style.position : 'absolute',
+          zIndex: props.style.zIndex ? parseInt(props.style.zIndex) - 1 : '-11',
         }}
         objFit="cover"
         objPosition="50% 50%"
