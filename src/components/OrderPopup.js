@@ -168,7 +168,6 @@ class OrderPopup extends React.Component {
     const errors = {}
     if (!data.name) errors.name = 'Поле обязательно для заполнения.'
     if (!data.phone) errors.phone = 'Введите номер телефона для связи.'
-    console.log(errors)
     return errors
   }
 

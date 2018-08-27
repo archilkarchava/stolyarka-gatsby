@@ -7,6 +7,7 @@ exports.onClientEntry = () => {
   // IntersectionObserver polyfill for gatsby-image (Safari, IE)
   if (typeof window.IntersectionObserver === `undefined`) {
     require(`intersection-observer`)
+    console.log('intersection-observer is polyfilled')
   }
 
   // Object-fit/Object-position polyfill for gatsby-image (IE)
@@ -16,5 +17,6 @@ exports.onClientEntry = () => {
     typeof testImg.style.objectPosition === `undefined`
   ) {
     require(`object-fit-images`)()
+    console.log('object-fit-images is polyfilled')
   }
 }

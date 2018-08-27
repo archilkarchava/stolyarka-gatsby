@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('path')
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
@@ -8,8 +8,8 @@ exports.createPages = ({ graphql, actions }) => {
       graphql(
         `
           {
-            productSpecs: file(relativePath: {eq: "products.json"}) {
-              childrenProductsJson {
+            productSpecs: file(relativePath: { eq: "products.yaml" }) {
+              childrenProductsYaml {
                 productName
               }
             }
@@ -20,15 +20,15 @@ exports.createPages = ({ graphql, actions }) => {
           reject(result.errors)
         }
 
-        const { childrenProductsJson: products } = result.data.productSpecs
+        const { childrenProductsYaml: products } = result.data.productSpecs
 
         products.forEach(({ productName }) => {
           createPage({
             path: `/products/${productName.replace(/ /g, '_')}`, // required
             component: productPageTemplate,
             context: {
-              productName: productName
-            }
+              productName,
+            },
           })
         })
       })

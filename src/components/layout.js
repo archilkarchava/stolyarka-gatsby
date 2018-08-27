@@ -58,6 +58,9 @@ injectGlobal`
     text-decoration: none;
     color: #000000;
   }
+  .nopointer {
+    pointer-events: none;
+  }
   .noscroll {
     height: 100vh;
     min-height: 100vh;

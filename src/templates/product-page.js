@@ -91,7 +91,7 @@ const ProductSpecs = styled.div`
   .price {
     margin-bottom: 30px;
     font-size: 28px;
-    font-weight: 300;
+    font-weight: 400;
     display: block;
   }
   .current-price {
@@ -133,17 +133,24 @@ const ProductSpecs = styled.div`
 `
 
 class ProductPageTemplate extends React.Component {
-  state = {
-    imgMainSlider: null,
-    imgThumbnailSlider: null,
-    buyProductPopupOpen: false,
+  constructor() {
+    super()
+    this.state = {
+      imgMainSlider: null,
+      imgThumbnailSlider: null,
+      buyProductPopupOpen: false,
+    }
   }
+
   componentDidMount() {
     this.setState({
       nav1: this.imgMainSlider,
       nav2: this.imgThumbnailSlider,
     })
+    this.imgMainSlider.innerSlider.list.setAttribute('tabindex', 0)
+    this.imgMainSlider.innerSlider.list.focus()
   }
+
   buyButtonClickHandler = () => {
     this.setState({ buyProductPopupOpen: true }, () => {})
   }
@@ -199,6 +206,7 @@ class ProductPageTemplate extends React.Component {
               >
                 {productImages.map(image => (
                   <Img
+                    outerWrapperClassName="nopointer"
                     key={image.node.name}
                     alt={productSpecs.productName}
                     fluid={image.node.fullImgSharp.fluid}
@@ -220,7 +228,7 @@ class ProductPageTemplate extends React.Component {
                 >
                   {productImages.map(image => (
                     <Img
-                      outerWrapperClassName="thumbnail-img"
+                      outerWrapperClassName="thumbnail-img nopointer"
                       key={image.node.name}
                       alt={productSpecs.productName}
                       fluid={{
@@ -315,7 +323,7 @@ export const productPageQuery = graphql`
         }
       }
     }
-    productSpecs: allProductsJson(
+    productSpecs: allProductsYaml(
       filter: { productName: { eq: $productName } }
     ) {
       edges {

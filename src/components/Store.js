@@ -214,8 +214,8 @@ const Store = props => {
               }
             }
           }
-          productSpecs: file(relativePath: { eq: "products.json" }) {
-            childrenProductsJson {
+          productSpecs: file(relativePath: { eq: "products.yaml" }) {
+            childrenProductsYaml {
               id
               productName
               type
@@ -236,15 +236,15 @@ const Store = props => {
       render={data => (
         <Wrapper {...props}>
           {combineArraysBasedOnProductName(
-            data.productSpecs.childrenProductsJson,
+            data.productSpecs.childrenProductsYaml,
             combineArraysBasedOnProductName(
               transformImg1Arr(data.img1Arr.edges),
               transformImg2Arr(data.img2Arr.edges)
             )
           )
             .slice(0, props.numberOfProductsDisplayed)
-            .map(productItem => (
-              <ProductItemContainer key={productItem.id}>
+            .map((productItem, index) => (
+              <ProductItemContainer key={index}>
                 {ProductItemLayout(productItem)}
               </ProductItemContainer>
             ))}
