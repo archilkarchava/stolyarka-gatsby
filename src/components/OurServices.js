@@ -69,7 +69,6 @@ const OurServices = props => {
           }}
           alt="Наши услуги. Фоновое изображение"
           fluid={props.bgImg.fluid}
-          zIndex={1}
           {...props}
         />
       )}

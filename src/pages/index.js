@@ -20,30 +20,24 @@ const ButtonWrapper = styled.div`
   width: 100%;
   margin: 40px 0 60px 0;
 `
-const Main = styled.main`
-  background-color: #ffffff;
-  z-index: 10;
-`
 
 const IndexPage = ({ data }) => (
   <Layout>
     <Header bgImg={data.headerBgImg.childImageSharp} />
-    <Main>
-      <StoreWrapper>
-        <Store numberOfProductsDisplayed={9} />
-        <ButtonWrapper>
-          <Link to="/products/">
-            <Button dark rounded>
-              Посмотреть все работы
-            </Button>
-          </Link>
-        </ButtonWrapper>
-      </StoreWrapper>
-      <TextBlock lightBg>Делаем мебель красиво. Мы из России.</TextBlock>
-      <OurAdvantages primaryBg />
-      <OurServices bgImg={data.ourServicesBgImg.childImageSharp} />
-      <ContactUs darkBg />
-    </Main>
+    <StoreWrapper>
+      <Store numberOfProductsDisplayed={8} />
+      <ButtonWrapper>
+        <Link to="/products/">
+          <Button dark rounded>
+            Посмотреть все работы
+          </Button>
+        </Link>
+      </ButtonWrapper>
+    </StoreWrapper>
+    <OurAdvantages lightBg />
+    <TextBlock primaryBg>Делаем мебель красиво. Мы из России.</TextBlock>
+    <OurServices bgImg={data.ourServicesBgImg.childImageSharp} />
+    <ContactUs darkBg />
   </Layout>
 )
 
@@ -56,7 +50,7 @@ export const query = graphql`
         }
       }
     }
-    ourServicesBgImg: file(relativePath: { regex: "/sectionBg/" }) {
+    ourServicesBgImg: file(relativePath: { regex: "/sectionBgCropped/" }) {
       childImageSharp {
         fluid(maxWidth: 2480) {
           ...GatsbyImageSharpFluid

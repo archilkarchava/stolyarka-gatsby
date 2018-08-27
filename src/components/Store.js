@@ -17,11 +17,14 @@ const Wrapper = styled.ul`
 const ProductItemContainer = styled.li`
   display: inline-block;
   *display: inline; /*for IE6 - IE7*/
-  width: 33.33%;
+  width: 25%;
   vertical-align: middle;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  ${media.laptop`
+    width: 33.3333%;
+  `}
   ${media.tablet`
     width: 50%;
   `} ${media.phone`
@@ -44,13 +47,13 @@ const ProductItem = styled.div`
     .description {
       margin-top: 8px;
       font-size: 18px;
-      font-weight: 300;
+      font-weight: 400;
       line-height: 1.55;
     }
     .price {
       margin: 0.5em 0.5em 0 0;
       font-size: 18px;
-      font-weight: 500;
+      font-weight: 400;
       line-height: 1.4em;
       display: inline-block;
     }
