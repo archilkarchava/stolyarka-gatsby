@@ -133,13 +133,10 @@ const ProductSpecs = styled.div`
 `
 
 class ProductPageTemplate extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      imgMainSlider: null,
-      imgThumbnailSlider: null,
-      buyProductPopupOpen: false,
-    }
+  state = {
+    imgMainSlider: null,
+    imgThumbnailSlider: null,
+    buyProductPopupOpen: false,
   }
 
   componentDidMount() {
