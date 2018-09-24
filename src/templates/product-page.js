@@ -325,9 +325,8 @@ export const productPageQuery = graphql`
     ) {
       edges {
         node {
-          id
           productName
-          type
+          productType
           material
           woodType
           color

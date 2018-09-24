@@ -216,9 +216,8 @@ const Store = props => {
           }
           productSpecs: file(relativePath: { eq: "products.yaml" }) {
             childrenProductsYaml {
-              id
               productName
-              type
+              productType
               material
               woodType
               color

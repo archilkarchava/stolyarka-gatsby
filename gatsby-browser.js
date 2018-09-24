@@ -1,5 +1,6 @@
-require('core-js/es6/map')
-require('core-js/es6/set')
+require(`core-js/es6/map`)
+require(`core-js/es6/set`)
+require(`raf/polyfill`)
 
 exports.onClientEntry = () => {
   // NOTE: Don't polyfill Promise here (Gatsby already includes a Promise polyfill)

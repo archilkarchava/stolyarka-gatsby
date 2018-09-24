@@ -1,5 +1,5 @@
 - productName: Вешалка для одежды
-  type: вешалка
+  productType: вешалка
   material: сосна
   woodType: массив
   color: на заказ
@@ -12,7 +12,7 @@
   isStocked: false
 
 - productName: Двуспальная кровать
-  type: двуспальная кровать
+  productType: двуспальная кровать
   material: береза
   woodType: массив
   color: натуральный
@@ -25,7 +25,7 @@
   isStocked: false
 
 - productName: Двуспальная кровать из массива березы
-  type: двуспальная кровать
+  productType: двуспальная кровать
   material: береза
   woodType: массив
   color: на заказ
@@ -42,7 +42,7 @@
   isStocked: true
 
 - productName: Декоративное весло
-  type: декоративное весло
+  productType: декоративное весло
   material: ель
   woodType: массив
   color: на заказ
@@ -55,7 +55,7 @@
   isStocked: true
 
 - productName: Декоративные балки
-  type: декоративные балки
+  productType: декоративные балки
   material: сосна, лиственница, дуб
   woodType: ''
   color: широкая цветовая гамма
@@ -68,7 +68,7 @@
   isStocked: false
 
 - productName: Детская кровать-домик
-  type: детская кровать-домик
+  productType: детская кровать-домик
   material: ''
   woodType: ''
   color: ''
@@ -81,7 +81,7 @@
   isStocked: false
 
 - productName: Журнальный столик
-  type: журнальный столик
+  productType: журнальный столик
   material: береза
   woodType: массив
   color: натуральный
@@ -94,7 +94,7 @@
   isStocked: true
 
 - productName: Журнальный столик из бука
-  type: журнальный столик
+  productType: журнальный столик
   material: бук
   woodType: массив
   color: натуральный
@@ -107,7 +107,7 @@
   isStocked: true
 
 - productName: Журнальный столик из массива дуба
-  type: журнальный столик
+  productType: журнальный столик
   material: дуб
   woodType: массив
   color: натуральный
@@ -120,7 +120,7 @@
   isStocked: true
 
 - productName: Кровать из массива березы
-  type: кровать
+  productType: кровать
   material: береза
   woodType: массив
   color: на заказ
@@ -133,7 +133,7 @@
   isStocked: true
 
 - productName: Круглый столик из дуба
-  type: круглый столик
+  productType: круглый столик
   material: дуб
   woodType: ''
   color: белый
@@ -146,7 +146,7 @@
   isStocked: true
 
 - productName: Лавочка из массива сосны
-  type: лавочка
+  productType: лавочка
   material: сосна
   woodType: ''
   color: белый
@@ -159,7 +159,7 @@
   isStocked: true
 
 - productName: Обеденный стол
-  type: стол
+  productType: стол
   material: сосна
   woodType: массив
   color: натуральный
@@ -172,7 +172,7 @@
   isStocked: false
 
 - productName: Обеденный стол из массива березы
-  type: журнальный столик
+  productType: журнальный столик
   material: береза
   woodType: массив
   color: на заказ
@@ -185,7 +185,7 @@
   isStocked: true
 
 - productName: Подоконники из массива
-  type: подоконники
+  productType: подоконники
   material: дуб, ясень, бук, сосна, граб, карагач
   woodType: массив
   color: натуральный
@@ -198,7 +198,7 @@
   isStocked: true
 
 - productName: Светильник Бэтмен
-  type: светильник
+  productType: светильник
   material: дерево
   woodType: ''
   color: ''
@@ -211,7 +211,7 @@
   isStocked: true
 
 - productName: Стеллаж в стиле LOFT
-  type: стеллаж
+  productType: стеллаж
   material: металл и карагач
   woodType: массив
   color: на заказ
@@ -224,7 +224,7 @@
   isStocked: true
 
 - productName: Стол в стиле LOFT
-  type: стол
+  productType: стол
   material: металл, береза
   woodType: массив
   color: натуральный
@@ -241,7 +241,7 @@
   isStocked: true
 
 - productName: Стол из массива дуба
-  type: стол
+  productType: стол
   material: дуб
   woodType: массив
   color: натуральный
@@ -254,7 +254,7 @@
   isStocked: true
 
 - productName: Столешница из массива
-  type: столешница
+  productType: столешница
   material: дуб, ясень, бук, сосна, граб, карагач
   woodType: массив
   color: натуральный
@@ -269,7 +269,7 @@
   isStocked: true
 
 - productName: Тара для транспортировки
-  type: тара
+  productType: тара
   material: ''
   woodType: ''
   color: ''
