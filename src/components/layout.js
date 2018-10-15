@@ -2,14 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
-import styled, { injectGlobal, ThemeProvider } from 'styled-components'
+import { createGlobalStyle, ThemeProvider } from 'styled-components'
 
 import Navbar from './Navigation/Navbar'
 import Footer from './Footer'
 
 import media from '../utils/media'
 
-injectGlobal`
+const GlobalStyle = createGlobalStyle`
   * {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -109,6 +109,7 @@ const Layout = ({ children, data }) => (
     render={data => (
       <ThemeProvider theme={theme}>
         <>
+          <GlobalStyle />
           <Helmet
             title={data.site.siteMetadata.title}
             meta={[

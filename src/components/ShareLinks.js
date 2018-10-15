@@ -1,3 +1,4 @@
+// TODO: share on Pinterest
 import React from 'react'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -5,7 +6,7 @@ import {
   faVk,
   faFacebookF,
   faTwitter,
-  faPinterestP,
+  // faPinterestP,
 } from '@fortawesome/free-brands-svg-icons'
 
 const Wrapper = styled.div`
@@ -36,7 +37,7 @@ function openInNewWindow(url) {
 
 const ShareLinks = props => {
   const { node: productSpecs } = props.data.productSpecs.edges[0]
-  const { edges: productImages } = props.data.productImages
+  // const { edges: productImages } = props.data.productImages
   const { href: currentPageUrl } = props.location
   return (
     <Wrapper {...props}>
