@@ -33,10 +33,11 @@ const ImagesWrapper = styled.div`
   width: calc(50% - 50px);
   float: left;
   margin: 0;
-  .thumbnail-img {
+  /* .thumbnail-img {
     max-width: 120px;
     max-height: 120px;
-  }
+    width: 90%;
+  } */
   .main-slider {
     margin-bottom: 30px;
   }
@@ -45,6 +46,7 @@ const ImagesWrapper = styled.div`
       props.thumbnailSliderWidth <= 5
         ? `${props.thumbnailSliderWidth * 135}px`
         : `100%`};
+    height: 30%;
   }
   .slick-prev:before,
   .slick-next:before {
@@ -212,21 +214,30 @@ class ProductPageTemplate extends React.Component {
             {productImages.length > 1 && (
               <Slider
                 className="thumbnail-slider"
-                arrows={productImages.length > 5}
+                arrows={false}
                 slidesToShow={
-                  productImages.length <= 5 ? productImages.length : 5
+                  productImages.length > 5 ? 5 : productImages.length
                 }
                 swipeToSlide={true}
                 focusOnSelect={true}
-                centerMode={productImages.length > 5}
+                // centerMode={productImages.length > 4}
                 asNavFor={this.state.nav1}
                 ref={slider => (this.imgThumbnailSlider = slider)}
               >
                 {productImages.map(image => (
                   <Img
-                    className="thumbnail-img nopointer"
+                    className="nopointer"
                     key={image.node.name}
                     alt={productSpecs.productName}
+                    style={{
+                      marginRight: '10px',
+                    }}
+                    imgStyle={{
+                      maxWidth: '120px',
+                      maxHeight: '120px',
+                      width: '90%',
+                      height: '90%',
+                    }}
                     fluid={{
                       ...image.node.thumbnailImgSharp.fluid,
                       aspectRatio: 1 / 1,
